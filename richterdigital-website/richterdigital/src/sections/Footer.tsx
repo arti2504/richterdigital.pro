@@ -27,8 +27,9 @@ const Footer = () => {
                 building digital products with passion and precision.
               </p>
               <div className="text-sm text-cream-muted">
-                <p>Richter Digital</p>
-                <p>Bad Driburg, Germany</p>
+                <p>Arthur Richter · Richter Digital</p>
+                <p>Schmechtener Str. 13</p>
+                <p>33014 Bad Driburg, Germany</p>
               </div>
             </div>
 

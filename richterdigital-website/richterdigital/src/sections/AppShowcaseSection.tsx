@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react';
-import { Check, Sparkles, Camera, Share2, MessageCircle } from 'lucide-react';
+import { Check, Tv2, Laugh, Smartphone, Zap } from 'lucide-react';
 
 const features = [
-  { icon: Sparkles, text: 'Fun emoji filters & face effects' },
-  { icon: Camera, text: 'Live streaming with reactions' },
-  { icon: Share2, text: 'Share photos & videos with friends' },
-  { icon: MessageCircle, text: 'Easy to use, fast & lightweight' },
+  { icon: Tv2,        text: 'Realistic fake livestream interface' },
+  { icon: Laugh,      text: 'Prank your friends & family' },
+  { icon: Smartphone, text: 'Works on any Android device' },
+  { icon: Zap,        text: 'Free to use, no signup required' },
 ];
 
 const AppShowcaseSection = () => {
@@ -45,14 +45,8 @@ const AppShowcaseSection = () => {
       <div
         className="absolute inset-0 z-[1]"
         style={{
-          backgroundImage: 'url(/images/project_city_street.jpg)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          background: 'radial-gradient(ellipse at 60% 40%, rgba(45,98,255,0.07) 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, rgba(139,92,246,0.05) 0%, transparent 50%)',
         }}
-      />
-      <div
-        className="absolute inset-0 z-[2]"
-        style={{ background: 'rgba(7,10,18,0.82)' }}
       />
 
       <div className="relative z-10 px-6 lg:px-12">
@@ -76,7 +70,7 @@ const AppShowcaseSection = () => {
                   Smile4Me
                 </h2>
                 <p className="text-cream-muted text-lg">
-                  Express yourself with emoji filters and effects
+                  The ultimate fake livestream prank app
                 </p>
               </div>
             </div>
@@ -86,9 +80,10 @@ const AppShowcaseSection = () => {
               {/* Left: Description + Features */}
               <div>
                 <p className="text-cream-muted leading-relaxed mb-8">
-                  Smile4Me is a social entertainment app that lets you add fun emoji filters and 
-                  effects to your photos and videos. Share your moments with friends, go live with 
-                  interactive reactions, and make every memory more fun.
+                  Smile4Me lets you create a convincing fake livestream on your phone —
+                  perfect for pranking friends and family. It looks just like a real streaming
+                  platform, complete with viewer counts, reactions, and comments.
+                  Download it free on Google Play and start the fun.
                 </p>
 
                 {/* Feature List */}
@@ -105,9 +100,14 @@ const AppShowcaseSection = () => {
 
                 {/* CTAs */}
                 <div className="flex flex-wrap gap-4">
-                  <button className="glow-button px-8 py-4 bg-electric text-white font-semibold rounded-xl hover:bg-electric-dark transition-all">
+                  <a
+                    href="https://play.google.com/store/apps/developer?id=Richter+Digital"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="glow-button px-8 py-4 bg-electric text-white font-semibold rounded-xl hover:bg-electric-dark transition-all inline-flex items-center gap-2"
+                  >
                     Get it on Google Play
-                  </button>
+                  </a>
                   <span className="px-6 py-4 bg-white/5 text-cream-muted rounded-xl border border-white/10 flex items-center">
                     App Store — Coming Soon
                   </span>

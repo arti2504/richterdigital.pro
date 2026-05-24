@@ -53,7 +53,7 @@ const HeroSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="relative min-h-[100dvh] bg-navy-900 flex items-center justify-center pt-20 pb-12 overflow-hidden"
+      className="relative min-h-[100dvh] bg-navy-900 flex items-center justify-center overflow-hidden"
     >
       {/* Background gradient */}
       <div
@@ -63,16 +63,16 @@ const HeroSection = () => {
         }}
       />
 
-      {/* Hero Lens Frame */}
+      {/* Hero Lens Frame — top: calc(50% + 40px) gibt dem fixed Nav (80px) etwas Luft */}
       <div
         ref={lensRef}
         className="absolute z-[6] lens-frame"
         style={{
           left: '50%',
-          top: '52%',
+          top: 'calc(50% + 40px)',
           transform: 'translate(-50%, -50%)',
           width: 'min(84vw, 1100px)',
-          height: 'min(70vh, 680px)',
+          height: 'min(calc(100dvh - 100px), 680px)',
         }}
       >
         {/* Inner subtle gradient */}
@@ -117,7 +117,7 @@ const HeroSection = () => {
                 </div>
               </div>
               <p className="text-sm text-cream-muted text-left mb-4">
-                A fun social media app with emoji filters and effects.
+                Prank your friends with a fake livestream!
               </p>
               <button
                 onClick={scrollToApp}

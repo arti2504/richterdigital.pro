@@ -36,16 +36,12 @@ const ImpressumPage = () => {
               <div className="bg-navy-800/40 rounded-2xl border border-white/5 p-6">
                 <p className="text-cream-muted leading-relaxed">
                   <strong className="text-cream">Richter Digital</strong><br />
-                  <span className="text-electric">Arthur Richter</span><br />
-                  <span className="text-electric">Schmechtener Str. 13</span><br />
+                  Arthur Richter<br />
+                  Schmechtener Str. 13<br />
                   33014 Bad Driburg<br />
                   Germany
                 </p>
               </div>
-              <p className="text-sm text-electric/70 mt-3">
-                Please fill in your name and street address above before publishing. 
-                This information is required by German law (§ 5 TMG).
-              </p>
             </section>
 
             {/* Kontakt */}
@@ -70,8 +66,8 @@ const ImpressumPage = () => {
               </h2>
               <div className="bg-navy-800/40 rounded-2xl border border-white/5 p-6">
                 <p className="text-cream-muted leading-relaxed">
-                  <span className="text-electric">[Your Name]</span><br />
-                  (Address as above)
+                  Arthur Richter<br />
+                  Schmechtener Str. 13, 33014 Bad Driburg, Germany
                 </p>
               </div>
             </section>
@@ -80,8 +76,8 @@ const ImpressumPage = () => {
             <section>
               <h2 className="font-display text-xl font-bold text-cream mb-4">Notice</h2>
               <p className="text-cream-muted leading-relaxed">
-                This website serves as the developer presence for the mobile app <strong className="text-cream">Smile4Me</strong>, 
-                developed by Richter Digital. The content on this page was created with the utmost care. 
+                This website serves as the developer presence for the mobile app <strong className="text-cream">Smile4Me</strong>,
+                developed by Richter Digital. The content on this page was created with the utmost care.
                 However, we cannot guarantee the accuracy, completeness, or timeliness of the content.
               </p>
             </section>
