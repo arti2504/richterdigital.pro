@@ -1,68 +1,59 @@
 @echo off
-setlocal EnableDelayedExpansion
-set REPO_ROOT=C:\Users\PC\Desktop\Richter Digitals\Richter Digital
-set PROJECT_DIR=%REPO_ROOT%\richterdigital-website\richterdigital
+set REPO=C:\Users\PC\Desktop\Richter Digitals\Richter Digital
+set PROJECT=%REPO%\richterdigital-website\richterdigital
 
+echo.
 echo ============================================
-echo   Richter Digital - Build ^& Deploy Script
+echo   Richter Digital Deploy
 echo ============================================
 echo.
 
-REM ---- Step 1: Copy images to public folder ----
-echo [1/5] Copying images into Vite public folder...
-if not exist "%PROJECT_DIR%\public\images" mkdir "%PROJECT_DIR%\public\images"
-xcopy /Y /I "%REPO_ROOT%\images\*" "%PROJECT_DIR%\public\images\" >nul 2>&1
-if %ERRORLEVEL% neq 0 (
-  echo   ERROR: Could not copy images.
-  pause
-  exit /b 1
-)
-echo   OK - Images copied to public\images\
+echo [1/5] Cache loeschen (erzwingt frischen Build)...
+if exist "%PROJECT%\dist" rmdir /s /q "%PROJECT%\dist"
+if exist "%PROJECT%\node_modules\.vite" rmdir /s /q "%PROJECT%\node_modules\.vite"
+if exist "%PROJECT%\tsconfig.app.tsbuildinfo" del /q "%PROJECT%\tsconfig.app.tsbuildinfo"
+if exist "%PROJECT%\tsconfig.node.tsbuildinfo" del /q "%PROJECT%\tsconfig.node.tsbuildinfo"
+echo   OK
 
-REM ---- Step 2: npm build ----
 echo.
-echo [2/5] Building website (npm run build)...
-cd /d "%PROJECT_DIR%"
+echo [2/5] Bilder nach public\images kopieren...
+if not exist "%PROJECT%\public\images" mkdir "%PROJECT%\public\images"
+xcopy /Y /I "%REPO%\images\*" "%PROJECT%\public\images\" > nul
+echo   OK
+
+echo.
+echo [3/5] npm run build (bitte warten ~30-60 Sek)...
+cd /d "%PROJECT%"
 call npm run build
-if %ERRORLEVEL% neq 0 (
-  echo   BUILD FAILED. Fix TypeScript errors above and retry.
-  pause
-  exit /b 1
+if not exist "%PROJECT%\dist\index.html" (
+    echo.
+    echo   FEHLER: Build fehlgeschlagen - dist\index.html fehlt!
+    echo   Lies die Fehlermeldung oben.
+    pause
+    exit /b 1
 )
-echo   OK - Build complete.
+echo   OK - Build erfolgreich
 
-REM ---- Step 3: Copy dist to repo root ----
 echo.
-echo [3/5] Deploying dist\ to repo root...
-robocopy "%PROJECT_DIR%\dist" "%REPO_ROOT%" /E /NFL /NDL /NJH /NJS /nc /ns /np >nul 2>&1
-echo   OK - dist\ copied to repo root.
-
-REM ---- Step 4: Verify app-ads.txt ----
-echo.
-echo [4/5] Checking app-ads.txt...
-if not exist "%REPO_ROOT%\app-ads.txt" (
-  echo   WARNING: app-ads.txt missing at repo root! Creating...
-  echo google.com, pub-3806787756785352, DIRECT, f08c47fec0942fa0 > "%REPO_ROOT%\app-ads.txt"
+echo [4/5] dist nach Repo-Root kopieren...
+robocopy "%PROJECT%\dist" "%REPO%" /E /NFL /NDL /NJH /NJS
+if not exist "%REPO%\app-ads.txt" (
+    echo google.com, pub-3806787756785352, DIRECT, f08c47fec0942fa0 > "%REPO%\app-ads.txt"
 )
-echo   OK - app-ads.txt present.
+echo   OK
 
-REM ---- Step 5: Git commit and push ----
 echo.
-echo [5/5] Pushing to GitHub...
-cd /d "%REPO_ROOT%"
+echo [5/5] Git commit und push...
+cd /d "%REPO%"
 git add -A
-git commit -m "Fix website: images, hero, placeholders, UI"
+git commit -m "Redesign: new hero, fixed animations, clean layout"
 git push -f origin master:main
-if %ERRORLEVEL% neq 0 (
-  echo   PUSH FAILED - check your git credentials or internet connection.
-  pause
-  exit /b 1
-)
+echo   OK
 
 echo.
 echo ============================================
-echo   DONE! Website is deploying to GitHub.
-echo   It will be live in ~1-2 minutes at:
+echo   FERTIG! Warte 2 Minuten, dann reload.
 echo   https://richterdigital.pro
 echo ============================================
+echo.
 pause
