@@ -36,8 +36,8 @@ const ImpressumPage = () => {
               <div className="bg-navy-800/40 rounded-2xl border border-white/5 p-6">
                 <p className="text-cream-muted leading-relaxed">
                   <strong className="text-cream">Richter Digital</strong><br />
-                  <span className="text-electric">[Your Name / Responsible Person]</span><br />
-                  <span className="text-electric">[Street and House Number]</span><br />
+                  <span className="text-electric">Arthur Richter</span><br />
+                  <span className="text-electric">Schmechtener Str. 13</span><br />
                   33014 Bad Driburg<br />
                   Germany
                 </p>
