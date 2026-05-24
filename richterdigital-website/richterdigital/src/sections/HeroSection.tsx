@@ -11,16 +11,17 @@ const HeroSection = () => {
     const content = contentRef.current;
     if (!lens || !content) return;
 
-    // Initial animation on load
+    // Initial animation on load — translate(-50%,-50%) muss IMMER dabei bleiben,
+    // sonst verliert das Element seine absolute Zentrierung
     lens.style.opacity = '0';
-    lens.style.transform = 'scale(0.86) translateY(40px)';
+    lens.style.transform = 'translate(-50%, -50%) scale(0.86) translateY(40px)';
     content.style.opacity = '0';
     content.style.transform = 'translateY(24px)';
 
     setTimeout(() => {
       lens.style.transition = 'all 1.1s cubic-bezier(0.16, 1, 0.3, 1)';
       lens.style.opacity = '1';
-      lens.style.transform = 'scale(1) translateY(0)';
+      lens.style.transform = 'translate(-50%, -50%) scale(1) translateY(0)';
 
       setTimeout(() => {
         content.style.transition = 'all 0.8s cubic-bezier(0.16, 1, 0.3, 1)';
@@ -36,7 +37,7 @@ const HeroSection = () => {
       const progress = Math.min(scrollY / (windowHeight * 0.7), 1);
 
       if (progress > 0) {
-        lens.style.transform = `translateY(${-progress * 50}px) scale(${1 - progress * 0.03})`;
+        lens.style.transform = `translate(-50%, -50%) translateY(${-progress * 50}px) scale(${1 - progress * 0.03})`;
         lens.style.opacity = `${1 - progress * 0.5}`;
       }
     };
