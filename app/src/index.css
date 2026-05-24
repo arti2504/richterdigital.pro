@@ -1,0 +1,191 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 48% 4%;
+    --foreground: 230 60% 97%;
+    --card: 222 45% 6%;
+    --card-foreground: 230 60% 97%;
+    --popover: 222 45% 6%;
+    --popover-foreground: 230 60% 97%;
+    --primary: 224 100% 59%;
+    --primary-foreground: 230 60% 97%;
+    --secondary: 222 35% 12%;
+    --secondary-foreground: 230 60% 97%;
+    --muted: 222 35% 12%;
+    --muted-foreground: 225 20% 70%;
+    --accent: 224 100% 59%;
+    --accent-foreground: 230 60% 97%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 222 30% 18%;
+    --input: 222 30% 18%;
+    --ring: 224 100% 59%;
+    --radius: 0.875rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Sora', sans-serif;
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer components {
+  .font-mono-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  
+  .lens-frame {
+    @apply rounded-[40px] border border-white/10;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.55);
+    overflow: hidden;
+  }
+  
+  .lens-frame-inner {
+    @apply rounded-[28px] border border-white/10;
+    overflow: hidden;
+  }
+  
+  .glow-button {
+    @apply relative overflow-hidden;
+    box-shadow: 0 0 30px rgba(45, 98, 255, 0.4), 0 0 60px rgba(45, 98, 255, 0.2);
+    transition: all 0.3s ease;
+  }
+  
+  .glow-button:hover {
+    box-shadow: 0 0 40px rgba(45, 98, 255, 0.6), 0 0 80px rgba(45, 98, 255, 0.3);
+    transform: translateY(-2px);
+  }
+  
+  .text-gradient {
+    background: linear-gradient(135deg, #F4F6FF 0%, #A7B0C8 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .accent-gradient {
+    background: linear-gradient(135deg, #2D62FF 0%, #1E4AD0 100%);
+  }
+  
+  .noise-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.04;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+  
+  .section-pinned {
+    @apply relative w-screen h-screen overflow-hidden;
+  }
+  
+  .marquee-track {
+    animation: marquee 30s linear infinite;
+  }
+  
+  @keyframes marquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+  
+  .border-shimmer {
+    background: linear-gradient(90deg, transparent, rgba(45, 98, 255, 0.3), transparent);
+    background-size: 200% 100%;
+    animation: border-shimmer 6s ease-in-out infinite;
+  }
+  
+  @keyframes border-shimmer {
+    0%, 100% {
+      background-position: 200% 0;
+    }
+    50% {
+      background-position: -200% 0;
+    }
+  }
+  
+  .breathing {
+    animation: breathing 4.5s ease-in-out infinite;
+  }
+  
+  @keyframes breathing {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.01);
+    }
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Legal page typography */
+.prose-invert h2 {
+  color: #F4F6FF;
+  margin-bottom: 0.75rem;
+}
+
+.prose-invert p {
+  color: #A7B0C8;
+  line-height: 1.7;
+}
+
+.prose-invert ul {
+  color: #A7B0C8;
+}
+
+.prose-invert strong {
+  color: #F4F6FF;
+}
+
+.prose-invert a {
+  color: #2D62FF;
+}
+
+.prose-invert a:hover {
+  text-decoration: underline;
+}
