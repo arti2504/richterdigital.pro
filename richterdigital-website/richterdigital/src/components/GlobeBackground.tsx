@@ -105,8 +105,8 @@ const GlobeBackground = () => {
     canvas.width  = SIZE;
     canvas.height = SIZE;
 
-    // Position canvas so globe center sits near viewport top-right corner
-    const offset = Math.round(SIZE / 2 - R * 0.35);
+    // Push globe mostly off-screen — only ~20% peeking from corner
+    const offset = Math.round(SIZE / 2 - R * 0.18);
     canvas.style.top   = `-${offset}px`;
     canvas.style.right = `-${offset}px`;
 
@@ -269,7 +269,7 @@ const GlobeBackground = () => {
         position: 'fixed',
         pointerEvents: 'none',
         zIndex: 9997,
-        opacity: 0.88,
+        opacity: 0.18,
       }}
       aria-hidden="true"
     />
