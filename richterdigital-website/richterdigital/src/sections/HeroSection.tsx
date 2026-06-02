@@ -1,109 +1,100 @@
-import { ArrowDown } from 'lucide-react';
+import { ArrowDown, Smartphone, Globe, Code2, Monitor } from 'lucide-react';
+
+const services = [
+  { icon: Smartphone, label: 'Android Apps' },
+  { icon: Smartphone, label: 'iOS Apps'     },
+  { icon: Globe,      label: 'Web Apps'     },
+  { icon: Monitor,    label: 'Websites'     },
+];
+
+const trust = [
+  '🇩🇪 Based in Germany',
+  '⚡ Fast delivery',
+  '💬 Direct communication',
+  '🔒 GDPR compliant',
+];
 
 const HeroSection = () => {
-  const scrollToApp = () => {
-    const el = document.getElementById('app');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
+  const scrollTo = (id: string) =>
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
   return (
     <section className="relative min-h-screen bg-navy-900 flex items-center pt-20 pb-16 overflow-hidden">
 
-      {/* Background glow */}
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse at 50% 20%, rgba(45,98,255,0.12) 0%, transparent 65%)',
-        }}
-      />
-      {/* Bottom fade into next section */}
-      <div
-        className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
-        style={{
-          background: 'linear-gradient(to bottom, transparent, rgba(7,10,18,0.6))',
-        }}
-      />
+      {/* Background glows */}
+      <div className="absolute inset-0 pointer-events-none">
+        <div
+          className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px] rounded-full blur-[120px] opacity-20"
+          style={{ background: 'radial-gradient(circle, #2D62FF 0%, transparent 70%)' }}
+        />
+      </div>
 
       <div className="relative z-10 w-full px-6 lg:px-12">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-5xl mx-auto text-center">
 
-          {/* Outer lens card */}
-          <div className="lens-frame bg-navy-800/50 backdrop-blur-sm p-8 lg:p-14 hero-card-in">
+          {/* Label */}
+          <div className="inline-flex items-center gap-2 bg-electric/10 border border-electric/20 rounded-full px-4 py-1.5 mb-8 hero-card-in">
+            <span className="w-2 h-2 rounded-full bg-electric animate-pulse" />
+            <span className="font-mono-label text-electric">Available for new projects</span>
+          </div>
 
-            <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          {/* Headline */}
+          <h1 className="font-display text-5xl md:text-6xl lg:text-7xl text-cream font-bold leading-[1.04] mb-6 hero-text-in">
+            Turn your idea into a<br />
+            <span className="text-electric">real digital product</span>
+          </h1>
 
-              {/* ── Left: Text ── */}
-              <div className="hero-text-in">
-                <span className="font-mono-label text-electric mb-5 block">RICHTER DIGITAL</span>
+          {/* Subheadline */}
+          <p className="text-cream-muted text-xl leading-relaxed max-w-2xl mx-auto mb-10 hero-phones-in">
+            I design and build Android apps, iOS apps, web apps, and websites —
+            from your first idea all the way to launch. No agency overhead, just direct work.
+          </p>
 
-                <h1 className="font-display text-4xl md:text-5xl lg:text-[52px] text-cream font-bold leading-[1.08] mb-5">
-                  Prank your friends<br />
-                  with a{' '}
-                  <span className="text-electric">fake livestream</span>
-                </h1>
-
-                <p className="text-cream-muted text-lg leading-relaxed mb-8 max-w-md">
-                  Smile4Me makes your phone look exactly like a real streaming
-                  platform — live viewer counts, chat reactions, comments and all.
-                  Download free on Google Play.
-                </p>
-
-                {/* Feature pills */}
-                <div className="flex flex-wrap gap-2.5 mb-8">
-                  {['Fake live viewer count', 'Animated reactions', 'Free to use', 'No signup'].map((f) => (
-                    <span
-                      key={f}
-                      className="text-xs text-cream/80 bg-electric/10 border border-electric/20 rounded-full px-3.5 py-1.5 font-medium"
-                    >
-                      {f}
-                    </span>
-                  ))}
-                </div>
-
-                {/* CTAs */}
-                <div className="flex flex-wrap gap-4 items-center">
-                  <a
-                    href="https://play.google.com/store/apps/developer?id=Richter+Digital"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="glow-button px-7 py-3.5 bg-electric text-white font-semibold rounded-xl hover:bg-electric-dark transition-all text-sm"
-                  >
-                    Get it on Google Play
-                  </a>
-                  <button
-                    onClick={scrollToApp}
-                    className="text-cream-muted hover:text-cream transition-colors text-sm flex items-center gap-2 group"
-                  >
-                    Learn more
-                    <ArrowDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
-                  </button>
-                </div>
+          {/* Service tags */}
+          <div className="flex flex-wrap justify-center gap-3 mb-10 hero-phones-in">
+            {services.map(({ icon: Icon, label }) => (
+              <div
+                key={label}
+                className="flex items-center gap-2 bg-navy-800/80 border border-white/8 rounded-xl px-4 py-2.5 text-sm text-cream"
+              >
+                <Icon className="w-4 h-4 text-electric" />
+                {label}
               </div>
+            ))}
+          </div>
 
-              {/* ── Right: Phone mockups ── */}
-              <div className="flex gap-5 justify-center lg:justify-end items-end hero-phones-in">
-                <div className="lens-frame-inner w-36 sm:w-44 md:w-48 aspect-[9/16] overflow-hidden hover:scale-[1.03] transition-transform duration-500 flex-shrink-0">
-                  <img
-                    src="/images/smile4me-screenshot1.png"
-                    alt="Smile4Me Screenshot 1"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <div className="lens-frame-inner w-36 sm:w-44 md:w-48 aspect-[9/16] overflow-hidden hover:scale-[1.03] transition-transform duration-500 flex-shrink-0 mb-10">
-                  <img
-                    src="/images/smile4me-screenshot2.png"
-                    alt="Smile4Me Screenshot 2"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
+          {/* CTAs */}
+          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-16 hero-phones-in">
+            <button
+              onClick={() => scrollTo('contact')}
+              className="glow-button px-8 py-4 bg-electric text-white font-semibold rounded-xl hover:bg-electric-dark transition-all text-base"
+            >
+              Get a Free Quote
+            </button>
+            <button
+              onClick={() => scrollTo('portfolio')}
+              className="px-8 py-4 bg-white/5 text-cream border border-white/10 font-semibold rounded-xl hover:bg-white/10 transition-all text-base flex items-center justify-center gap-2 group"
+            >
+              See My Work
+              <ArrowDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+            </button>
+          </div>
 
-            </div>
+          {/* Trust signals */}
+          <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 hero-phones-in">
+            {trust.map((t) => (
+              <span key={t} className="text-sm text-cream-muted">{t}</span>
+            ))}
           </div>
 
         </div>
       </div>
+
+      {/* Bottom fade */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none"
+        style={{ background: 'linear-gradient(to bottom, transparent, #070A12)' }}
+      />
     </section>
   );
 };
