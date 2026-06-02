@@ -108,19 +108,18 @@ const AboutSection = () => {
 
               <div className="space-y-4 text-cream-muted leading-relaxed mb-8">
                 <p>
-                  I'm Arthur — a freelance developer from Bad Driburg, Germany. I build
-                  apps and websites for people who have an idea and need someone to
-                  turn it into a real product.
+                  I'm Arthur — a full-stack developer with two years of experience
+                  designing and building digital products for clients across Europe and beyond.
                 </p>
                 <p>
-                  I started by building <strong className="text-cream">Smile4Me</strong> —
-                  a prank app I designed, coded, and published to Google Play entirely on my own.
-                  That's the level of ownership I bring to every project.
+                  I handle every stage myself: concept, design, development, testing,
+                  and deployment. Android, iOS, web apps, websites — one person who
+                  owns the full process. No agency layers, no handoffs.
                 </p>
                 <p>
-                  I'm at the start of my freelance journey, which means I keep rates competitive
-                  and bring extra motivation to every project. You get someone who's genuinely
-                  invested in making your idea work.
+                  My app <strong className="text-cream">Smile4Me</strong> is live on
+                  Google Play and available to users in 180+ countries. Every client
+                  project gets the same standard of execution.
                 </p>
               </div>
 
