@@ -19,6 +19,12 @@ echo.
 echo [2/5] Bilder nach public\images kopieren...
 if not exist "%PROJECT%\public\images" mkdir "%PROJECT%\public\images"
 xcopy /Y /I "%REPO%\images\*" "%PROJECT%\public\images\" > nul
+if exist "%REPO%\images\arthur.jpg" (
+  xcopy /Y /I "%REPO%\images\arthur.jpg" "%PROJECT%\public\images\" > nul
+  echo   OK - inkl. arthur.jpg
+) else (
+  echo   OK - HINWEIS: arthur.jpg fehlt noch in images\
+)
 echo   OK
 
 echo.

@@ -1,7 +1,14 @@
 import { useEffect, useRef } from 'react';
-import { MessageSquare, Code2, Rocket } from 'lucide-react';
+import { type LucideIcon, MessageSquare, Code2, Rocket } from 'lucide-react';
 
-const steps = [
+interface Step {
+  number: string;
+  icon: LucideIcon;
+  title: string;
+  description: string;
+}
+
+const steps: Step[] = [
   {
     number: '01',
     icon: MessageSquare,

@@ -1,11 +1,17 @@
 import { useEffect, useRef } from 'react';
-import { Code2, Smartphone, Globe, Shield, Zap, MessageSquare } from 'lucide-react';
+import { type LucideIcon, Shield, Zap, MessageSquare, Code2 } from 'lucide-react';
 
-const strengths = [
-  { icon: MessageSquare, label: 'Direct contact', desc: 'You talk to me, not a project manager.' },
-  { icon: Zap,           label: 'Fast delivery',  desc: 'No agency overhead means faster turnaround.' },
-  { icon: Shield,        label: 'Made in Germany', desc: 'GDPR-compliant, reliable, high quality standards.' },
-  { icon: Code2,         label: 'Full stack',      desc: 'I handle design, frontend, backend, and deployment.' },
+interface Strength {
+  icon: LucideIcon;
+  label: string;
+  desc: string;
+}
+
+const strengths: Strength[] = [
+  { icon: MessageSquare, label: 'Direct contact',  desc: 'You talk to me, not a project manager.' },
+  { icon: Zap,           label: 'Fast turnaround', desc: 'No agency layers, I move quickly.' },
+  { icon: Shield,        label: 'Made in Germany', desc: 'Reliable, GDPR-compliant, high standards.' },
+  { icon: Code2,         label: 'End-to-end',      desc: 'Design, code, deployment — all handled.' },
 ];
 
 const AboutSection = () => {
@@ -21,12 +27,12 @@ const AboutSection = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             leftRef.current?.classList.add('visible');
-            setTimeout(() => rightRef.current?.classList.add('visible'), 150);
+            setTimeout(() => rightRef.current?.classList.add('visible'), 120);
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.15 }
+      { threshold: 0.12 }
     );
     observer.observe(section);
     return () => observer.disconnect();
@@ -39,100 +45,110 @@ const AboutSection = () => {
       className="relative bg-navy-900 py-24 lg:py-32 overflow-hidden"
     >
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse at 20% 50%, rgba(45,98,255,0.06) 0%, transparent 55%)',
-        }}
+      <div className="absolute inset-0 pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at 15% 60%, rgba(45,98,255,0.06) 0%, transparent 55%)' }}
       />
 
       <div className="relative z-10 px-6 lg:px-12">
         <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
 
-            {/* Left — decorative */}
+            {/* ── Left: Photo ── */}
             <div ref={leftRef} className="reveal-left">
-              <div className="lens-frame bg-navy-800/60 aspect-square max-w-md mx-auto lg:mx-0 relative overflow-hidden flex items-center justify-center">
-                {/* Glow */}
-                <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-48 h-48 rounded-full blur-3xl opacity-30" style={{ background: '#2D62FF' }} />
-                <div className="absolute bottom-1/4 left-1/4 w-32 h-32 rounded-full blur-3xl opacity-20" style={{ background: '#8B5CF6' }} />
+              <div className="relative max-w-sm mx-auto lg:mx-0">
 
-                {/* Content */}
-                <div className="relative z-10 flex flex-col items-center gap-6 p-10">
+                {/* Glow behind photo */}
+                <div
+                  className="absolute -inset-4 rounded-[44px] blur-2xl opacity-20 pointer-events-none"
+                  style={{ background: 'linear-gradient(135deg, #2D62FF, #8B5CF6)' }}
+                />
+
+                {/* Photo frame */}
+                <div className="relative lens-frame overflow-hidden aspect-[3/4]">
                   <img
-                    src="/images/logo.png"
-                    alt="Richter Digital"
-                    className="w-20 h-20 object-contain breathing"
+                    src="/images/arthur.jpg"
+                    alt="Arthur Richter"
+                    className="w-full h-full object-cover object-top"
+                    onError={(e) => {
+                      // Fallback if photo not yet added
+                      (e.target as HTMLImageElement).style.display = 'none';
+                      (e.target as HTMLImageElement).parentElement!.classList.add('bg-navy-800');
+                    }}
                   />
-                  <div className="text-center">
-                    <p className="font-display text-2xl font-bold text-cream">Arthur Richter</p>
-                    <p className="text-cream-muted text-sm mt-1">Freelance App & Web Developer</p>
-                    <p className="text-cream-muted/60 text-xs mt-0.5">Bad Driburg, Germany 🇩🇪</p>
-                  </div>
-
-                  {/* Mini stats */}
-                  <div className="flex gap-8">
-                    {[
-                      { value: '4+', label: 'Services' },
-                      { value: '1',  label: 'App live'  },
-                      { value: '∞',  label: 'Ideas left' },
-                    ].map((s) => (
-                      <div key={s.label} className="text-center">
-                        <p className="font-display text-2xl font-bold text-electric">{s.value}</p>
-                        <p className="text-xs text-cream-muted font-mono-label">{s.label}</p>
+                  {/* Subtle overlay gradient at bottom */}
+                  <div
+                    className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
+                    style={{ background: 'linear-gradient(to top, rgba(7,10,18,0.7), transparent)' }}
+                  />
+                  {/* Name badge over photo */}
+                  <div className="absolute bottom-5 left-5 right-5">
+                    <div className="bg-navy-900/80 backdrop-blur-md border border-white/10 rounded-2xl px-4 py-3 flex items-center justify-between">
+                      <div>
+                        <p className="font-display text-sm font-bold text-cream">Arthur Richter</p>
+                        <p className="text-xs text-cream-muted">Freelance Developer · Bad Driburg 🇩🇪</p>
                       </div>
-                    ))}
-                  </div>
-
-                  {/* Tech icons row */}
-                  <div className="flex gap-3">
-                    {[Smartphone, Globe, Code2].map((Icon, i) => (
-                      <div key={i} className="w-10 h-10 rounded-lg bg-electric/10 border border-electric/20 flex items-center justify-center">
-                        <Icon className="w-5 h-5 text-electric" />
+                      <div className="flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-emerald-400 available-dot" />
+                        <span className="text-xs text-emerald-400/80 font-mono-label">Open</span>
                       </div>
-                    ))}
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Right — text */}
-            <div ref={rightRef} className="reveal-right">
-              <span className="font-mono-label text-electric mb-4 block">ABOUT ME</span>
-              <h2 className="font-display text-display-2 text-cream font-bold mb-6">
-                A developer who{' '}
-                <span className="text-electric">actually ships</span>
-              </h2>
-              <p className="text-cream-muted leading-relaxed mb-5">
-                I'm Arthur — a freelance developer based in Bad Driburg, Germany. I build
-                Android and iOS apps, web apps, and websites for clients who have an idea
-                and need someone to execute it.
-              </p>
-              <p className="text-cream-muted leading-relaxed mb-8">
-                I started with my own app, <strong className="text-cream">Smile4Me</strong>,
-                which I designed, built, and published to Google Play entirely on my own.
-                Now I take on client projects and bring the same level of care and quality
-                to your idea — at rates that make sense for early-stage projects.
-              </p>
+            {/* ── Right: Text ── */}
+            <div ref={rightRef} className="reveal-right pt-2">
+              <span className="font-mono-label text-electric mb-5 block">ABOUT ME</span>
 
-              {/* Strengths grid */}
-              <div className="grid sm:grid-cols-2 gap-4">
+              <h2 className="font-display text-display-2 text-cream font-bold mb-6 leading-tight">
+                A developer who<br />
+                <span className="text-gradient-blue">actually ships.</span>
+              </h2>
+
+              <div className="space-y-4 text-cream-muted leading-relaxed mb-8">
+                <p>
+                  I'm Arthur — a freelance developer from Bad Driburg, Germany. I build
+                  apps and websites for people who have an idea and need someone to
+                  turn it into a real product.
+                </p>
+                <p>
+                  I started by building <strong className="text-cream">Smile4Me</strong> —
+                  a prank app I designed, coded, and published to Google Play entirely on my own.
+                  That's the level of ownership I bring to every project.
+                </p>
+                <p>
+                  I'm at the start of my freelance journey, which means I keep rates competitive
+                  and bring extra motivation to every project. You get someone who's genuinely
+                  invested in making your idea work.
+                </p>
+              </div>
+
+              {/* Strengths */}
+              <div className="grid grid-cols-2 gap-3">
                 {strengths.map((s) => (
                   <div
                     key={s.label}
-                    className="flex items-start gap-3 bg-navy-800/40 rounded-2xl p-4 border border-white/5 hover:border-electric/20 transition-colors"
+                    className="flex items-start gap-3 bg-navy-800/50 rounded-2xl p-4 border border-white/5 hover:border-electric/25 transition-colors"
                   >
-                    <div className="w-8 h-8 rounded-lg bg-electric/15 flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div className="w-8 h-8 rounded-lg bg-electric/12 flex items-center justify-center flex-shrink-0 mt-0.5">
                       <s.icon className="w-4 h-4 text-electric" />
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-cream">{s.label}</p>
-                      <p className="text-xs text-cream-muted mt-0.5">{s.desc}</p>
+                      <p className="text-xs text-cream-muted/80 mt-0.5 leading-snug">{s.desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
+
+              {/* CTA */}
+              <button
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                className="mt-8 glow-button-border px-7 py-3.5 bg-electric text-white font-semibold rounded-xl text-sm"
+              >
+                Let's work together →
+              </button>
             </div>
 
           </div>

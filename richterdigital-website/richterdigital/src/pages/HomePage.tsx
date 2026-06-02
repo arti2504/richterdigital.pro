@@ -1,5 +1,6 @@
 import Navigation from '../components/Navigation';
 import HeroSection from '../sections/HeroSection';
+import MarqueeSection from '../sections/MarqueeSection';
 import ServicesSection from '../sections/ServicesSection';
 import HowItWorksSection from '../sections/HowItWorksSection';
 import PortfolioSection from '../sections/PortfolioSection';
@@ -13,6 +14,7 @@ const HomePage = () => {
       <Navigation />
       <main>
         <HeroSection />
+        <MarqueeSection />
         <ServicesSection />
         <HowItWorksSection />
         <PortfolioSection />
