@@ -1,0 +1,43 @@
+import { useLang, tr } from '../i18n';
+import Reveal from '../components/Reveal';
+
+const ProcessSection = () => {
+  const { lang } = useLang();
+  const steps = [
+    { t: tr(lang, 'Kickoff-Gespräch', 'Kickoff call'),       d: tr(lang, 'Wir sprechen über deine Idee, dein Ziel und was das Produkt wirklich leisten soll.', 'We talk through your idea, your goal and what the product actually needs to do.') },
+    { t: tr(lang, 'Konzept & Design', 'Concept & design'),   d: tr(lang, 'Ich entwerfe Struktur und Design — du gibst Feedback, bevor eine Zeile Code entsteht.', 'I design the structure and look — you give feedback before a single line of code is written.') },
+    { t: tr(lang, 'Entwicklung', 'Development'),              d: tr(lang, 'Ich baue iterativ und halte dich mit regelmäßigen Updates auf dem Laufenden. Keine Überraschungen.', 'I build iteratively and keep you posted with regular updates. No surprises.') },
+    { t: tr(lang, 'Test & Feinschliff', 'Testing & polish'), d: tr(lang, 'Alles wird getestet und optimiert, bis es schnell, stabil und rund läuft.', 'Everything gets tested and refined until it runs fast, stable and smooth.') },
+    { t: tr(lang, 'Launch', 'Launch'),                       d: tr(lang, 'Veröffentlichung im App Store, bei Google Play oder auf deiner Domain — ich übernehme das komplett.', 'Release on the App Store, Google Play or your domain — I handle the whole thing.') },
+    { t: tr(lang, 'Support & Weiterentwicklung', 'Support & growth'), d: tr(lang, 'Auch nach dem Launch bin ich da: Updates, Verbesserungen und neue Features.', 'I stick around after launch too: updates, improvements and new features.') },
+  ];
+
+  return (
+    <section className="bg-mist text-ink py-20 sm:py-28 px-6">
+      <div className="max-w-[1080px] mx-auto">
+        <Reveal>
+          <p className="font-mono-label text-electric mb-4">{tr(lang, 'So arbeiten wir', 'How it works')}</p>
+          <h2 className="font-display font-bold" style={{ fontSize: 'clamp(30px, 4.4vw, 56px)', lineHeight: 1.12, letterSpacing: '-0.02em' }}>
+            {lang === 'de'
+              ? <>Aus deiner Idee wird ein Produkt — <span className="mark-hl">Schritt für Schritt</span>.</>
+              : <>Your idea becomes a product — <span className="mark-hl">step by step</span>.</>}
+          </h2>
+        </Reveal>
+
+        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {steps.map((s, i) => (
+            <Reveal key={i} delay={(i % 3) * 80}>
+              <div className="h-full bg-paper rounded-2xl border border-ink/10 p-6 hover:border-electric/40 transition-colors">
+                <span className="font-display font-bold text-electric text-2xl">{String(i + 1).padStart(2, '0')}</span>
+                <h3 className="mt-3 font-display font-semibold text-ink" style={{ fontSize: '20px' }}>{s.t}</h3>
+                <p className="mt-2 text-ink/65 font-sans" style={{ fontSize: '15px', lineHeight: 1.55 }}>{s.d}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default ProcessSection;
