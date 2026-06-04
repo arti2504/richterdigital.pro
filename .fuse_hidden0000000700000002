@@ -32,8 +32,8 @@
 
   .intro{background:var(--paper);color:var(--ink);padding:110px 24px;text-align:center}
   .intro .wrap{max-width:820px;margin:0 auto}
-  .intro h2{font-weight:700;font-size:clamp(34px,5vw,66px);line-height:1.15;letter-spacing:-.02em}
-  .intro h2 .mark{background:var(--accent);color:#fff;padding:.02em .22em;border-radius:.1em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+  .intro h2{font-weight:600;font-size:clamp(30px,4.2vw,56px);line-height:1.08;letter-spacing:-.02em}
+  .intro h2 .hl{color:var(--accent)}
   .intro p{margin:20px auto 0;font-family:'Inter';font-size:clamp(16px,1.5vw,20px);line-height:1.55;color:rgba(20,20,20,.7);max-width:58ch}
   .note{background:#EEEEEE;color:#6b6b6b;font-size:13px;padding:16px 40px;text-align:center}
   @media(max-width:900px){.nav-links{display:none}}
@@ -67,7 +67,7 @@
 
   <section class="intro">
     <div class="wrap">
-      <h2>Aus deiner Idee wird ein <span class="mark">echtes Produkt</span>.</h2>
+      <h2>Aus deiner Idee wird ein <span class="hl">echtes Produkt</span>.</h2>
       <p>Apps, Web-Apps und Landingpages — end-to-end gebaut von einem KI-nativen Entwickler, der liefert. Aus Deutschland, weltweit im Einsatz.</p>
     </div>
   </section>
