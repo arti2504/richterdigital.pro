@@ -1,16 +1,29 @@
 import { ArrowDown } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { useLang, tr } from '../i18n';
 
 const HeroSection = () => {
   const { lang } = useLang();
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 640px)');
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener('change', update);
+    return () => mq.removeEventListener('change', update);
+  }, []);
+
+  const videoSrc = isMobile ? '/images/hero-video-mobile.mp4' : '/images/hero-video.mp4';
+
   const scrollTo = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
   return (
     <section className="relative min-h-screen bg-ink flex items-end justify-center overflow-hidden">
       <div className="absolute inset-0 z-[1]">
-        <video className="w-full h-full object-cover" autoPlay muted loop playsInline>
-          <source src="/images/hero-video.mp4" type="video/mp4" />
+        <video key={videoSrc} className="w-full h-full object-cover" autoPlay muted loop playsInline>
+          <source src={videoSrc} type="video/mp4" />
         </video>
         <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(20,20,20,0.0) 0%, rgba(20,20,20,0.0) 60%, rgba(20,20,20,0.8) 100%)' }} />
       </div>
