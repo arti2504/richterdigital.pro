@@ -68,8 +68,8 @@ const ContactSection = () => {
     } catch { setStatus('error'); }
   };
 
-  const fieldCls = 'w-full bg-navy-900/80 border border-white/10 rounded-xl px-4 py-3 text-cream text-sm focus:outline-none focus:border-electric/50 transition-colors placeholder:text-cream-muted/40';
-  const selectCls = fieldCls + ' appearance-none';
+  const fieldCls = 'w-full bg-white border border-black/10 rounded-xl px-4 py-3 text-ink text-sm focus:outline-none focus:border-electric transition-colors placeholder:text-ink/40';
+  const selectCls = fieldCls;
 
   return (
     <section ref={sectionRef} id="contact" className="relative bg-navy-900 py-24 lg:py-32 overflow-hidden">

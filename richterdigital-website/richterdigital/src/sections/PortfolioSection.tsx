@@ -3,11 +3,68 @@ import { ArrowUpRight } from 'lucide-react';
 import { useLang, tr } from '../i18n';
 import Reveal from '../components/Reveal';
 
+type Project = {
+  name: string;
+  type: string;
+  desc: string;
+  tags: string[];
+  link: string;
+  accent: string;
+  desktop?: string;
+  mobile?: string;
+  mobile2?: string;
+};
+
+const Dot = () => <span className="w-2 h-2 rounded-full bg-ink/20" />;
+
+const DeviceShowcase = ({ p }: { p: Project }) => {
+  const [deskErr, setDeskErr] = useState(false);
+  const [mobErr, setMobErr] = useState(false);
+
+  const fallback = (!p.desktop && !p.mobile) || (p.desktop ? deskErr : mobErr);
+
+  if (fallback) {
+    return (
+      <div className="w-full aspect-[4/3] rounded-2xl flex items-center justify-center" style={{ background: `${p.accent}14` }}>
+        <span className="font-display font-bold" style={{ color: p.accent, fontSize: '30px' }}>{p.name}</span>
+      </div>
+    );
+  }
+
+  if (p.desktop) {
+    return (
+      <div className="relative w-full aspect-[4/3]">
+        <div className="absolute left-0 top-3 right-[16%] bottom-3 rounded-xl overflow-hidden border border-ink/10 bg-white shadow-xl">
+          <div className="h-7 bg-mist flex items-center gap-1.5 px-3 border-b border-ink/10"><Dot /><Dot /><Dot /></div>
+          <img src={p.desktop} alt={`${p.name} Desktop`} onError={() => setDeskErr(true)} className="w-full h-[calc(100%-1.75rem)] object-cover object-top" />
+        </div>
+        {p.mobile && !mobErr && (
+          <div className="absolute right-0 bottom-2 w-[30%] aspect-[9/19] rounded-[18px] border-[3px] border-ink bg-white overflow-hidden shadow-2xl">
+            <img src={p.mobile} alt={`${p.name} Mobile`} onError={() => setMobErr(true)} className="w-full h-full object-cover object-top" />
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-full aspect-[4/3] flex items-end justify-center gap-4 pb-2">
+      <div className="w-[34%] aspect-[9/19] rounded-[18px] border-[3px] border-ink bg-white overflow-hidden shadow-2xl">
+        <img src={p.mobile} alt={`${p.name} 1`} onError={() => setMobErr(true)} className="w-full h-full object-cover object-top" />
+      </div>
+      {p.mobile2 && (
+        <div className="w-[34%] aspect-[9/19] rounded-[18px] border-[3px] border-ink bg-white overflow-hidden shadow-2xl mb-6">
+          <img src={p.mobile2} alt={`${p.name} 2`} className="w-full h-full object-cover object-top" />
+        </div>
+      )}
+    </div>
+  );
+};
+
 const PortfolioSection = () => {
   const { lang } = useLang();
-  const [open, setOpen] = useState<number | null>(null);
 
-  const projects = [
+  const projects: Project[] = [
     {
       name: 'Smile4Me',
       type: tr(lang, 'Android-App · Google Play', 'Android app · Google Play'),
@@ -16,8 +73,9 @@ const PortfolioSection = () => {
         'Designed, built and published by us. The app turns an Android phone into a convincing fake livestream — with animated viewer counts, reactions and chat. Live worldwide on Google Play.'),
       tags: ['Kotlin', 'Firebase', 'AdMob', 'Google Play'],
       link: 'https://play.google.com/store/apps/developer?id=Richter+Digital',
-      preview: '/images/smile4me-screenshot1.png',
       accent: '#3DDC84',
+      mobile: '/images/smile4me-screenshot1.png',
+      mobile2: '/images/smile4me-screenshot2.png',
     },
     {
       name: 'Clio AI',
@@ -27,8 +85,9 @@ const PortfolioSection = () => {
         'AI writing assistant for academic texts: spelling, grammar, style, automatic sources and flashcards — all in one place.'),
       tags: ['React', 'TypeScript', 'AI / LLM'],
       link: 'https://getclio.ai',
-      preview: null,
       accent: '#0711ff',
+      desktop: '/images/clio-desktop.png',
+      mobile: '/images/clio-mobile.png',
     },
     {
       name: 'ThePackt',
@@ -38,8 +97,9 @@ const PortfolioSection = () => {
         'Quest-based community for founders and creators: complete tasks, earn Honor, join a tribe. Built and launched from the ground up.'),
       tags: ['React', 'Firebase', 'Community'],
       link: 'https://thepackt.io',
-      preview: null,
       accent: '#F59E0B',
+      desktop: '/images/packt-desktop.png',
+      mobile: '/images/packt-mobile.png',
     },
   ];
 
@@ -55,41 +115,27 @@ const PortfolioSection = () => {
           </h2>
         </Reveal>
 
-        <div className="mt-12 grid md:grid-cols-3 gap-5">
-          {projects.map((p, i) => {
-            const isOpen = open === i;
-            return (
-              <Reveal key={i} delay={i * 80}>
-                <div className="h-full flex flex-col bg-paper rounded-2xl border border-ink/10 overflow-hidden hover:border-electric/40 transition-colors">
-                  <div className="h-40 flex items-center justify-center" style={{ background: p.preview ? '#0B1022' : `${p.accent}14` }}>
-                    {p.preview
-                      ? <img src={p.preview} alt={p.name} className="h-full w-full object-cover object-top" />
-                      : <span className="font-display font-bold" style={{ color: p.accent, fontSize: '28px' }}>{p.name}</span>}
+        <div className="mt-14 space-y-16 lg:space-y-24">
+          {projects.map((p, i) => (
+            <div key={p.name} className="grid md:grid-cols-2 gap-8 lg:gap-14 items-center">
+              <Reveal variant={i % 2 === 1 ? 'right' : 'left'} className={i % 2 === 1 ? 'md:order-2' : 'md:order-1'}>
+                <DeviceShowcase p={p} />
+              </Reveal>
+              <Reveal variant={i % 2 === 1 ? 'left' : 'right'} className={i % 2 === 1 ? 'md:order-1' : 'md:order-2'}>
+                <div>
+                  <p className="font-mono-label text-ink/50">{p.type}</p>
+                  <h3 className="mt-2 font-display font-bold text-ink" style={{ fontSize: 'clamp(26px, 3vw, 38px)' }}>{p.name}</h3>
+                  <p className="mt-4 text-ink/70 font-sans" style={{ fontSize: '17px', lineHeight: 1.6 }}>{p.desc}</p>
+                  <div className="flex flex-wrap gap-2 mt-5">
+                    {p.tags.map((t) => (<span key={t} className="text-xs bg-mist text-ink/70 rounded-full px-3 py-1">{t}</span>))}
                   </div>
-                  <div className="flex flex-col flex-1 p-6">
-                    <p className="font-mono-label text-ink/50">{p.type}</p>
-                    <h3 className="mt-2 font-display font-bold text-ink text-2xl">{p.name}</h3>
-                    <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-60 opacity-100 mt-3' : 'max-h-0 opacity-0'}`}>
-                      <p className="text-ink/70 font-sans" style={{ fontSize: '15px', lineHeight: 1.55 }}>{p.desc}</p>
-                      <div className="flex flex-wrap gap-2 mt-3">
-                        {p.tags.map((t) => (
-                          <span key={t} className="text-xs bg-mist text-ink/70 rounded-full px-3 py-1">{t}</span>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="mt-auto pt-5 flex items-center gap-3">
-                      <button onClick={() => setOpen(isOpen ? null : i)} className="text-sm font-display font-semibold text-electric hover:underline">
-                        {isOpen ? tr(lang, 'Weniger', 'Less') : tr(lang, 'Mehr erfahren', 'Learn more')}
-                      </button>
-                      <a href={p.link} target="_blank" rel="noopener noreferrer" className="ml-auto inline-flex items-center gap-1 text-sm font-display font-semibold text-ink hover:text-electric transition-colors">
-                        {tr(lang, 'Ansehen', 'Visit')} <ArrowUpRight className="w-4 h-4" />
-                      </a>
-                    </div>
-                  </div>
+                  <a href={p.link} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex items-center gap-2 font-display font-bold text-electric hover:gap-3 transition-all">
+                    {tr(lang, 'Live ansehen', 'View live')} <ArrowUpRight className="w-5 h-5" />
+                  </a>
                 </div>
               </Reveal>
-            );
-          })}
+            </div>
+          ))}
         </div>
       </div>
     </section>
