@@ -3,116 +3,65 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Richter Digital — Vorschau (Droids-Stil, 1:1)</title>
+<title>Richter Digital — Vorschau Hero</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --ink:#141414;
-    --paper:#FDFDFD;
-    --mist:#EEEEEE;
-    --accent:#0711ff;
-    --accent-dark:#0509cc;
-    --muted:#6b6b6b;
-  }
+  :root{--ink:#141414;--accent:#0711ff;--accent-dark:#0509cc;}
   *{box-sizing:border-box;margin:0;padding:0}
-  html{scroll-behavior:smooth}
-  body{font-family:'Inter',system-ui,sans-serif;color:var(--ink);background:var(--ink)}
-  h1,h2,h3,.ral{font-family:'Raleway',sans-serif}
-
-  /* ---------- NAV ---------- */
-  header{position:fixed;top:0;left:0;right:0;z-index:50;height:100px;display:flex;align-items:center;background:transparent;transition:background .3s,border-color .3s}
-  header.solid{background:rgba(20,20,20,.92);backdrop-filter:blur(10px)}
+  body{font-family:'Inter',sans-serif;color:#141414;background:#141414}
+  h1,.ral{font-family:'Raleway',sans-serif}
+  header{position:fixed;top:0;left:0;right:0;z-index:50;height:88px;display:flex;align-items:center;background:transparent}
   .nav-inner{width:100%;max-width:1240px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:space-between}
-  .logo{display:flex;align-items:center;gap:11px;font-family:'Raleway';font-weight:700;font-size:21px;letter-spacing:-.01em;color:#fff;text-decoration:none}
+  .logo{display:flex;align-items:center;gap:11px;font-family:'Raleway';font-weight:700;font-size:21px;color:#fff;text-decoration:none}
   .logo img{width:42px;height:42px;object-fit:contain;display:block}
   .nav-links{display:flex;align-items:center;gap:38px}
-  .nav-links a{font-family:'Raleway';font-size:17px;font-weight:300;letter-spacing:.04em;text-transform:uppercase;color:#fff;text-decoration:none;display:flex;align-items:center;gap:6px;opacity:.92;transition:opacity .15s}
-  .nav-links a:hover{opacity:1}
-  .nav-links .chev{font-size:10px;opacity:.7}
-  .cta-pill{font-family:'Raleway';font-weight:700;font-size:16px;color:#fff;background:var(--accent);border:none;border-radius:100px;padding:15px 32px;text-decoration:none;cursor:pointer;transition:background .15s,transform .15s}
-  .cta-pill:hover{background:var(--accent-dark);transform:translateY(-1px)}
+  .nav-links a{font-family:'Raleway';font-size:15px;font-weight:300;letter-spacing:.04em;text-transform:uppercase;color:#fff;text-decoration:none;opacity:.92}
+  .navright{display:flex;align-items:center;gap:24px}
+  .lang{font-family:'Raleway';font-weight:600;font-size:13px;color:#fff}.lang .off{color:rgba(255,255,255,.35)}
+  .cta-pill{font-family:'Raleway';font-weight:700;font-size:15px;color:#fff;background:var(--accent);border-radius:100px;padding:13px 28px;text-decoration:none}
 
-  /* ---------- HERO ---------- */
-  .hero{position:relative;min-height:100vh;background:var(--ink);overflow:hidden;display:flex;align-items:flex-end}
+  .hero{position:relative;min-height:100vh;background:var(--ink);overflow:hidden;display:flex;align-items:flex-end;justify-content:center}
   .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
-  .hero .overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(to bottom,rgba(20,20,20,.55) 0%,rgba(20,20,20,.15) 38%,rgba(20,20,20,.92) 100%)}
-  .hero-inner{position:relative;z-index:3;width:100%;max-width:1240px;margin:0 auto;padding:0 40px 70px}
-  .eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:26px}
-  .eyebrow .line{width:54px;height:1px;background:rgba(255,255,255,.45)}
-  .eyebrow span{font-family:'Raleway';font-weight:600;font-size:13px;letter-spacing:.18em;text-transform:uppercase;color:#fff}
-  .hero h1{font-family:'Raleway';font-weight:600;font-size:clamp(40px,5.4vw,72px);line-height:1.05;letter-spacing:-.03em;color:#FDFDFD;max-width:16ch}
-  .hero .sub{margin-top:26px;font-family:'Inter';font-weight:500;font-size:clamp(17px,1.7vw,23px);line-height:1.4;color:rgba(253,253,253,.82);max-width:50ch}
-  .hero .actions{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap}
-  .btn-primary{font-family:'Raleway';font-weight:700;font-size:17px;color:#fff;background:var(--accent);border-radius:100px;padding:18px 38px;text-decoration:none;transition:background .15s,transform .15s}
-  .btn-primary:hover{background:var(--accent-dark);transform:translateY(-2px)}
-  .btn-ghost{font-family:'Raleway';font-weight:600;font-size:17px;color:#fff;background:transparent;border:1px solid rgba(255,255,255,.4);border-radius:100px;padding:18px 34px;text-decoration:none;transition:border-color .15s,background .15s}
-  .btn-ghost:hover{border-color:#fff;background:rgba(255,255,255,.06)}
-
-  /* ---------- NEXT (light) section, nur Übergang zeigen ---------- */
-  .light{background:var(--paper);color:var(--ink);padding:90px 40px}
-  .light .wrap{max-width:1240px;margin:0 auto}
-  .light h2{font-family:'Raleway';font-weight:600;font-size:clamp(30px,3.4vw,48px);line-height:1.1;letter-spacing:-.02em;max-width:20ch}
-  .light p{margin-top:18px;font-size:19px;line-height:1.55;color:var(--muted);max-width:60ch}
-  .pill-row{margin-top:34px;display:flex;gap:12px;flex-wrap:wrap}
-  .tag{font-family:'Raleway';font-weight:500;font-size:15px;background:var(--mist);border-radius:100px;padding:10px 20px}
-  .tag.accent{background:var(--accent);color:#fff}
-
-  .note{background:var(--mist);color:#6b6b6b;font-size:13px;padding:16px 40px;text-align:center}
+  .hero .overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(to bottom,rgba(20,20,20,0) 0%,rgba(20,20,20,0) 55%,rgba(20,20,20,.85) 100%)}
+  .hero-inner{position:relative;z-index:3;width:100%;max-width:620px;margin:0 auto;padding:0 24px 48px;text-align:center}
+  .hero h1{font-family:'Raleway';font-weight:600;font-size:clamp(25px,3.4vw,44px);line-height:1.08;letter-spacing:-.02em;color:#fff}
+  .hero .sub{margin:14px auto 0;font-family:'Inter';font-weight:500;font-size:clamp(14px,1.3vw,17px);line-height:1.45;color:rgba(255,255,255,.8);max-width:44ch}
+  .hero .actions{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  .btn-primary{font-family:'Raleway';font-weight:700;font-size:16px;color:#fff;background:var(--accent);border-radius:100px;padding:14px 28px;text-decoration:none}
+  .btn-ghost{font-family:'Raleway';font-weight:600;font-size:16px;color:#fff;background:transparent;border:1px solid rgba(255,255,255,.4);border-radius:100px;padding:14px 24px;text-decoration:none}
+  .note{background:#EEEEEE;color:#6b6b6b;font-size:13px;padding:16px 40px;text-align:center}
   @media(max-width:900px){.nav-links{display:none}}
 </style>
 </head>
 <body>
-
-  <header id="hdr">
+  <header>
     <div class="nav-inner">
       <a href="#" class="logo"><img src="images/logo.png" alt="Richter Digital" /> Richter Digital</a>
       <nav class="nav-links">
-        <a href="#">Leistungen <span class="chev">▾</span></a>
-        <a href="#">Portfolio</a>
-        <a href="#">Über mich</a>
-        <a href="#">Kontakt</a>
+        <a href="#">Leistungen ▾</a><a href="#">Portfolio</a><a href="#">Über mich</a><a href="#">Kontakt</a>
       </nav>
-      <a href="#" class="cta-pill">Projekt anfragen</a>
+      <div class="navright">
+        <span class="lang"><b>DE</b><span class="off"> / EN</span></span>
+        <a href="#" class="cta-pill">Projekt anfragen</a>
+      </div>
     </div>
   </header>
 
   <section class="hero">
-    <video autoplay muted loop playsinline>
-      <source src="images/hero-video.mp4" type="video/mp4" />
-    </video>
+    <video autoplay muted loop playsinline><source src="images/hero-video.mp4" type="video/mp4" /></video>
     <div class="overlay"></div>
     <div class="hero-inner">
-      <div class="eyebrow"><span class="line"></span><span>Live im Google Play Store</span></div>
       <h1>Aus deiner Idee wird ein echtes Produkt.</h1>
       <p class="sub">Apps, Web-Apps und Landingpages — end-to-end gebaut von einem KI-nativen Entwickler, der liefert. Aus Deutschland, weltweit im Einsatz.</p>
       <div class="actions">
         <a href="#" class="btn-primary">Kostenloses Angebot</a>
-        <a href="#" class="btn-ghost">Arbeiten ansehen</a>
+        <a href="#" class="btn-ghost">Arbeiten ansehen ↓</a>
       </div>
     </div>
   </section>
 
-  <section class="light">
-    <div class="wrap">
-      <h2>Von der ersten Idee bis zum Launch — alles aus einer Hand.</h2>
-      <p>So sieht der Übergang von der dunklen Hero-Sektion zu den hellen Inhalts-Sektionen aus (genau wie bei Droids). Diese Sektion bauen wir als Nächstes richtig aus.</p>
-      <div class="pill-row">
-        <span class="tag accent">Android</span>
-        <span class="tag">iOS</span>
-        <span class="tag">Web-Apps</span>
-        <span class="tag">Landingpages</span>
-        <span class="tag">KI-Integration</span>
-      </div>
-    </div>
-  </section>
-
-  <div class="note">Vorschau — Nav + Hero im exakten Droids-Stil (Raleway/Inter, #0711ff). Texte sind Entwürfe, anpassbar. Nach deiner Freigabe baue ich das 1:1 in deinen React-Code und wir gehen zur nächsten Sektion.</div>
-
-  <script>
-    const hdr=document.getElementById('hdr');
-    addEventListener('scroll',()=>{hdr.classList.toggle('solid',scrollY>80)},{passive:true});
-  </script>
+  <div class="note">Vorschau — Hero: kompakt, mittig, ganz unten (Eyebrow entfernt). So verdeckt der Text dein Video-Motiv nicht.</div>
 </body>
 </html>
