@@ -28,8 +28,8 @@ const AboutSection = () => {
           </p>
           <p className="mt-4 text-ink/70 font-sans" style={{ fontSize: '17px', lineHeight: 1.6 }}>
             {tr(lang,
-              'Wir arbeiten KI-nativ: Moderne KI-Werkzeuge sind für uns kein Buzzword, sondern der Hebel, mit dem wir besser, schneller und günstiger liefern als klassische Anbieter. Mit jahrelanger Erfahrung und eigener App-Entwicklung — Smile4Me ist weltweit im Play Store live — stehen wir dir auch nach dem Launch jederzeit tatkräftig zur Seite.',
-              'We work AI-native: modern AI tools are not a buzzword for us but the lever that lets us deliver better, faster and more affordably than traditional shops. With years of experience and our own app development — Smile4Me is live worldwide on Google Play — we stay actively at your side long after launch.')}
+              'Wir nehmen bewusst nie mehr als eine Handvoll Projekte gleichzeitig an — so bekommt jedes Vorhaben die Zeit und Aufmerksamkeit, die es verdient. Bei uns gilt Qualität vor Quantität. Du arbeitest direkt mit den Menschen, die dein Produkt bauen: modern, KI-nativ und ehrlich.',
+              'We deliberately never take on more than a handful of projects at a time — so every project gets the time and attention it deserves. For us, quality comes before quantity. You work directly with the people building your product: modern, AI-native and honest.')}
           </p>
         </Reveal>
       </div>
