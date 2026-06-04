@@ -40,7 +40,7 @@ const Footer = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <Mail className="w-4 h-4 text-electric flex-shrink-0" />
-                  <a href="mailto:hello@richterdigital.pro" className="hover:text-electric transition-colors">hello@richterdigital.pro</a>
+                  <a href="mailto:richterdigitals@gmail.com" className="hover:text-electric transition-colors">richterdigitals@gmail.com</a>
                 </div>
               </div>
             </div>

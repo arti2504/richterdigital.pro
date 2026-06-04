@@ -1,6 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { Mail, MapPin, Clock, Send, ChevronDown } from 'lucide-react';
+import { Mail, MapPin, Clock, Send, Loader2 } from 'lucide-react';
 import { useLang, tr } from '../i18n';
+
+const ACCESS_KEY = 'f29d119e-7534-481b-9109-e7b82dc2e8a6';
+const CONTACT_EMAIL = 'richterdigitals@gmail.com';
 
 const ContactSection = () => {
   const { lang } = useLang();
@@ -22,9 +25,12 @@ const ContactSection = () => {
     tr(lang, 'Keine Angabe', 'Prefer not to say'),
   ];
 
+  const [name,        setName]        = useState('');
+  const [email,       setEmail]       = useState('');
   const [projectType, setProjectType] = useState('');
   const [budget,      setBudget]      = useState('');
   const [message,     setMessage]     = useState('');
+  const [status,      setStatus]      = useState<'idle' | 'sending' | 'error'>('idle');
   const [sent,        setSent]        = useState(false);
 
   useEffect(() => {
@@ -33,10 +39,7 @@ const ContactSection = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            cardRef.current?.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
+          if (entry.isIntersecting) { cardRef.current?.classList.add('visible'); observer.unobserve(entry.target); }
         });
       },
       { threshold: 0.15 }
@@ -45,15 +48,28 @@ const ContactSection = () => {
     return () => observer.disconnect();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const subject = encodeURIComponent(`${tr(lang, 'Projektanfrage', 'Project inquiry')} — ${projectType || tr(lang, 'Allgemein', 'General')}`);
-    const body = encodeURIComponent(
-      `${tr(lang, 'Projektart', 'Project type')}: ${projectType || '—'}\n${tr(lang, 'Budget', 'Budget')}: ${budget || '—'}\n\n${message}`
-    );
-    window.location.href = `mailto:hello@richterdigital.pro?subject=${subject}&body=${body}`;
-    setSent(true);
+    setStatus('sending');
+    const fd = new FormData();
+    fd.append('access_key', ACCESS_KEY);
+    fd.append('from_name', 'Richter Digital Website');
+    fd.append('subject', `${tr(lang, 'Neue Projektanfrage', 'New project inquiry')} — ${projectType || tr(lang, 'Allgemein', 'General')}`);
+    fd.append('name', name);
+    fd.append('email', email);
+    fd.append(tr(lang, 'Projektart', 'Project type'), projectType || '—');
+    fd.append('Budget', budget || '—');
+    fd.append(tr(lang, 'Nachricht', 'Message'), message);
+    fd.append('botcheck', '');
+    try {
+      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd });
+      const data = await res.json();
+      if (data.success) { setSent(true); } else { setStatus('error'); }
+    } catch { setStatus('error'); }
   };
+
+  const fieldCls = 'w-full bg-navy-900/80 border border-white/10 rounded-xl px-4 py-3 text-cream text-sm focus:outline-none focus:border-electric/50 transition-colors placeholder:text-cream-muted/40';
+  const selectCls = fieldCls + ' appearance-none';
 
   return (
     <section ref={sectionRef} id="contact" className="relative bg-navy-900 py-24 lg:py-32 overflow-hidden">
@@ -84,59 +100,63 @@ const ContactSection = () => {
                   <div className="w-16 h-16 rounded-2xl bg-electric/15 flex items-center justify-center mx-auto mb-5">
                     <Send className="w-7 h-7 text-electric" />
                   </div>
-                  <h3 className="font-display text-2xl font-bold text-cream mb-2">{tr(lang, 'E-Mail-Programm öffnet sich…', 'Opening your email app…')}</h3>
-                  <p className="text-cream-muted">
-                    {tr(lang, 'Falls nicht,', "If it didn't open,")}{' '}
-                    <a href="mailto:hello@richterdigital.pro" className="text-electric hover:underline">
-                      {tr(lang, 'hier direkt senden.', 'click here to send directly.')}
-                    </a>
-                  </p>
+                  <h3 className="font-display text-2xl font-bold text-cream mb-2">{tr(lang, 'Danke! Deine Nachricht ist da.', 'Thanks! Your message is in.')}</h3>
+                  <p className="text-cream-muted">{tr(lang, 'Wir melden uns innerhalb von 24 Stunden bei dir.', 'We will get back to you within 24 hours.')}</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
 
+                  <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
+
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    <div>
+                      <label className="font-mono-label text-cream-muted block mb-2">{tr(lang, 'Name', 'Name')}</label>
+                      <input type="text" value={name} onChange={e => setName(e.target.value)} placeholder={tr(lang, 'Dein Name', 'Your name')} className={fieldCls} />
+                    </div>
+                    <div>
+                      <label className="font-mono-label text-cream-muted block mb-2">{tr(lang, 'E-Mail', 'Email')} *</label>
+                      <input type="email" required value={email} onChange={e => setEmail(e.target.value)} placeholder={tr(lang, 'damit wir antworten können', 'so we can reply')} className={fieldCls} />
+                    </div>
+                  </div>
+
                   <div>
                     <label className="font-mono-label text-cream-muted block mb-2">{tr(lang, 'Was brauchst du?', 'What do you need?')}</label>
-                    <div className="relative">
-                      <select value={projectType} onChange={e => setProjectType(e.target.value)} className="w-full bg-navy-900/80 border border-white/10 rounded-xl px-4 py-3 text-cream text-sm appearance-none focus:outline-none focus:border-electric/50 transition-colors">
-                        <option value="" disabled>{tr(lang, 'Projektart wählen…', 'Select project type…')}</option>
-                        {PROJECT_TYPES.map(t => (<option key={t} value={t}>{t}</option>))}
-                      </select>
-                      <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-cream-muted pointer-events-none" />
-                    </div>
+                    <select value={projectType} onChange={e => setProjectType(e.target.value)} className={selectCls}>
+                      <option value="" disabled>{tr(lang, 'Projektart wählen…', 'Select project type…')}</option>
+                      {PROJECT_TYPES.map(t => (<option key={t} value={t}>{t}</option>))}
+                    </select>
                   </div>
 
                   <div>
                     <label className="font-mono-label text-cream-muted block mb-2">{tr(lang, 'Ungefähres Budget (optional)', 'Rough budget (optional)')}</label>
-                    <div className="relative">
-                      <select value={budget} onChange={e => setBudget(e.target.value)} className="w-full bg-navy-900/80 border border-white/10 rounded-xl px-4 py-3 text-cream text-sm appearance-none focus:outline-none focus:border-electric/50 transition-colors">
-                        <option value="">{tr(lang, 'Keine Angabe / unsicher', 'Prefer not to say / not sure')}</option>
-                        {BUDGETS.map(b => (<option key={b} value={b}>{b}</option>))}
-                      </select>
-                      <ChevronDown className="absolute right-4 top-1/2 -translate-y-1/2 w-4 h-4 text-cream-muted pointer-events-none" />
-                    </div>
+                    <select value={budget} onChange={e => setBudget(e.target.value)} className={selectCls}>
+                      <option value="">{tr(lang, 'Keine Angabe / unsicher', 'Prefer not to say / not sure')}</option>
+                      {BUDGETS.map(b => (<option key={b} value={b}>{b}</option>))}
+                    </select>
                   </div>
 
                   <div>
-                    <label className="font-mono-label text-cream-muted block mb-2">{tr(lang, 'Erzähl uns von deiner Idee', 'Tell us about your idea')}</label>
-                    <textarea
-                      value={message}
-                      onChange={e => setMessage(e.target.value)}
-                      required
-                      rows={5}
-                      placeholder={tr(lang, 'Was möchtest du bauen? Für wen ist es? Was sind die 2–3 wichtigsten Funktionen? (Deutsch oder Englisch, beides geht)', 'What do you want to build? Who is it for? What are the 2–3 most important features? (English or German, both fine)')}
-                      className="w-full bg-navy-900/80 border border-white/10 rounded-xl px-4 py-3 text-cream text-sm resize-none focus:outline-none focus:border-electric/50 transition-colors placeholder:text-cream-muted/40"
-                    />
+                    <label className="font-mono-label text-cream-muted block mb-2">{tr(lang, 'Erzähl uns von deiner Idee', 'Tell us about your idea')} *</label>
+                    <textarea value={message} onChange={e => setMessage(e.target.value)} required rows={5}
+                      placeholder={tr(lang, 'Was möchtest du bauen? Für wen ist es? Was sind die 2–3 wichtigsten Funktionen?', 'What do you want to build? Who is it for? What are the 2–3 most important features?')}
+                      className={fieldCls + ' resize-none'} />
                   </div>
 
-                  <button type="submit" className="w-full glow-button-border py-4 bg-electric text-white font-semibold rounded-xl text-base flex items-center justify-center gap-2">
-                    <Send className="w-4 h-4" />
-                    {tr(lang, 'Nachricht senden', 'Send message')}
+                  {status === 'error' && (
+                    <p className="text-center text-sm text-red-400">
+                      {tr(lang, 'Da ist etwas schiefgelaufen. Schreib uns direkt: ', 'Something went wrong. Email us directly: ')}
+                      <a href={`mailto:${CONTACT_EMAIL}`} className="underline">{CONTACT_EMAIL}</a>
+                    </p>
+                  )}
+
+                  <button type="submit" disabled={status === 'sending'} className="w-full glow-button-border py-4 bg-electric text-white font-semibold rounded-xl text-base flex items-center justify-center gap-2 disabled:opacity-70">
+                    {status === 'sending' ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
+                    {status === 'sending' ? tr(lang, 'Wird gesendet…', 'Sending…') : tr(lang, 'Nachricht senden', 'Send message')}
                   </button>
 
                   <p className="text-center text-xs text-cream-muted/50">
                     {tr(lang, 'Oder direkt per E-Mail:', 'Or email directly:')}{' '}
-                    <a href="mailto:hello@richterdigital.pro" className="text-electric/70 hover:text-electric transition-colors">hello@richterdigital.pro</a>
+                    <a href={`mailto:${CONTACT_EMAIL}`} className="text-electric/70 hover:text-electric transition-colors">{CONTACT_EMAIL}</a>
                   </p>
 
                 </form>
@@ -146,18 +166,9 @@ const ContactSection = () => {
                 <>
                   <div className="h-px bg-gradient-to-r from-transparent via-white/8 to-transparent my-8" />
                   <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-cream-muted text-sm">
-                    <div className="flex items-center gap-2">
-                      <MapPin className="w-4 h-4 text-electric flex-shrink-0" />
-                      {tr(lang, 'Bad Driburg, Deutschland', 'Bad Driburg, Germany')}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Clock className="w-4 h-4 text-electric flex-shrink-0" />
-                      {tr(lang, 'Antwort in 24 Stunden', 'Reply within 24 hours')}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Mail className="w-4 h-4 text-electric flex-shrink-0" />
-                      {tr(lang, 'DE & EN willkommen', 'EN & DE welcome')}
-                    </div>
+                    <div className="flex items-center gap-2"><MapPin className="w-4 h-4 text-electric flex-shrink-0" />{tr(lang, 'Bad Driburg, Deutschland', 'Bad Driburg, Germany')}</div>
+                    <div className="flex items-center gap-2"><Clock className="w-4 h-4 text-electric flex-shrink-0" />{tr(lang, 'Antwort in 24 Stunden', 'Reply within 24 hours')}</div>
+                    <div className="flex items-center gap-2"><Mail className="w-4 h-4 text-electric flex-shrink-0" />{tr(lang, 'DE & EN willkommen', 'EN & DE welcome')}</div>
                   </div>
                 </>
               )}

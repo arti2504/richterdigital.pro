@@ -46,11 +46,11 @@ const PrivacyPage = () => {
                 <strong className="text-cream">Richter Digital</strong><br />
                 Bad Driburg, Germany<br />
                 <a 
-                  href="mailto:hello@richterdigital.pro" 
+                  href="mailto:richterdigitals@gmail.com" 
                   className="text-electric hover:underline inline-flex items-center gap-1.5"
                 >
                   <Mail className="w-4 h-4" />
-                  hello@richterdigital.pro
+                  richterdigitals@gmail.com
                 </a>
               </p>
             </section>
@@ -167,11 +167,11 @@ const PrivacyPage = () => {
                 If you have any questions about this privacy policy or our data practices, 
                 please contact us at:{" "}
                 <a 
-                  href="mailto:hello@richterdigital.pro" 
+                  href="mailto:richterdigitals@gmail.com" 
                   className="text-electric hover:underline inline-flex items-center gap-1.5"
                 >
                   <Mail className="w-4 h-4" />
-                  hello@richterdigital.pro
+                  richterdigitals@gmail.com
                 </a>
               </p>
             </section>

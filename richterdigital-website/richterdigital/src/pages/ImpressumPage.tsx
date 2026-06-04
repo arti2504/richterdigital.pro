@@ -50,11 +50,11 @@ const ImpressumPage = () => {
               <p className="text-cream-muted leading-relaxed">
                 Email:{" "}
                 <a 
-                  href="mailto:hello@richterdigital.pro" 
+                  href="mailto:richterdigitals@gmail.com" 
                   className="text-electric hover:underline inline-flex items-center gap-1.5"
                 >
                   <Mail className="w-4 h-4" />
-                  hello@richterdigital.pro
+                  richterdigitals@gmail.com
                 </a>
               </p>
             </section>

@@ -188,3 +188,9 @@
 input, textarea, select, option, button {
   font-family: 'Inter', sans-serif;
 }
+
+/* Native Dropdown-Optionen lesbar (sonst weiß auf weiß auf dem Handy) */
+select option {
+  color: #141414;
+  background-color: #ffffff;
+}
