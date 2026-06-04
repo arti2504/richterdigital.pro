@@ -12,21 +12,11 @@ const HeroSection = () => {
         <video className="w-full h-full object-cover" autoPlay muted loop playsInline>
           <source src="/images/hero-video.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(20,20,20,0.0) 0%, rgba(20,20,20,0.0) 55%, rgba(20,20,20,0.85) 100%)' }} />
+        <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(20,20,20,0.0) 0%, rgba(20,20,20,0.0) 60%, rgba(20,20,20,0.8) 100%)' }} />
       </div>
 
       <div className="relative z-10 w-full max-w-[620px] mx-auto px-6 pb-12 text-center">
-        <h1 className="font-display font-semibold text-white hero-text-in" style={{ fontSize: 'clamp(25px, 3.4vw, 44px)', lineHeight: 1.08, letterSpacing: '-0.02em' }}>
-          {tr(lang, 'Aus deiner Idee wird ein echtes Produkt.', 'Turn your idea into a real product.')}
-        </h1>
-
-        <p className="mt-3.5 mx-auto text-white/80 font-sans font-medium hero-phones-in" style={{ fontSize: 'clamp(14px, 1.3vw, 17px)', lineHeight: 1.45, maxWidth: '44ch' }}>
-          {tr(lang,
-            'Apps, Web-Apps und Landingpages — end-to-end gebaut von einem KI-nativen Entwickler, der liefert. Aus Deutschland, weltweit im Einsatz.',
-            'Apps, web apps and landing pages — built end-to-end by an AI-native developer who ships. Based in Germany, working worldwide.')}
-        </p>
-
-        <div className="mt-6 flex flex-wrap gap-3 justify-center hero-phones-in">
+        <div className="flex flex-wrap gap-3 justify-center hero-phones-in">
           <button onClick={() => scrollTo('contact')} className="px-7 py-3.5 bg-electric text-white font-display font-bold rounded-full text-[16px] hover:bg-electric-dark transition-all">
             {tr(lang, 'Kostenloses Angebot', 'Get a free quote')}
           </button>

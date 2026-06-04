@@ -3,15 +3,15 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Richter Digital — Vorschau Hero</title>
+<title>Richter Digital — Vorschau Hero + Intro</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  :root{--ink:#141414;--accent:#0711ff;--accent-dark:#0509cc;}
+  :root{--ink:#141414;--paper:#FDFDFD;--accent:#0711ff;}
   *{box-sizing:border-box;margin:0;padding:0}
   body{font-family:'Inter',sans-serif;color:#141414;background:#141414}
-  h1,.ral{font-family:'Raleway',sans-serif}
+  h1,h2{font-family:'Raleway',sans-serif}
   header{position:fixed;top:0;left:0;right:0;z-index:50;height:88px;display:flex;align-items:center;background:transparent}
   .nav-inner{width:100%;max-width:1240px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:space-between}
   .logo{display:flex;align-items:center;gap:11px;font-family:'Raleway';font-weight:700;font-size:21px;color:#fff;text-decoration:none}
@@ -24,13 +24,17 @@
 
   .hero{position:relative;min-height:100vh;background:var(--ink);overflow:hidden;display:flex;align-items:flex-end;justify-content:center}
   .hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
-  .hero .overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(to bottom,rgba(20,20,20,0) 0%,rgba(20,20,20,0) 55%,rgba(20,20,20,.85) 100%)}
+  .hero .overlay{position:absolute;inset:0;z-index:2;background:linear-gradient(to bottom,rgba(20,20,20,0) 0%,rgba(20,20,20,0) 60%,rgba(20,20,20,.8) 100%)}
   .hero-inner{position:relative;z-index:3;width:100%;max-width:620px;margin:0 auto;padding:0 24px 48px;text-align:center}
-  .hero h1{font-family:'Raleway';font-weight:600;font-size:clamp(25px,3.4vw,44px);line-height:1.08;letter-spacing:-.02em;color:#fff}
-  .hero .sub{margin:14px auto 0;font-family:'Inter';font-weight:500;font-size:clamp(14px,1.3vw,17px);line-height:1.45;color:rgba(255,255,255,.8);max-width:44ch}
-  .hero .actions{margin-top:24px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+  .actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
   .btn-primary{font-family:'Raleway';font-weight:700;font-size:16px;color:#fff;background:var(--accent);border-radius:100px;padding:14px 28px;text-decoration:none}
   .btn-ghost{font-family:'Raleway';font-weight:600;font-size:16px;color:#fff;background:transparent;border:1px solid rgba(255,255,255,.4);border-radius:100px;padding:14px 24px;text-decoration:none}
+
+  .intro{background:var(--paper);color:var(--ink);padding:110px 24px;text-align:center}
+  .intro .wrap{max-width:820px;margin:0 auto}
+  .intro h2{font-weight:600;font-size:clamp(30px,4.2vw,56px);line-height:1.08;letter-spacing:-.02em}
+  .intro h2 .hl{color:var(--accent)}
+  .intro p{margin:20px auto 0;font-family:'Inter';font-size:clamp(16px,1.5vw,20px);line-height:1.55;color:rgba(20,20,20,.7);max-width:58ch}
   .note{background:#EEEEEE;color:#6b6b6b;font-size:13px;padding:16px 40px;text-align:center}
   @media(max-width:900px){.nav-links{display:none}}
 </style>
@@ -53,8 +57,6 @@
     <video autoplay muted loop playsinline><source src="images/hero-video.mp4" type="video/mp4" /></video>
     <div class="overlay"></div>
     <div class="hero-inner">
-      <h1>Aus deiner Idee wird ein echtes Produkt.</h1>
-      <p class="sub">Apps, Web-Apps und Landingpages — end-to-end gebaut von einem KI-nativen Entwickler, der liefert. Aus Deutschland, weltweit im Einsatz.</p>
       <div class="actions">
         <a href="#" class="btn-primary">Kostenloses Angebot</a>
         <a href="#" class="btn-ghost">Arbeiten ansehen ↓</a>
@@ -62,6 +64,13 @@
     </div>
   </section>
 
-  <div class="note">Vorschau — Hero: kompakt, mittig, ganz unten (Eyebrow entfernt). So verdeckt der Text dein Video-Motiv nicht.</div>
+  <section class="intro">
+    <div class="wrap">
+      <h2>Aus deiner Idee wird ein <span class="hl">echtes Produkt</span>.</h2>
+      <p>Apps, Web-Apps und Landingpages — end-to-end gebaut von einem KI-nativen Entwickler, der liefert. Aus Deutschland, weltweit im Einsatz.</p>
+    </div>
+  </section>
+
+  <div class="note">Vorschau — Hero zeigt nur noch Video + Buttons; Headline & Text sind jetzt eine eigene helle Sektion darunter.</div>
 </body>
 </html>
