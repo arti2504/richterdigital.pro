@@ -183,3 +183,8 @@
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
+
+/* Form-Controls erben die Seitenschrift (sonst System-Font) */
+input, textarea, select, option, button {
+  font-family: 'Inter', sans-serif;
+}
