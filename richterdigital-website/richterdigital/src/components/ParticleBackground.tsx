@@ -19,7 +19,7 @@ interface Particle {
 const COUNT = 55;
 
 function spawn(W: number, H: number, randomY = false): Particle {
-  const hues = [224, 224, 224, 245, 210, 260]; // mostly blue, touch of purple & cyan
+  const hues = [15, 15, 15, 20, 10, 25]; // #ff4620 = hsl(15°) — orange-red tones
   return {
     x: Math.random() * W,
     y: randomY ? Math.random() * H : H + 30,

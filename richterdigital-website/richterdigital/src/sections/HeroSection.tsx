@@ -35,7 +35,7 @@ const HeroSection = () => {
         className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[400px] pointer-events-none z-[2]"
         style={{
           background:
-            'radial-gradient(ellipse at 50% 0%, rgba(45,98,255,0.18) 0%, transparent 65%)',
+            'radial-gradient(ellipse at 50% 0%, rgba(255,70,32,0.18) 0%, transparent 65%)',
           filter: 'blur(40px)',
         }}
       />

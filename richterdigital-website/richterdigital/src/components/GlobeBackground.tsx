@@ -134,8 +134,8 @@ const GlobeBackground = () => {
 
       // ── Outer atmosphere haze ──
       const atm = ctx.createRadialGradient(cx, cy, R * 0.9, cx, cy, R * 1.42);
-      atm.addColorStop(0,    'rgba(30,80,255,0.14)');
-      atm.addColorStop(0.45, 'rgba(20,60,220,0.06)');
+      atm.addColorStop(0,    'rgba(255,70,32,0.14)');
+      atm.addColorStop(0.45, 'rgba(255,70,32,0.06)');
       atm.addColorStop(1,    'transparent');
       ctx.fillStyle = atm;
       ctx.beginPath();
@@ -166,7 +166,7 @@ const GlobeBackground = () => {
         const a  = z > 0
           ? 0.10 + (z / R) * 0.42
           : 0.015 + Math.max(0, (z + R) / R) * 0.05;
-        ctx.strokeStyle = `rgba(50,140,255,${a})`;
+        ctx.strokeStyle = `rgba(255,100,50,${a})`;
         ctx.beginPath();
         ctx.moveTo(p1.sx, p1.sy);
         ctx.lineTo(p2.sx, p2.sy);
@@ -197,7 +197,7 @@ const GlobeBackground = () => {
           else if (vis)        ctx.lineTo(sx, sy);
           prevVis = vis;
         }
-        ctx.strokeStyle = 'rgba(80,200,255,0.30)';
+        ctx.strokeStyle = 'rgba(255,100,60,0.30)';
         ctx.stroke();
       }
 
@@ -207,7 +207,7 @@ const GlobeBackground = () => {
         if (z < 0) continue;
         const vis = z / R;
         const g = ctx.createRadialGradient(sx, sy, 0, sx, sy, 10);
-        g.addColorStop(0, `rgba(100,200,255,${vis * 0.7})`);
+        g.addColorStop(0, `rgba(255,120,70,${vis * 0.7})`);
         g.addColorStop(1, 'transparent');
         ctx.fillStyle = g;
         ctx.beginPath();
@@ -248,8 +248,8 @@ const GlobeBackground = () => {
       // ── Rim glow (limb brightening) ──
       const rim = ctx.createRadialGradient(cx, cy, R * 0.78, cx, cy, R);
       rim.addColorStop(0,    'transparent');
-      rim.addColorStop(0.72, 'rgba(40,100,255,0.05)');
-      rim.addColorStop(1,    'rgba(60,140,255,0.28)');
+      rim.addColorStop(0.72, 'rgba(255,70,32,0.05)');
+      rim.addColorStop(1,    'rgba(255,70,32,0.28)');
       ctx.fillStyle = rim;
       ctx.beginPath();
       ctx.arc(cx, cy, R, 0, Math.PI * 2);
