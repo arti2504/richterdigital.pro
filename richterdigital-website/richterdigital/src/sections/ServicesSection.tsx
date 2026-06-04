@@ -1,109 +1,52 @@
 import { useEffect, useRef } from 'react';
-import { type LucideIcon, Smartphone, Globe, Monitor } from 'lucide-react';
+import { type LucideIcon, Smartphone, Globe, Monitor, ArrowUpRight } from 'lucide-react';
 
 interface Service {
   icon: LucideIcon;
+  number: string;
   title: string;
   description: string;
   tags: string[];
-  accent: string;
-  span: string;
 }
 
 const services: Service[] = [
   {
     icon: Smartphone,
+    number: '01',
     title: 'Android Apps',
     description:
-      'Native Android apps built for performance and published to Google Play. From simple tools to feature-rich applications — with AdMob monetization if needed.',
+      'Native Android applications built for performance, monetized with AdMob, and shipped to Google Play. From MVP to full product.',
     tags: ['Kotlin', 'Google Play', 'Firebase', 'AdMob'],
-    accent: '#3DDC84',
-    span: 'lg:col-span-2',
   },
   {
     icon: Smartphone,
+    number: '02',
     title: 'iOS Apps',
     description:
-      'iPhone & iPad apps that feel at home on Apple devices. Smooth, native, App Store-ready.',
-    tags: ['Swift / SwiftUI', 'App Store'],
-    accent: '#007AFF',
-    span: 'lg:col-span-1',
+      'iPhone and iPad apps built with Swift. Smooth, native, App Store-ready — designed to feel at home on Apple devices.',
+    tags: ['Swift / SwiftUI', 'App Store', 'Core Data'],
   },
   {
     icon: Globe,
+    number: '03',
     title: 'Web Apps',
     description:
-      'Browser-based tools, SaaS dashboards, or customer portals. Fast, modern, scalable.',
-    tags: ['React', 'TypeScript', 'Node.js'],
-    accent: '#2D62FF',
-    span: 'lg:col-span-1',
+      'SaaS tools, dashboards, and customer portals. Fast, scalable, built with React — with backend and database if needed.',
+    tags: ['React', 'TypeScript', 'Node.js', 'Supabase'],
   },
   {
     icon: Monitor,
+    number: '04',
     title: 'Websites',
     description:
-      'Marketing sites and landing pages that convert — clean design, fast, SEO-ready.',
-    tags: ['React / Vite', 'Tailwind', 'SEO'],
-    accent: '#A78BFA',
-    span: 'lg:col-span-2',
+      'Marketing sites and landing pages that convert. Clean design, fast loading, SEO-optimised — built to grow your business.',
+    tags: ['React / Vite', 'Tailwind CSS', 'SEO'],
   },
 ];
 
-const TiltCard = ({
-  service,
-  index,
-  cardRef,
-}: {
-  service: Service;
-  index: number;
-  cardRef: (el: HTMLDivElement | null) => void;
-}) => {
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    const el = e.currentTarget;
-    const rect = el.getBoundingClientRect();
-    const x = (e.clientX - rect.left) / rect.width - 0.5;
-    const y = (e.clientY - rect.top) / rect.height - 0.5;
-    el.style.transform = `perspective(700px) rotateY(${x * 7}deg) rotateX(${-y * 7}deg) scale(1.02)`;
-  };
-  const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.currentTarget.style.transform = '';
-  };
-
-  return (
-    <div
-      ref={cardRef}
-      className={`reveal-up tilt-card lens-frame bg-navy-800/60 p-7 lg:p-8 flex flex-col gap-5 cursor-default ${service.span}`}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{ transitionDelay: `${index * 80}ms` }}
-    >
-      {/* Icon + title */}
-      <div className="flex items-center gap-4">
-        <div
-          className="w-11 h-11 rounded-xl flex items-center justify-center flex-shrink-0"
-          style={{ background: `${service.accent}18` }}
-        >
-          <service.icon className="w-5 h-5" style={{ color: service.accent }} />
-        </div>
-        <h3 className="font-display text-xl font-bold text-cream">{service.title}</h3>
-      </div>
-
-      {/* Description */}
-      <p className="text-cream-muted text-sm leading-relaxed flex-1">{service.description}</p>
-
-      {/* Tags */}
-      <div className="flex flex-wrap gap-2">
-        {service.tags.map((tag) => (
-          <span key={tag} className="tag">{tag}</span>
-        ))}
-      </div>
-    </div>
-  );
-};
-
 const ServicesSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  const cardsRef   = useRef<(HTMLDivElement | null)[]>([]);
+  const itemRefs   = useRef<(HTMLDivElement | null)[]>([]);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -112,58 +55,90 @@ const ServicesSection = () => {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            cardsRef.current.forEach((card, i) => {
-              if (!card) return;
-              setTimeout(() => card.classList.add('visible'), i * 80);
+            itemRefs.current.forEach((el, i) => {
+              if (!el) return;
+              setTimeout(() => el.classList.add('visible'), i * 100);
             });
             observer.unobserve(entry.target);
           }
         });
       },
-      { threshold: 0.08 }
+      { threshold: 0.1 }
     );
     observer.observe(section);
     return () => observer.disconnect();
   }, []);
 
   return (
-    <section ref={sectionRef} id="services" className="relative bg-navy-900 py-24 lg:py-32 overflow-hidden">
-      <div className="absolute inset-0 pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 85% 15%, rgba(45,98,255,0.06) 0%, transparent 50%)' }}
+    <section ref={sectionRef} id="services" className="relative bg-navy-900 py-28 lg:py-36 overflow-hidden">
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at 90% 10%, rgba(45,98,255,0.05) 0%, transparent 55%)' }}
       />
 
-      <div className="relative z-10 px-6 lg:px-12">
-        <div className="max-w-7xl mx-auto">
+      <div className="px-6 lg:px-16">
+        <div className="max-w-6xl mx-auto">
 
-          <div className="text-center mb-14">
-            <span className="font-mono-label text-electric mb-4 block">SERVICES</span>
-            <h2 className="font-display text-display-2 text-cream font-bold mb-4">What I build</h2>
-            <p className="text-cream-muted text-lg max-w-lg mx-auto">
-              Whatever platform your idea lives on — I build it.
-            </p>
-          </div>
-
-          {/* Bento grid — 3 cols on desktop */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {services.map((s, i) => (
-              <TiltCard
-                key={s.title}
-                service={s}
-                index={i}
-                cardRef={(el) => { cardsRef.current[i] = el; }}
-              />
-            ))}
-          </div>
-
-          <p className="text-center text-cream-muted/60 text-sm mt-10">
-            Not sure what you need?{' '}
+          {/* Section header */}
+          <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-20">
+            <div>
+              <span className="font-mono-label text-electric mb-4 block">SERVICES</span>
+              <h2
+                className="font-display font-bold text-cream leading-tight"
+                style={{ fontSize: 'clamp(36px, 5vw, 64px)' }}
+              >
+                Everything you need,<br />under one roof.
+              </h2>
+            </div>
             <button
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="text-electric hover:underline"
+              className="flex items-center gap-2 text-electric hover:gap-3 transition-all font-semibold text-sm group lg:mb-2"
             >
-              Just describe your idea →
+              Discuss your project
+              <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
             </button>
-          </p>
+          </div>
+
+          {/* Service rows — editorial list style */}
+          <div className="divide-y divide-white/6">
+            {services.map((s, i) => (
+              <div
+                key={s.number}
+                ref={(el) => { itemRefs.current[i] = el; }}
+                className="reveal-up grid lg:grid-cols-12 gap-6 lg:gap-10 py-10 group cursor-default hover:pl-2 transition-all duration-300"
+              >
+                {/* Number + icon */}
+                <div className="lg:col-span-1 flex items-center gap-3 lg:flex-col lg:items-start lg:gap-2">
+                  <span className="font-mono-label text-electric/50 text-lg">{s.number}</span>
+                  <s.icon className="w-5 h-5 text-electric/60 group-hover:text-electric transition-colors" />
+                </div>
+
+                {/* Title */}
+                <div className="lg:col-span-3 flex items-center">
+                  <h3
+                    className="font-display font-bold text-cream group-hover:text-electric transition-colors"
+                    style={{ fontSize: 'clamp(22px, 2.5vw, 32px)' }}
+                  >
+                    {s.title}
+                  </h3>
+                </div>
+
+                {/* Description */}
+                <div className="lg:col-span-5 flex items-center">
+                  <p className="text-cream-muted leading-relaxed">{s.description}</p>
+                </div>
+
+                {/* Tags */}
+                <div className="lg:col-span-3 flex items-center">
+                  <div className="flex flex-wrap gap-2">
+                    {s.tags.map((t) => (
+                      <span key={t} className="tag">{t}</span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
 
         </div>
       </div>

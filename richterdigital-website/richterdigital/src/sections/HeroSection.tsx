@@ -5,102 +5,109 @@ const HeroSection = () => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 
   return (
-    <section className="relative min-h-screen bg-navy-900 flex items-center pt-20 pb-12 overflow-hidden">
+    <section className="relative min-h-screen bg-navy-900 flex flex-col justify-end overflow-hidden">
 
-      {/* ── Atmospheric background ── */}
-      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
-        {/* Radial glow */}
+      {/* ── Video background (swap poster + src when you have the file) ── */}
+      <div className="absolute inset-0 z-[1]">
+        <video
+          className="w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          poster="/images/arthur.jpg"
+        >
+          {/* Drop hero-video.mp4 into images/ and it auto-activates */}
+          <source src="/images/hero-video.mp4" type="video/mp4" />
+        </video>
+        {/* Dark overlay so text stays readable */}
         <div
-          className="absolute top-[-20%] left-1/2 -translate-x-1/2 w-[900px] h-[700px] rounded-full"
+          className="absolute inset-0"
           style={{
-            background: 'radial-gradient(circle, rgba(45,98,255,0.14) 0%, transparent 70%)',
-            filter: 'blur(60px)',
+            background:
+              'linear-gradient(to bottom, rgba(7,10,18,0.55) 0%, rgba(7,10,18,0.3) 40%, rgba(7,10,18,0.85) 100%)',
           }}
         />
-        {/* Ghost headline in background */}
-        <div
-          className="absolute inset-0 flex items-center justify-center"
-          aria-hidden="true"
-        >
-          <span
-            className="font-display font-bold text-center leading-none whitespace-nowrap"
-            style={{
-              fontSize: 'clamp(120px, 20vw, 260px)',
-              color: 'transparent',
-              WebkitTextStroke: '1px rgba(45,98,255,0.08)',
-              userSelect: 'none',
-              letterSpacing: '-0.04em',
-            }}
-          >
-            RICHTER
-          </span>
-        </div>
       </div>
 
-      <div className="relative z-10 w-full px-6 lg:px-12">
-        <div className="max-w-5xl mx-auto text-center">
+      {/* ── Subtle blue glow at top ── */}
+      <div
+        className="absolute top-0 left-1/2 -translate-x-1/2 w-[900px] h-[400px] pointer-events-none z-[2]"
+        style={{
+          background:
+            'radial-gradient(ellipse at 50% 0%, rgba(45,98,255,0.18) 0%, transparent 65%)',
+          filter: 'blur(40px)',
+        }}
+      />
+
+      {/* ── Main content — pinned to bottom of hero ── */}
+      <div className="relative z-10 px-6 lg:px-16 pb-20 pt-32">
+        <div className="max-w-6xl mx-auto">
 
           {/* Available badge */}
-          <div className="inline-flex items-center gap-2.5 bg-navy-800/80 border border-white/10 rounded-full px-4 py-1.5 mb-10 hero-card-in backdrop-blur-sm">
+          <div className="inline-flex items-center gap-2.5 bg-navy-800/70 border border-white/10 rounded-full px-4 py-1.5 mb-8 backdrop-blur-sm hero-card-in">
             <span className="w-2 h-2 rounded-full bg-emerald-400 available-dot flex-shrink-0" />
             <span className="font-mono-label text-emerald-400/90">Available for new projects</span>
           </div>
 
-          {/* Main headline */}
-          <h1 className="font-display font-bold leading-[1.02] mb-6 hero-text-in"
-            style={{ fontSize: 'clamp(42px, 7vw, 88px)' }}
+          {/* Headline — huge like Droids */}
+          <h1
+            className="font-display font-bold text-cream leading-[1.0] mb-8 hero-text-in"
+            style={{ fontSize: 'clamp(48px, 8.5vw, 110px)', letterSpacing: '-0.03em' }}
           >
-            <span className="text-cream">I build apps &amp; websites</span>
-            <br />
-            <span className="text-gradient-blue">from your idea.</span>
+            Turn your idea<br />
+            <span
+              className="relative inline-block"
+              style={{
+                WebkitTextStroke: '1px rgba(45,98,255,0.6)',
+                color: 'transparent',
+                backgroundImage: 'linear-gradient(135deg, #5B85FF 0%, #2D62FF 40%, #A78BFA 100%)',
+                WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+              }}
+            >
+              into a real product.
+            </span>
           </h1>
 
-          {/* Sub */}
-          <p className="text-cream-muted text-xl leading-relaxed max-w-2xl mx-auto mb-10 hero-phones-in">
-            Android, iOS, web apps, websites — whatever your idea needs.
-            Direct work, no agency. Based in Germany.
-          </p>
+          {/* Sub + CTA row */}
+          <div className="flex flex-col lg:flex-row lg:items-end gap-8 hero-phones-in">
+            <div className="max-w-xl">
+              <p className="text-cream-muted text-xl leading-relaxed">
+                Android, iOS, web apps and websites — built end-to-end
+                by one developer who ships. Based in Germany, working internationally.
+              </p>
+            </div>
 
-          {/* CTAs */}
-          <div className="flex flex-col sm:flex-row justify-center gap-4 mb-14 hero-phones-in">
-            <button
-              onClick={() => scrollTo('contact')}
-              className="glow-button-border px-8 py-4 bg-electric text-white font-semibold rounded-xl text-base"
-            >
-              Get a Free Quote
-            </button>
-            <button
-              onClick={() => scrollTo('portfolio')}
-              className="px-8 py-4 bg-navy-800/80 text-cream border border-white/10 font-semibold rounded-xl hover:bg-navy-800 hover:border-white/20 transition-all text-base flex items-center justify-center gap-2 group backdrop-blur-sm"
-            >
-              See My Work
-              <ArrowDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
-            </button>
-          </div>
-
-          {/* Trust row */}
-          <div className="flex flex-wrap justify-center gap-x-8 gap-y-2 hero-phones-in">
-            {[
-              '🇩🇪 Based in Germany',
-              '⚡ Fast turnaround',
-              '💬 Direct communication',
-              '🔒 GDPR compliant',
-            ].map((t) => (
-              <span key={t} className="text-sm text-cream-muted/70">{t}</span>
-            ))}
+            <div className="flex flex-wrap gap-4 lg:ml-auto flex-shrink-0">
+              <button
+                onClick={() => scrollTo('contact')}
+                className="glow-button-border px-8 py-4 bg-electric text-white font-bold rounded-xl text-base"
+              >
+                Get a Free Quote
+              </button>
+              <button
+                onClick={() => scrollTo('portfolio')}
+                className="px-8 py-4 bg-white/8 text-cream border border-white/15 font-semibold rounded-xl hover:bg-white/12 transition-all text-base flex items-center gap-2 group backdrop-blur-sm"
+              >
+                See the Work
+                <ArrowDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
+              </button>
+            </div>
           </div>
 
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Scroll line */}
       <button
-        onClick={() => scrollTo('services')}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-cream-muted/40 hover:text-cream-muted transition-colors group"
-        aria-label="Scroll down"
+        onClick={() => scrollTo('stats')}
+        className="absolute bottom-8 right-8 z-10 flex flex-col items-center gap-1.5 text-cream-muted/40 hover:text-cream-muted/70 transition-colors group"
+        aria-label="Scroll"
       >
-        <div className="w-[1px] h-10 bg-gradient-to-b from-transparent to-white/20 group-hover:to-white/40 transition-colors" />
-        <ArrowDown className="w-4 h-4" />
+        <span className="font-mono-label text-[10px]">SCROLL</span>
+        <div className="w-px h-10 bg-gradient-to-b from-white/20 to-transparent" />
       </button>
     </section>
   );

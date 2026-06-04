@@ -1,17 +1,13 @@
 import { useEffect, useRef } from 'react';
-import { type LucideIcon, Shield, Zap, MessageSquare, Code2 } from 'lucide-react';
+import { type LucideIcon, Shield, Zap, MessageSquare, Code2, ArrowUpRight } from 'lucide-react';
 
-interface Strength {
-  icon: LucideIcon;
-  label: string;
-  desc: string;
-}
+interface Strength { icon: LucideIcon; label: string; desc: string }
 
 const strengths: Strength[] = [
-  { icon: MessageSquare, label: 'Direct contact',  desc: 'You talk to me, not a project manager.' },
-  { icon: Zap,           label: 'Fast turnaround', desc: 'No agency layers, I move quickly.' },
-  { icon: Shield,        label: 'Made in Germany', desc: 'Reliable, GDPR-compliant, high standards.' },
-  { icon: Code2,         label: 'End-to-end',      desc: 'Design, code, deployment — all handled.' },
+  { icon: MessageSquare, label: 'Direct contact',   desc: 'You deal with me, not a project manager.' },
+  { icon: Zap,           label: 'Fast turnaround',  desc: 'No agency layers. I move quickly.' },
+  { icon: Shield,        label: 'Made in Germany',  desc: 'Reliable, GDPR-compliant, high standards.' },
+  { icon: Code2,         label: 'End-to-end',       desc: 'Design, code, deployment — I own it all.' },
 ];
 
 const AboutSection = () => {
@@ -27,7 +23,7 @@ const AboutSection = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             leftRef.current?.classList.add('visible');
-            setTimeout(() => rightRef.current?.classList.add('visible'), 120);
+            setTimeout(() => rightRef.current?.classList.add('visible'), 100);
             observer.unobserve(entry.target);
           }
         });
@@ -39,57 +35,47 @@ const AboutSection = () => {
   }, []);
 
   return (
-    <section
-      ref={sectionRef}
-      id="about"
-      className="relative bg-navy-900 py-24 lg:py-32 overflow-hidden"
-    >
+    <section ref={sectionRef} id="about" className="relative bg-navy-900 py-28 lg:py-36 overflow-hidden">
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
-      <div className="absolute inset-0 pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 15% 60%, rgba(45,98,255,0.06) 0%, transparent 55%)' }}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at 5% 50%, rgba(45,98,255,0.06) 0%, transparent 55%)' }}
       />
 
-      <div className="relative z-10 px-6 lg:px-12">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+      <div className="px-6 lg:px-16">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start">
 
             {/* ── Left: Photo ── */}
             <div ref={leftRef} className="reveal-left">
-              <div className="relative max-w-sm mx-auto lg:mx-0">
-
+              <div className="relative">
                 {/* Glow behind photo */}
                 <div
-                  className="absolute -inset-4 rounded-[44px] blur-2xl opacity-20 pointer-events-none"
+                  className="absolute -inset-6 rounded-[50px] opacity-25 pointer-events-none blur-2xl"
                   style={{ background: 'linear-gradient(135deg, #2D62FF, #8B5CF6)' }}
                 />
-
-                {/* Photo frame */}
-                <div className="relative lens-frame overflow-hidden aspect-[3/4]">
+                {/* Photo */}
+                <div className="relative lens-frame aspect-[4/5] overflow-hidden">
                   <img
                     src="/images/arthur.jpg"
                     alt="Arthur Richter"
                     className="w-full h-full object-cover object-top"
                     onError={(e) => {
-                      // Fallback if photo not yet added
-                      (e.target as HTMLImageElement).style.display = 'none';
-                      (e.target as HTMLImageElement).parentElement!.classList.add('bg-navy-800');
+                      const parent = (e.currentTarget as HTMLImageElement).parentElement!;
+                      parent.style.background = 'linear-gradient(135deg, rgba(45,98,255,0.15), transparent)';
+                      (e.currentTarget as HTMLImageElement).style.display = 'none';
                     }}
                   />
-                  {/* Subtle overlay gradient at bottom */}
-                  <div
-                    className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
-                    style={{ background: 'linear-gradient(to top, rgba(7,10,18,0.7), transparent)' }}
-                  />
-                  {/* Name badge over photo */}
+                  {/* Bottom badge */}
                   <div className="absolute bottom-5 left-5 right-5">
-                    <div className="bg-navy-900/80 backdrop-blur-md border border-white/10 rounded-2xl px-4 py-3 flex items-center justify-between">
+                    <div className="bg-navy-900/85 backdrop-blur-md border border-white/10 rounded-2xl px-5 py-3.5 flex items-center justify-between">
                       <div>
                         <p className="font-display text-sm font-bold text-cream">Arthur Richter</p>
-                        <p className="text-xs text-cream-muted">Freelance Developer · Bad Driburg 🇩🇪</p>
+                        <p className="text-xs text-cream-muted">Developer · Bad Driburg 🇩🇪</p>
                       </div>
                       <div className="flex items-center gap-1.5">
                         <span className="w-2 h-2 rounded-full bg-emerald-400 available-dot" />
-                        <span className="text-xs text-emerald-400/80 font-mono-label">Open</span>
+                        <span className="text-xs text-emerald-400/90 font-mono-label">Open</span>
                       </div>
                     </div>
                   </div>
@@ -98,55 +84,55 @@ const AboutSection = () => {
             </div>
 
             {/* ── Right: Text ── */}
-            <div ref={rightRef} className="reveal-right pt-2">
-              <span className="font-mono-label text-electric mb-5 block">ABOUT ME</span>
+            <div ref={rightRef} className="reveal-right pt-4">
+              <span className="font-mono-label text-electric mb-5 block">ABOUT</span>
 
-              <h2 className="font-display text-display-2 text-cream font-bold mb-6 leading-tight">
-                A developer who<br />
-                <span className="text-gradient-blue">actually ships.</span>
+              <h2
+                className="font-display font-bold text-cream leading-tight mb-8"
+                style={{ fontSize: 'clamp(32px, 4vw, 54px)' }}
+              >
+                A developer<br />
+                <span className="text-gradient-blue">who actually ships.</span>
               </h2>
 
-              <div className="space-y-4 text-cream-muted leading-relaxed mb-8">
+              <div className="space-y-4 text-cream-muted leading-relaxed mb-10">
                 <p>
                   I'm Arthur — a full-stack developer with two years of experience
                   designing and building digital products for clients across Europe and beyond.
                 </p>
                 <p>
                   I handle every stage myself: concept, design, development, testing,
-                  and deployment. Android, iOS, web apps, websites — one person who
-                  owns the full process. No agency layers, no handoffs.
+                  and deployment. One person, full ownership, no handoffs.
                 </p>
                 <p>
-                  My app <strong className="text-cream">Smile4Me</strong> is live on
-                  Google Play and available to users in 180+ countries. Every client
-                  project gets the same standard of execution.
+                  My app <strong className="text-cream">Smile4Me</strong> is live on Google Play
+                  in 180+ countries. <strong className="text-cream">Clio AI</strong> and{' '}
+                  <strong className="text-cream">ThePackt</strong> are live web platforms — all built solo.
+                  That's the standard I bring to every client project.
                 </p>
               </div>
 
-              {/* Strengths */}
-              <div className="grid grid-cols-2 gap-3">
+              {/* Strengths — simple list, not cards */}
+              <div className="space-y-4 mb-10">
                 {strengths.map((s) => (
-                  <div
-                    key={s.label}
-                    className="flex items-start gap-3 bg-navy-800/50 rounded-2xl p-4 border border-white/5 hover:border-electric/25 transition-colors"
-                  >
-                    <div className="w-8 h-8 rounded-lg bg-electric/12 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <div key={s.label} className="flex items-start gap-4 group">
+                    <div className="w-9 h-9 rounded-xl bg-electric/10 flex items-center justify-center flex-shrink-0 mt-0.5 group-hover:bg-electric/20 transition-colors">
                       <s.icon className="w-4 h-4 text-electric" />
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-cream">{s.label}</p>
-                      <p className="text-xs text-cream-muted/80 mt-0.5 leading-snug">{s.desc}</p>
+                      <p className="font-semibold text-cream text-sm">{s.label}</p>
+                      <p className="text-cream-muted text-sm">{s.desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
 
-              {/* CTA */}
               <button
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="mt-8 glow-button-border px-7 py-3.5 bg-electric text-white font-semibold rounded-xl text-sm"
+                className="inline-flex items-center gap-2 font-bold text-electric hover:gap-3 transition-all group"
               >
-                Let's work together →
+                Start a project together
+                <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </button>
             </div>
 
