@@ -8,15 +8,19 @@ module.exports = {
         border: "hsl(var(--border))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        // Droids-style palette
+        ink:   '#141414',
+        paper: '#FDFDFD',
+        mist:  '#EEEEEE',
         navy: {
           900: '#070A12',
           800: '#0B1022',
           700: '#111836',
         },
         electric: {
-          DEFAULT: '#ff4620',
-          dark:    '#cc3518',
-          light:   '#ff6b4a',
+          DEFAULT: '#0711ff',
+          dark:    '#0509cc',
+          light:   '#4d4dff',
         },
         cream: {
           DEFAULT: '#F4F6FF',
@@ -25,7 +29,7 @@ module.exports = {
       },
       fontFamily: {
         sans:    ['Inter', 'system-ui', 'sans-serif'],
-        display: ['Sora', 'system-ui', 'sans-serif'],
+        display: ['Raleway', 'system-ui', 'sans-serif'],
         mono:    ['IBM Plex Mono', 'monospace'],
       },
       fontSize: {
@@ -41,8 +45,8 @@ module.exports = {
         sm:  "calc(var(--radius) - 4px)",
       },
       boxShadow: {
-        glow:    "0 0 30px rgba(255,70,32,0.4), 0 0 60px rgba(255,70,32,0.2)",
-        'glow-lg':"0 0 40px rgba(255,70,32,0.6), 0 0 80px rgba(255,70,32,0.3)",
+        glow:    "0 0 30px rgba(7,17,255,0.35), 0 0 60px rgba(7,17,255,0.18)",
+        'glow-lg':"0 0 40px rgba(7,17,255,0.5), 0 0 80px rgba(7,17,255,0.25)",
       },
       keyframes: {
         "accordion-down": { from: { height: "0" },                              to: { height: "var(--radix-accordion-content-height)" } },

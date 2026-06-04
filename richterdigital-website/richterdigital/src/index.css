@@ -1,4 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,13 +5,13 @@
 
 @layer base {
   :root {
-    --background: 222 48% 4%;
-    --foreground: 230 60% 97%;
-    --card: 222 45% 6%;
-    --card-foreground: 230 60% 97%;
-    --border: 222 30% 18%;
-    --input: 222 30% 18%;
-    --ring: 15 100% 59%;
+    --background: 0 0% 99%;
+    --foreground: 0 0% 8%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 8%;
+    --border: 0 0% 90%;
+    --input: 0 0% 90%;
+    --ring: 235 100% 51%;
     --radius: 0.875rem;
   }
   * { @apply border-border; }
@@ -23,7 +22,7 @@
     overflow-x: hidden;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Sora', sans-serif;
+    font-family: 'Raleway', sans-serif;
     letter-spacing: -0.02em;
   }
 }
@@ -57,24 +56,24 @@
     will-change: transform;
   }
   .tilt-card:hover {
-    box-shadow: 0 32px 80px rgba(255,70,32,0.15), 0 8px 32px rgba(0,0,0,0.5);
+    box-shadow: 0 32px 80px rgba(7,17,255,0.15), 0 8px 32px rgba(0,0,0,0.5);
   }
 
   /* ── Glow button ── */
   .glow-button {
     @apply relative overflow-hidden;
-    box-shadow: 0 0 24px rgba(255,70,32,0.35), 0 0 60px rgba(255,70,32,0.15);
+    box-shadow: 0 0 24px rgba(7,17,255,0.35), 0 0 60px rgba(7,17,255,0.15);
     transition: all 0.25s ease;
   }
   .glow-button:hover {
-    box-shadow: 0 0 40px rgba(255,70,32,0.55), 0 0 80px rgba(255,70,32,0.25);
+    box-shadow: 0 0 40px rgba(7,17,255,0.55), 0 0 80px rgba(7,17,255,0.25);
     transform: translateY(-2px);
   }
 
   /* ── Animated gradient border button ── */
   .glow-button-border {
     @apply relative;
-    box-shadow: 0 0 24px rgba(255,70,32,0.35);
+    box-shadow: 0 0 24px rgba(7,17,255,0.35);
     transition: box-shadow 0.25s ease, transform 0.25s ease;
   }
   .glow-button-border::before {
@@ -82,7 +81,7 @@
     position: absolute;
     inset: -1.5px;
     border-radius: inherit;
-    background: linear-gradient(90deg, #ff4620, #ff8c00, #ff4620);
+    background: linear-gradient(90deg, #0711ff, #4d4dff, #0711ff);
     background-size: 300% 100%;
     animation: gradientSlide 2.5s linear infinite;
     z-index: -1;
@@ -95,7 +94,7 @@
   }
   .glow-button-border:hover::before { opacity: 1; }
   .glow-button-border:hover {
-    box-shadow: 0 0 40px rgba(255,70,32,0.5);
+    box-shadow: 0 0 40px rgba(7,17,255,0.5);
     transform: translateY(-2px);
   }
 
@@ -154,9 +153,9 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
-  /* Orange-red gradient — replaces blue */
+  /* Blue gradient */
   .text-gradient-blue {
-    background: linear-gradient(135deg, #ff6b4a 0%, #ff4620 50%, #cc3518 100%);
+    background: linear-gradient(135deg, #4d4dff 0%, #0711ff 50%, #0509cc 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
