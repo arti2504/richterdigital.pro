@@ -29,8 +29,8 @@ const ServicesSection = () => {
     {
       t: tr(lang, 'KI-Integration', 'AI integration'),
       d: tr(lang,
-        'Ich baue KI direkt in dein Produkt — Automatisierungen, Assistenten und smarte Features, die echten Mehrwert liefern statt nur ein Buzzword zu sein.',
-        'I build AI right into your product — automations, assistants and smart features that deliver real value instead of just being a buzzword.'),
+        'Wir bauen KI direkt in dein Produkt — Automatisierungen, Assistenten und smarte Features, die echten Mehrwert liefern statt nur ein Buzzword zu sein.',
+        'We build AI right into your product — automations, assistants and smart features that deliver real value instead of just being a buzzword.'),
     },
   ];
 
@@ -42,7 +42,7 @@ const ServicesSection = () => {
           <h2 className="font-display font-bold" style={{ fontSize: 'clamp(30px, 4.4vw, 56px)', lineHeight: 1.12, letterSpacing: '-0.02em' }}>
             {lang === 'de'
               ? <>Von der Idee bis zum Launch — <span className="mark-hl">alles aus einer Hand</span>.</>
-              : <>From idea to launch — <span className="mark-hl">all from one hand</span>.</>}
+              : <>From idea to launch — <span className="mark-hl">all from one partner</span>.</>}
           </h2>
         </Reveal>
 
@@ -52,10 +52,7 @@ const ServicesSection = () => {
             return (
               <Reveal key={i} delay={i * 60}>
                 <div className="border-b border-ink/10">
-                  <button
-                    onClick={() => setOpen(isOpen ? null : i)}
-                    className="w-full flex items-center justify-between gap-4 py-6 text-left group"
-                  >
+                  <button onClick={() => setOpen(isOpen ? null : i)} className="w-full flex items-center justify-between gap-4 py-6 text-left group">
                     <span className="font-display font-semibold text-ink" style={{ fontSize: 'clamp(20px, 2.4vw, 30px)' }}>{it.t}</span>
                     <span className={`flex-shrink-0 w-9 h-9 rounded-full flex items-center justify-center transition-all ${isOpen ? 'bg-electric text-white rotate-45' : 'bg-mist text-ink group-hover:bg-electric/10'}`}>
                       <Plus className="w-5 h-5" />

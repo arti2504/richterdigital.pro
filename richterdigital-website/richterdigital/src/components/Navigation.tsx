@@ -85,7 +85,7 @@ const Navigation = () => {
               {isHome && (
                 <>
                   <button onClick={() => scrollTo('portfolio')} className="text-[15px] font-display font-light tracking-wide uppercase text-white/90 hover:text-white transition-colors">Portfolio</button>
-                  <button onClick={() => scrollTo('about')}     className="text-[15px] font-display font-light tracking-wide uppercase text-white/90 hover:text-white transition-colors">{tr(lang, 'Über mich', 'About')}</button>
+                  <button onClick={() => scrollTo('about')}     className="text-[15px] font-display font-light tracking-wide uppercase text-white/90 hover:text-white transition-colors">{tr(lang, 'Über uns', 'About us')}</button>
                   <button onClick={() => scrollTo('contact')}   className="text-[15px] font-display font-light tracking-wide uppercase text-white/90 hover:text-white transition-colors">{tr(lang, 'Kontakt', 'Contact')}</button>
                 </>
               )}
@@ -119,7 +119,7 @@ const Navigation = () => {
             <>
               <button onClick={() => scrollTo('services')}  className="text-2xl font-display font-semibold uppercase tracking-wide text-white hover:text-electric-light transition-colors">{tr(lang, 'Leistungen', 'Services')}</button>
               <button onClick={() => scrollTo('portfolio')} className="text-2xl font-display font-semibold uppercase tracking-wide text-white hover:text-electric-light transition-colors">Portfolio</button>
-              <button onClick={() => scrollTo('about')}     className="text-2xl font-display font-semibold uppercase tracking-wide text-white hover:text-electric-light transition-colors">{tr(lang, 'Über mich', 'About')}</button>
+              <button onClick={() => scrollTo('about')}     className="text-2xl font-display font-semibold uppercase tracking-wide text-white hover:text-electric-light transition-colors">{tr(lang, 'Über uns', 'About us')}</button>
               <button onClick={() => scrollTo('contact')}   className="text-2xl font-display font-semibold uppercase tracking-wide text-white hover:text-electric-light transition-colors">{tr(lang, 'Kontakt', 'Contact')}</button>
             </>
           )}

@@ -6,7 +6,6 @@ import PortfolioSection  from '../sections/PortfolioSection';
 import ProcessSection    from '../sections/ProcessSection';
 import TestimonialsSection from '../sections/TestimonialsSection';
 import AboutSection      from '../sections/AboutSection';
-import CtaSection        from '../sections/CtaSection';
 import ContactSection    from '../sections/ContactSection';
 import Footer            from '../sections/Footer';
 
@@ -21,7 +20,6 @@ const HomePage = () => (
       <ProcessSection />
       <TestimonialsSection />
       <AboutSection />
-      <CtaSection />
       <ContactSection />
     </main>
     <Footer />

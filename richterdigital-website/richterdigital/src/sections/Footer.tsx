@@ -1,9 +1,18 @@
 import { Link } from 'react-router-dom';
 import { Mail, MapPin } from 'lucide-react';
+import { useLang, tr } from '../i18n';
 
 const Footer = () => {
+  const { lang } = useLang();
   const scrollTo = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+
+  const services = [
+    tr(lang, 'App-Entwicklung', 'App development'),
+    tr(lang, 'Web-Apps', 'Web apps'),
+    tr(lang, 'Landingpages', 'Landing pages'),
+    tr(lang, 'KI-Integration', 'AI integration'),
+  ];
 
   return (
     <footer className="relative bg-navy-900 pt-16 pb-8 z-[100]">
@@ -14,85 +23,55 @@ const Footer = () => {
 
           <div className="grid md:grid-cols-4 gap-10 mb-12">
 
-            {/* Brand */}
             <div className="md:col-span-2">
               <Link to="/" className="flex items-center gap-3 mb-4 w-fit">
                 <img src="/images/logo.png" alt="Richter Digital" className="w-9 h-9 object-contain" />
                 <span className="font-display text-xl font-bold text-cream">Richter Digital</span>
               </Link>
               <p className="text-cream-muted text-sm leading-relaxed mb-5 max-w-sm">
-                Freelance app & web development from Germany.
-                I turn your idea into a real digital product — Android, iOS, web apps, websites.
+                {tr(lang,
+                  'KI-native App- & Web-Entwicklung aus Deutschland. Wir machen aus deiner Idee ein echtes digitales Produkt — Android, iOS, Web-Apps und Websites.',
+                  'AI-native app & web development from Germany. We turn your idea into a real digital product — Android, iOS, web apps and websites.')}
               </p>
               <div className="space-y-2 text-sm text-cream-muted">
                 <div className="flex items-start gap-2">
                   <MapPin className="w-4 h-4 text-electric mt-0.5 flex-shrink-0" />
-                  <span>Arthur Richter · Schmechtener Str. 13, 33014 Bad Driburg, Germany</span>
+                  <span>Arthur Richter · Schmechtener Str. 13, 33014 Bad Driburg, {tr(lang, 'Deutschland', 'Germany')}</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Mail className="w-4 h-4 text-electric flex-shrink-0" />
-                  <a href="mailto:hello@richterdigital.pro" className="hover:text-electric transition-colors">
-                    hello@richterdigital.pro
-                  </a>
+                  <a href="mailto:hello@richterdigital.pro" className="hover:text-electric transition-colors">hello@richterdigital.pro</a>
                 </div>
               </div>
             </div>
 
-            {/* Services */}
             <div>
-              <h4 className="font-mono-label text-cream mb-5">SERVICES</h4>
+              <h4 className="font-mono-label text-cream mb-5">{tr(lang, 'Leistungen', 'Services')}</h4>
               <ul className="space-y-3 text-sm text-cream-muted">
-                {['Android Apps', 'iOS Apps', 'Web Apps', 'Websites'].map((s) => (
+                {services.map((s) => (
                   <li key={s}>
-                    <button
-                      onClick={() => scrollTo('services')}
-                      className="hover:text-electric transition-colors text-left"
-                    >
-                      {s}
-                    </button>
+                    <button onClick={() => scrollTo('services')} className="hover:text-electric transition-colors text-left">{s}</button>
                   </li>
                 ))}
               </ul>
             </div>
 
-            {/* Links */}
             <div>
-              <h4 className="font-mono-label text-cream mb-5">LINKS</h4>
+              <h4 className="font-mono-label text-cream mb-5">Links</h4>
               <ul className="space-y-3 text-sm">
-                <li>
-                  <button onClick={() => scrollTo('portfolio')} className="text-cream-muted hover:text-electric transition-colors">
-                    Portfolio
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => scrollTo('about')} className="text-cream-muted hover:text-electric transition-colors">
-                    About
-                  </button>
-                </li>
-                <li>
-                  <button onClick={() => scrollTo('contact')} className="text-cream-muted hover:text-electric transition-colors">
-                    Contact
-                  </button>
-                </li>
-                <li>
-                  <Link to="/privacy" className="text-cream-muted hover:text-electric transition-colors">
-                    Privacy Policy
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/impressum" className="text-cream-muted hover:text-electric transition-colors">
-                    Impressum
-                  </Link>
-                </li>
+                <li><button onClick={() => scrollTo('portfolio')} className="text-cream-muted hover:text-electric transition-colors">Portfolio</button></li>
+                <li><button onClick={() => scrollTo('about')} className="text-cream-muted hover:text-electric transition-colors">{tr(lang, 'Über uns', 'About us')}</button></li>
+                <li><button onClick={() => scrollTo('contact')} className="text-cream-muted hover:text-electric transition-colors">{tr(lang, 'Kontakt', 'Contact')}</button></li>
+                <li><Link to="/privacy" className="text-cream-muted hover:text-electric transition-colors">{tr(lang, 'Datenschutz', 'Privacy Policy')}</Link></li>
+                <li><Link to="/impressum" className="text-cream-muted hover:text-electric transition-colors">Impressum</Link></li>
               </ul>
             </div>
 
           </div>
 
-          {/* Bottom */}
           <div className="pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream-muted">
-            <p>&copy; {new Date().getFullYear()} Richter Digital — Arthur Richter. All rights reserved.</p>
-            <p>Made with care in Germany 🇩🇪</p>
+            <p>&copy; {new Date().getFullYear()} Richter Digital — Arthur Richter. {tr(lang, 'Alle Rechte vorbehalten.', 'All rights reserved.')}</p>
+            <p>{tr(lang, 'Mit Sorgfalt gebaut in Deutschland', 'Made with care in Germany')} 🇩🇪</p>
           </div>
 
         </div>

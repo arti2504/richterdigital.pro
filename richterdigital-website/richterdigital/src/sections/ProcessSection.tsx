@@ -4,19 +4,19 @@ import Reveal from '../components/Reveal';
 const ProcessSection = () => {
   const { lang } = useLang();
   const steps = [
-    { t: tr(lang, 'Kickoff-Gespräch', 'Kickoff call'),       d: tr(lang, 'Wir sprechen über deine Idee, dein Ziel und was das Produkt wirklich leisten soll.', 'We talk through your idea, your goal and what the product actually needs to do.') },
-    { t: tr(lang, 'Konzept & Design', 'Concept & design'),   d: tr(lang, 'Ich entwerfe Struktur und Design — du gibst Feedback, bevor eine Zeile Code entsteht.', 'I design the structure and look — you give feedback before a single line of code is written.') },
-    { t: tr(lang, 'Entwicklung', 'Development'),              d: tr(lang, 'Ich baue iterativ und halte dich mit regelmäßigen Updates auf dem Laufenden. Keine Überraschungen.', 'I build iteratively and keep you posted with regular updates. No surprises.') },
+    { t: tr(lang, 'Kickoff-Gespräch', 'Kickoff call'),       d: tr(lang, 'Wir sprechen über deine Idee, dein Ziel und was das Produkt wirklich leisten soll. Die Erstberatung ist kostenlos.', 'We talk through your idea, your goal and what the product actually needs to do. The initial consultation is free.') },
+    { t: tr(lang, 'Konzept & Design', 'Concept & design'),   d: tr(lang, 'Wir entwerfen Struktur und Design — du gibst Feedback, bevor eine Zeile Code entsteht.', 'We design the structure and look — you give feedback before a single line of code is written.') },
+    { t: tr(lang, 'Entwicklung', 'Development'),              d: tr(lang, 'Wir bauen iterativ und halten dich mit regelmäßigen Updates auf dem Laufenden. Keine Überraschungen.', 'We build iteratively and keep you posted with regular updates. No surprises.') },
     { t: tr(lang, 'Test & Feinschliff', 'Testing & polish'), d: tr(lang, 'Alles wird getestet und optimiert, bis es schnell, stabil und rund läuft.', 'Everything gets tested and refined until it runs fast, stable and smooth.') },
-    { t: tr(lang, 'Launch', 'Launch'),                       d: tr(lang, 'Veröffentlichung im App Store, bei Google Play oder auf deiner Domain — ich übernehme das komplett.', 'Release on the App Store, Google Play or your domain — I handle the whole thing.') },
-    { t: tr(lang, 'Support & Weiterentwicklung', 'Support & growth'), d: tr(lang, 'Auch nach dem Launch bin ich da: Updates, Verbesserungen und neue Features.', 'I stick around after launch too: updates, improvements and new features.') },
+    { t: tr(lang, 'Launch', 'Launch'),                       d: tr(lang, 'Veröffentlichung im App Store, bei Google Play oder auf deiner Domain — wir übernehmen das komplett.', 'Release on the App Store, Google Play or your domain — we handle the whole thing.') },
+    { t: tr(lang, 'Support & Weiterentwicklung', 'Support & growth'), d: tr(lang, 'Auch nach dem Launch sind wir jederzeit für dich da: Updates, Verbesserungen und neue Features.', 'We stay available long after launch too: updates, improvements and new features.') },
   ];
 
   return (
     <section className="bg-mist text-ink py-20 sm:py-28 px-6">
       <div className="max-w-[1080px] mx-auto">
         <Reveal>
-          <p className="font-mono-label text-electric mb-4">{tr(lang, 'So arbeiten wir', 'How it works')}</p>
+          <p className="font-mono-label text-electric mb-4">{tr(lang, 'So arbeiten wir', 'How we work')}</p>
           <h2 className="font-display font-bold" style={{ fontSize: 'clamp(30px, 4.4vw, 56px)', lineHeight: 1.12, letterSpacing: '-0.02em' }}>
             {lang === 'de'
               ? <>Aus deiner Idee wird ein Produkt — <span className="mark-hl">Schritt für Schritt</span>.</>
