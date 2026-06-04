@@ -15,12 +15,12 @@ const HeroSection = () => {
         <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(20,20,20,0.0) 0%, rgba(20,20,20,0.0) 60%, rgba(20,20,20,0.8) 100%)' }} />
       </div>
 
-      <div className="relative z-10 w-full max-w-[620px] mx-auto px-6 pb-12 text-center">
-        <div className="flex flex-wrap gap-3 justify-center hero-phones-in">
-          <button onClick={() => scrollTo('contact')} className="px-7 py-3.5 bg-electric text-white font-display font-bold rounded-full text-[16px] hover:bg-electric-dark transition-all">
+      <div className="relative z-10 w-full max-w-[620px] mx-auto px-6 pb-10 sm:pb-12 text-center">
+        <div className="flex flex-col sm:flex-row gap-3 justify-center items-center hero-phones-in">
+          <button onClick={() => scrollTo('contact')} className="w-full sm:w-auto px-7 py-3.5 bg-electric text-white font-display font-bold rounded-full text-[16px] hover:bg-electric-dark transition-all">
             {tr(lang, 'Kostenloses Angebot', 'Get a free quote')}
           </button>
-          <button onClick={() => scrollTo('portfolio')} className="px-6 py-3.5 bg-transparent text-white border border-white/40 font-display font-semibold rounded-full text-[16px] hover:border-white hover:bg-white/5 transition-all flex items-center gap-2 group">
+          <button onClick={() => scrollTo('portfolio')} className="w-full sm:w-auto px-6 py-3.5 bg-transparent text-white border border-white/40 font-display font-semibold rounded-full text-[16px] hover:border-white hover:bg-white/5 transition-all flex items-center justify-center gap-2 group">
             {tr(lang, 'Arbeiten ansehen', 'See the work')}
             <ArrowDown className="w-4 h-4 group-hover:translate-y-0.5 transition-transform" />
           </button>

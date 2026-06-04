@@ -3,7 +3,7 @@ import { useLang, tr } from '../i18n';
 const IntroSection = () => {
   const { lang } = useLang();
   return (
-    <section className="bg-paper text-ink py-24 lg:py-28 px-6">
+    <section className="bg-paper text-ink py-16 sm:py-24 lg:py-28 px-6">
       <div className="max-w-[820px] mx-auto text-center">
         <h2 className="font-display font-semibold" style={{ fontSize: 'clamp(30px, 4.2vw, 56px)', lineHeight: 1.08, letterSpacing: '-0.02em' }}>
           {lang === 'de' ? (

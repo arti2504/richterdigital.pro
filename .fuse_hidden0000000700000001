@@ -37,7 +37,6 @@
   .intro p{margin:20px auto 0;font-family:'Inter';font-size:clamp(16px,1.5vw,20px);line-height:1.55;color:rgba(20,20,20,.7);max-width:58ch}
   .note{background:#EEEEEE;color:#6b6b6b;font-size:13px;padding:16px 40px;text-align:center}
   @media(max-width:900px){.nav-links{display:none}}
-  @media(max-width:640px){.actions{flex-direction:column;align-items:stretch}.btn-primary,.btn-ghost{text-align:center;padding-left:0;padding-right:0}.intro{padding:64px 20px}.hero-inner{padding:0 20px 36px}}
 </style>
 </head>
 <body>
