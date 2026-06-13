@@ -30,8 +30,8 @@ const Footer = () => {
               </Link>
               <p className="text-cream-muted text-sm leading-relaxed mb-5 max-w-sm">
                 {tr(lang,
-                  'KI-native App- & Web-Entwicklung aus Deutschland. Wir machen aus deiner Idee ein echtes digitales Produkt — Android, iOS, Web-Apps und Websites.',
-                  'AI-native app & web development from Germany. We turn your idea into a real digital product — Android, iOS, web apps and websites.')}
+                  'App- und Web-Entwicklung aus Deutschland, KI-gestützt. Aus deiner Idee machen wir ein fertiges digitales Produkt: Android, iOS, Web-Apps und Websites.',
+                  'App and web development from Germany, powered by AI. We turn your idea into a finished digital product: Android, iOS, web apps and websites.')}
               </p>
               <div className="space-y-2 text-sm text-cream-muted">
                 <div className="flex items-start gap-2">
@@ -70,7 +70,7 @@ const Footer = () => {
           </div>
 
           <div className="pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-cream-muted">
-            <p>&copy; {new Date().getFullYear()} Richter Digital — Arthur Richter. {tr(lang, 'Alle Rechte vorbehalten.', 'All rights reserved.')}</p>
+            <p>&copy; {new Date().getFullYear()} Richter Digital · Arthur Richter. {tr(lang, 'Alle Rechte vorbehalten.', 'All rights reserved.')}</p>
             <p>{tr(lang, 'Mit Sorgfalt gebaut in Deutschland', 'Made with care in Germany')} 🇩🇪</p>
           </div>
 

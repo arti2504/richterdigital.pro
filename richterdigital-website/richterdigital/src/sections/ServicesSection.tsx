@@ -11,26 +11,26 @@ const ServicesSection = () => {
     {
       t: tr(lang, 'App-Entwicklung', 'App development'),
       d: tr(lang,
-        'Native Android- und iOS-Apps, die sich schnell anfühlen, stabil laufen und im Store bestehen — vom Konzept bis zur Veröffentlichung.',
-        'Native Android and iOS apps that feel fast, run stable and make it through store review — from concept to release.'),
+        'Native Apps für Android und iOS, die sich schnell anfühlen und im Store bestehen. Vom Konzept bis zur Veröffentlichung kümmern wir uns um alles.',
+        'Native apps for Android and iOS that feel fast and make it through store review. From concept to release, we take care of everything.'),
     },
     {
       t: tr(lang, 'Web-Apps', 'Web apps'),
       d: tr(lang,
-        'Dashboards, Portale und SaaS-Produkte — performant gebaut, sauber strukturiert und so, dass sie mit deinem Geschäft mitwachsen.',
-        'Dashboards, portals and SaaS products — built for performance, cleanly structured and ready to scale with your business.'),
+        'Dashboards, Portale und SaaS-Produkte, die zuverlässig laufen und mit deinem Geschäft mitwachsen.',
+        'Dashboards, portals and SaaS products that run reliably and grow with your business.'),
     },
     {
       t: tr(lang, 'Landingpages', 'Landing pages'),
       d: tr(lang,
-        'Seiten, die Besucher in Kunden verwandeln: schnell, klar und auf Conversion ausgerichtet — inklusive sauberer Technik und SEO-Basis.',
-        'Pages that turn visitors into customers: fast, clear and conversion-focused — with clean code and SEO basics included.'),
+        'Seiten, die aus Besuchern Kunden machen. Schnell geladen, klar aufgebaut und für Google optimiert.',
+        'Pages that turn visitors into customers. Fast to load, clearly built and optimised for Google.'),
     },
     {
       t: tr(lang, 'KI-Integration', 'AI integration'),
       d: tr(lang,
-        'Wir bauen KI direkt in dein Produkt — Automatisierungen, Assistenten und smarte Features, die echten Mehrwert liefern statt nur ein Buzzword zu sein.',
-        'We build AI right into your product — automations, assistants and smart features that deliver real value instead of just being a buzzword.'),
+        'Wir bauen KI direkt in dein Produkt. Automatisierungen, Assistenten und Funktionen, die deinen Nutzern echte Arbeit abnehmen.',
+        'We build AI right into your product. Automations, assistants and features that genuinely save your users work.'),
     },
   ];
 
@@ -41,8 +41,8 @@ const ServicesSection = () => {
           <p className="font-mono-label text-electric mb-4">{tr(lang, 'Leistungen', 'Services')}</p>
           <h2 className="font-display font-bold" style={{ fontSize: 'clamp(30px, 4.4vw, 56px)', lineHeight: 1.12, letterSpacing: '-0.02em' }}>
             {lang === 'de'
-              ? <>Von der Idee bis zum Launch — <span className="mark-hl">alles aus einer Hand</span>.</>
-              : <>From idea to launch — <span className="mark-hl">all from one partner</span>.</>}
+              ? <>Von der Idee bis zum Launch, <span className="mark-hl">alles aus einer Hand</span>.</>
+              : <>From idea to launch, <span className="mark-hl">all from one partner</span>.</>}
           </h2>
         </Reveal>
 

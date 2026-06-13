@@ -62,10 +62,10 @@ const PrivacyPage = () => {
                 When you use Smile4Me, we may collect the following data:
               </p>
               <ul className="list-disc list-inside space-y-2 text-cream-muted">
-                <li><strong className="text-cream">App usage data</strong> — How you interact with the app (analytics)</li>
-                <li><strong className="text-cream">Device information</strong> — OS version, device model, app version</li>
-                <li><strong className="text-cream">Advertising ID</strong> — For personalized advertising via Google AdMob</li>
-                <li><strong className="text-cream">Crash logs</strong> — Technical data to improve app stability</li>
+                <li><strong className="text-cream">App usage data</strong>: How you interact with the app (analytics)</li>
+                <li><strong className="text-cream">Device information</strong>: OS version, device model, app version</li>
+                <li><strong className="text-cream">Advertising ID</strong>: For personalized advertising via Google AdMob</li>
+                <li><strong className="text-cream">Crash logs</strong>: Technical data to improve app stability</li>
               </ul>
             </section>
 
@@ -98,9 +98,9 @@ const PrivacyPage = () => {
                 We use the following third-party services:
               </p>
               <ul className="list-disc list-inside space-y-2 text-cream-muted">
-                <li><strong className="text-cream">Google AdMob</strong> — For advertising</li>
-                <li><strong className="text-cream">Google Firebase Analytics</strong> — For usage analytics</li>
-                <li><strong className="text-cream">Google Firebase Crashlytics</strong> — For crash reporting</li>
+                <li><strong className="text-cream">Google AdMob</strong>: For advertising</li>
+                <li><strong className="text-cream">Google Firebase Analytics</strong>: For usage analytics</li>
+                <li><strong className="text-cream">Google Firebase Crashlytics</strong>: For crash reporting</li>
               </ul>
               <p className="text-cream-muted leading-relaxed mt-3">
                 These services may collect and process data according to their own privacy policies. 
@@ -133,11 +133,11 @@ const PrivacyPage = () => {
                 Under the General Data Protection Regulation (GDPR), you have the following rights:
               </p>
               <ul className="list-disc list-inside space-y-2 text-cream-muted">
-                <li><strong className="text-cream">Right to access</strong> — Request a copy of your data</li>
-                <li><strong className="text-cream">Right to deletion</strong> — Request deletion of your data</li>
-                <li><strong className="text-cream">Right to rectification</strong> — Correct inaccurate data</li>
-                <li><strong className="text-cream">Right to data portability</strong> — Receive data in a structured format</li>
-                <li><strong className="text-cream">Right to object</strong> — Object to data processing</li>
+                <li><strong className="text-cream">Right to access</strong>: Request a copy of your data</li>
+                <li><strong className="text-cream">Right to deletion</strong>: Request deletion of your data</li>
+                <li><strong className="text-cream">Right to rectification</strong>: Correct inaccurate data</li>
+                <li><strong className="text-cream">Right to data portability</strong>: Receive data in a structured format</li>
+                <li><strong className="text-cream">Right to object</strong>: Object to data processing</li>
               </ul>
             </section>
 

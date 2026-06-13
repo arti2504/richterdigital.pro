@@ -1,147 +1,76 @@
-import { useEffect, useRef, useState } from 'react';
-import { Plus, Minus } from 'lucide-react';
-
-const faqs = [
-  {
-    q: 'How long does a project take?',
-    a: 'It depends on the scope. A landing page or simple website is usually done in 1–2 weeks. A mobile app MVP or web app takes 4–10 weeks. I always give you a realistic timeline upfront — no surprise delays.',
-  },
-  {
-    q: 'Do I need technical knowledge to work with you?',
-    a: 'Not at all. You bring the idea, I handle everything technical. We communicate in plain language — no jargon. You will always know what is being built and why.',
-  },
-  {
-    q: 'Can you sign an NDA?',
-    a: 'Yes, absolutely. If your project is confidential I will sign a Non-Disclosure Agreement before we discuss any details. Your idea stays between us.',
-  },
-  {
-    q: 'What if I am not satisfied with the result?',
-    a: 'We work iteratively — you give feedback throughout the process, not just at the end. I build in rounds so you are never surprised by the final result. Your satisfaction is the goal.',
-  },
-  {
-    q: 'Do you also handle maintenance and updates after launch?',
-    a: 'Yes. I offer ongoing support after launch — bug fixes, feature updates, App Store / Play Store updates. We can agree on a maintenance package or handle it per request.',
-  },
-  {
-    q: 'Do I need to share my budget upfront?',
-    a: 'No, but it helps. If you have a rough number in mind, I can tell you immediately what is realistic within that. No budget? Just describe your project — I will tell you what it would cost.',
-  },
-  {
-    q: 'Do you work with clients outside Germany?',
-    a: 'Yes, I work with clients internationally. Communication in English or German, payments via bank transfer or PayPal. Time zones have never been a problem.',
-  },
-  {
-    q: 'Who owns the code and the app after launch?',
-    a: 'You do. Once the project is paid, all rights to the code, design, and product are fully yours. No hidden licensing fees.',
-  },
-];
-
-const FAQItem = ({ q, a, isOpen, onToggle }: {
-  q: string;
-  a: string;
-  isOpen: boolean;
-  onToggle: () => void;
-}) => (
-  <div
-    className={`border rounded-2xl overflow-hidden transition-colors ${
-      isOpen ? 'border-electric/30 bg-navy-800/60' : 'border-white/8 bg-navy-800/30 hover:border-white/15'
-    }`}
-  >
-    <button
-      onClick={onToggle}
-      className="w-full flex items-center justify-between gap-4 px-6 py-5 text-left"
-    >
-      <span className={`font-display font-semibold text-base transition-colors ${isOpen ? 'text-cream' : 'text-cream-muted'}`}>
-        {q}
-      </span>
-      <span className="flex-shrink-0">
-        {isOpen
-          ? <Minus className="w-4 h-4 text-electric" />
-          : <Plus className="w-4 h-4 text-cream-muted" />
-        }
-      </span>
-    </button>
-
-    <div
-      className="overflow-hidden transition-all duration-300"
-      style={{ maxHeight: isOpen ? '200px' : '0px' }}
-    >
-      <p className="px-6 pb-5 text-cream-muted text-sm leading-relaxed">
-        {a}
-      </p>
-    </div>
-  </div>
-);
+import { useState } from 'react';
+import { Plus } from 'lucide-react';
+import { useLang, tr } from '../i18n';
+import Reveal from '../components/Reveal';
 
 const FAQSection = () => {
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const innerRef   = useRef<HTMLDivElement>(null);
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
+  const { lang } = useLang();
+  const [open, setOpen] = useState<number | null>(0);
 
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            innerRef.current?.classList.add('visible');
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.1 }
-    );
-    observer.observe(section);
-    return () => observer.disconnect();
-  }, []);
+  const faqs = [
+    {
+      q: tr(lang, 'Wie lange dauert ein Projekt?', 'How long does a project take?'),
+      a: tr(lang,
+        'Das hängt vom Umfang ab. Eine Landingpage ist oft in ein bis zwei Wochen fertig, eine App oder Web-App dauert meist mehrere Wochen. Im Erstgespräch bekommst du einen realistischen Zeitplan.',
+        'It depends on the scope. A landing page is often done within one to two weeks, an app or web app usually takes several weeks. You get a realistic timeline in the first call.'),
+    },
+    {
+      q: tr(lang, 'Was kostet das?', 'What does it cost?'),
+      a: tr(lang,
+        'Jedes Projekt ist anders, deshalb gibt es keinen Fixpreis von der Stange. Sag uns dein ungefähres Budget, und wir sagen dir ehrlich, was sich damit umsetzen lässt. Die Erstberatung ist kostenlos.',
+        'Every project is different, so there is no off the shelf fixed price. Tell us your rough budget and we will honestly say what is possible with it. The first consultation is free.'),
+    },
+    {
+      q: tr(lang, 'Ich bin nicht technisch. Ist das ein Problem?', 'I am not technical. Is that a problem?'),
+      a: tr(lang,
+        'Überhaupt nicht. Du bringst die Idee, wir kümmern uns um die Technik. Wir reden Klartext statt Fachchinesisch, du weißt jederzeit, was gerade passiert.',
+        'Not at all. You bring the idea, we handle the tech. We talk plainly instead of in jargon, so you always know what is going on.'),
+    },
+    {
+      q: tr(lang, 'Bekomme ich nach dem Launch Support?', 'Do I get support after launch?'),
+      a: tr(lang,
+        'Ja. Auch nach dem Launch sind wir für dich da, ob für Fehlerbehebung, neue Funktionen oder Store-Updates. Das lässt sich als Paket oder bei Bedarf regeln.',
+        'Yes. We are there for you after launch too, whether for bug fixes, new features or store updates. We can arrange that as a package or on demand.'),
+    },
+    {
+      q: tr(lang, 'Brauche ich schon ein fertiges Konzept?', 'Do I need a finished concept already?'),
+      a: tr(lang,
+        'Nein. Eine grobe Idee reicht völlig. Im Gespräch schärfen wir gemeinsam, was Sinn ergibt und was nicht.',
+        'No. A rough idea is enough. In the call we work out together what makes sense and what does not.'),
+    },
+  ];
 
   return (
-    <section
-      ref={sectionRef}
-      id="faq"
-      className="relative bg-navy-900 py-24 lg:py-32 overflow-hidden"
-    >
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/8 to-transparent" />
-      <div
-        className="absolute inset-0 pointer-events-none"
-        style={{
-          background:
-            'radial-gradient(ellipse at 40% 60%, rgba(45,98,255,0.05) 0%, transparent 55%)',
-        }}
-      />
+    <section id="faq" className="bg-paper text-ink py-20 sm:py-28 px-6">
+      <div className="max-w-[820px] mx-auto">
+        <Reveal>
+          <p className="font-mono-label text-electric mb-4">{tr(lang, 'Häufige Fragen', 'FAQ')}</p>
+          <h2 className="font-display font-bold" style={{ fontSize: 'clamp(30px, 4.4vw, 56px)', lineHeight: 1.12, letterSpacing: '-0.02em' }}>
+            {lang === 'de'
+              ? <>Bevor du fragst, <span className="mark-hl">hier die Antworten</span>.</>
+              : <>Before you ask, <span className="mark-hl">here are the answers</span>.</>}
+          </h2>
+        </Reveal>
 
-      <div className="relative z-10 px-6 lg:px-12">
-        <div className="max-w-3xl mx-auto">
-
-          <div className="text-center mb-14">
-            <span className="font-mono-label text-electric mb-4 block">FAQ</span>
-            <h2 className="font-display text-display-2 text-cream font-bold mb-4">
-              Questions you might have
-            </h2>
-            <p className="text-cream-muted text-lg">
-              Still wondering something?{' '}
-              <button
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="text-electric hover:underline"
-              >
-                Just ask directly →
-              </button>
-            </p>
-          </div>
-
-          <div ref={innerRef} className="reveal-up space-y-3">
-            {faqs.map((faq, i) => (
-              <FAQItem
-                key={i}
-                q={faq.q}
-                a={faq.a}
-                isOpen={openIndex === i}
-                onToggle={() => setOpenIndex(openIndex === i ? null : i)}
-              />
-            ))}
-          </div>
-
+        <div className="mt-12 border-t border-ink/10">
+          {faqs.map((f, i) => {
+            const isOpen = open === i;
+            return (
+              <Reveal key={i} delay={i * 50}>
+                <div className="border-b border-ink/10">
+                  <button onClick={() => setOpen(isOpen ? null : i)} className="w-full flex items-center justify-between gap-4 py-5 text-left group">
+                    <span className="font-display font-semibold text-ink" style={{ fontSize: 'clamp(17px, 2vw, 22px)' }}>{f.q}</span>
+                    <span className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all ${isOpen ? 'bg-electric text-white rotate-45' : 'bg-mist text-ink group-hover:bg-electric/10'}`}>
+                      <Plus className="w-4 h-4" />
+                    </span>
+                  </button>
+                  <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-60 opacity-100' : 'max-h-0 opacity-0'}`}>
+                    <p className="pb-5 pr-10 text-ink/70 font-sans" style={{ fontSize: 'clamp(15px, 1.4vw, 17px)', lineHeight: 1.6 }}>{f.a}</p>
+                  </div>
+                </div>
+              </Reveal>
+            );
+          })}
         </div>
       </div>
     </section>

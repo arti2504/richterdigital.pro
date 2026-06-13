@@ -14,8 +14,8 @@ const IntroSection = () => {
         </h2>
         <p className="mt-6 mx-auto font-sans text-ink/70" style={{ fontSize: 'clamp(17px, 1.6vw, 21px)', lineHeight: 1.55, maxWidth: '58ch' }}>
           {tr(lang,
-            'Apps, Web-Apps und Landingpages — end-to-end gebaut von einem KI-nativen Team, das liefert. Aus Deutschland, weltweit im Einsatz.',
-            'Apps, web apps and landing pages — built end-to-end by an AI-native team that ships. Based in Germany, working worldwide.')}
+            'Wir bauen Apps, Web-Apps und Landingpages. Vom ersten Entwurf bis zum fertigen Produkt im Store oder online. Unser Sitz ist in Deutschland, unsere Kunden sind überall.',
+            'We build apps, web apps and landing pages. From the first draft to the finished product, live in the store or online. We are based in Germany and work with clients everywhere.')}
         </p>
       </div>
     </section>

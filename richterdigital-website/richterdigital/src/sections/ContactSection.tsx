@@ -19,9 +19,9 @@ const ContactSection = () => {
   ];
   const BUDGETS = [
     tr(lang, 'Unter 1.000 €', 'Under €1,000'),
-    '1.000 – 3.000 €',
-    '3.000 – 8.000 €',
-    '8.000 €+',
+    tr(lang, '1.000 bis 3.000 €', '€1,000 to €3,000'),
+    tr(lang, '3.000 bis 8.000 €', '€3,000 to €8,000'),
+    tr(lang, '8.000 € und mehr', '€8,000 and up'),
     tr(lang, 'Keine Angabe', 'Prefer not to say'),
   ];
 
@@ -54,11 +54,11 @@ const ContactSection = () => {
     const fd = new FormData();
     fd.append('access_key', ACCESS_KEY);
     fd.append('from_name', 'Richter Digital Website');
-    fd.append('subject', `${tr(lang, 'Neue Projektanfrage', 'New project inquiry')} — ${projectType || tr(lang, 'Allgemein', 'General')}`);
+    fd.append('subject', `${tr(lang, 'Neue Projektanfrage', 'New project inquiry')}: ${projectType || tr(lang, 'Allgemein', 'General')}`);
     fd.append('name', name);
     fd.append('email', email);
-    fd.append(tr(lang, 'Projektart', 'Project type'), projectType || '—');
-    fd.append('Budget', budget || '—');
+    fd.append(tr(lang, 'Projektart', 'Project type'), projectType || tr(lang, 'keine Angabe', 'not provided'));
+    fd.append('Budget', budget || tr(lang, 'keine Angabe', 'not provided'));
     fd.append(tr(lang, 'Nachricht', 'Message'), message);
     fd.append('botcheck', '');
     try {
@@ -87,8 +87,8 @@ const ContactSection = () => {
             </h2>
             <p className="text-cream-muted text-lg max-w-lg mx-auto">
               {tr(lang,
-                'Beschreib dein Projekt unten — wir melden uns innerhalb von 24 Stunden mit einer groben Einschätzung. Unverbindlich und kostenlos.',
-                "Describe your project below — we'll get back to you within 24 hours with a rough estimate. No commitment, no cost.")}
+                'Beschreib dein Projekt unten. Wir melden uns innerhalb von 24 Stunden mit einer ehrlichen Einschätzung. Unverbindlich und kostenlos.',
+                "Describe your project below. We get back to you within 24 hours with an honest assessment. No commitment, no cost.")}
             </p>
           </div>
 
@@ -138,7 +138,7 @@ const ContactSection = () => {
                   <div>
                     <label className="font-mono-label text-cream-muted block mb-2">{tr(lang, 'Erzähl uns von deiner Idee', 'Tell us about your idea')} *</label>
                     <textarea value={message} onChange={e => setMessage(e.target.value)} required rows={5}
-                      placeholder={tr(lang, 'Was möchtest du bauen? Für wen ist es? Was sind die 2–3 wichtigsten Funktionen?', 'What do you want to build? Who is it for? What are the 2–3 most important features?')}
+                      placeholder={tr(lang, 'Was möchtest du bauen? Für wen ist es? Was sind die wichtigsten Funktionen?', 'What do you want to build? Who is it for? What are the most important features?')}
                       className={fieldCls + ' resize-none'} />
                   </div>
 
