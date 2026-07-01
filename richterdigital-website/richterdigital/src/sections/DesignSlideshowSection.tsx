@@ -3,8 +3,8 @@ import { useLang, tr } from '../i18n';
 import Reveal from '../components/Reveal';
 
 const IMAGES = [
-  '/images/designs/1.png', '/images/designs/2.png', '/images/designs/3.png', '/images/designs/4.png',
-  '/images/designs/5.png', '/images/designs/6.png', '/images/designs/7.png', '/images/designs/8.png',
+  '/images/designs/design-1.jpg', '/images/designs/design-2.jpg', '/images/designs/design-3.jpg', '/images/designs/design-4.jpg',
+  '/images/designs/design-5.jpg', '/images/designs/design-6.jpg', '/images/designs/design-7.jpg', '/images/designs/design-8.jpg',
 ];
 
 const Dot = () => <span className="w-2.5 h-2.5 rounded-full bg-ink/20" />;
@@ -41,7 +41,7 @@ const DesignSlideshowSection = () => {
           <div className="mt-10 max-w-[620px] mx-auto" onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
             <div className="rounded-xl overflow-hidden border border-ink/10 bg-white shadow-2xl">
               <div className="h-8 bg-mist flex items-center gap-1.5 px-3 border-b border-ink/10"><Dot /><Dot /><Dot /></div>
-              <div className="relative aspect-[16/10] bg-white">
+              <div className="relative aspect-[1400/903] bg-white">
                 {IMAGES.map((src, i) => (
                   <img
                     key={src}
