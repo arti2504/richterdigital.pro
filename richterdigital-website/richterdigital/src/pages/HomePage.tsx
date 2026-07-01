@@ -3,6 +3,7 @@ import HeroSection       from '../sections/HeroSection';
 import IntroSection      from '../sections/IntroSection';
 import LogoMarqueeSection from '../sections/LogoMarqueeSection';
 import ServicesSection   from '../sections/ServicesSection';
+import DesignSlideshowSection from '../sections/DesignSlideshowSection';
 import PortfolioSection  from '../sections/PortfolioSection';
 import TestimonialsSection from '../sections/TestimonialsSection';
 import ProcessSection    from '../sections/ProcessSection';
@@ -19,6 +20,7 @@ const HomePage = () => (
       <IntroSection />
       <LogoMarqueeSection />
       <ServicesSection />
+      <DesignSlideshowSection />
       <PortfolioSection />
       <TestimonialsSection />
       <ProcessSection />
