@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Mail, MapPin } from 'lucide-react';
 import { useLang, tr } from '../i18n';
+import { openConsentSettings } from '../components/ConsentBanner';
+import { TRACKING_ENABLED } from '../lib/pixel';
 
 const Footer = () => {
   const { lang } = useLang();
@@ -64,6 +66,13 @@ const Footer = () => {
                 <li><button onClick={() => scrollTo('contact')} className="text-cream-muted hover:text-electric transition-colors">{tr(lang, 'Kontakt', 'Contact')}</button></li>
                 <li><Link to="/privacy" className="text-cream-muted hover:text-electric transition-colors">{tr(lang, 'Datenschutz', 'Privacy Policy')}</Link></li>
                 <li><Link to="/impressum" className="text-cream-muted hover:text-electric transition-colors">Impressum</Link></li>
+                {TRACKING_ENABLED && (
+                  <li>
+                    <button onClick={openConsentSettings} className="text-cream-muted hover:text-electric transition-colors text-left">
+                      {tr(lang, 'Cookie-Einstellungen', 'Cookie settings')}
+                    </button>
+                  </li>
+                )}
               </ul>
             </div>
 

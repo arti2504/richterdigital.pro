@@ -1,14 +1,42 @@
+import { useEffect, useRef } from 'react';
 import { Check, ArrowRight } from 'lucide-react';
 import { useLang, tr } from '../i18n';
 import Reveal from '../components/Reveal';
+import { track, trackCustom } from '../lib/pixel';
 
 const PricingSection = () => {
   const { lang } = useLang();
+  const sectionRef = useRef<HTMLElement>(null);
+
+  /* Ein Blick auf die Preise ist der wichtigste Zwischenschritt vor der Anfrage.
+     Wird einmal pro Besuch gemeldet, sobald die Sektion wirklich sichtbar war —
+     erst abschalten, wenn das Event auch wirklich rausging (Einwilligung!). */
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          const sent = track('ViewContent', { content_name: 'Preise', content_category: 'pricing' });
+          if (sent) io.unobserve(entry.target);
+        });
+      },
+      /* threshold 0 + negativer rootMargin: die Sektion muss das mittlere
+         Drittel des Bildschirms erreichen. Ein prozentualer threshold waere
+         hier falsch — die Sektion ist hoeher als ein Handy-Display, 40 %
+         davon werden auf dem Handy nie gleichzeitig sichtbar. */
+      { threshold: 0, rootMargin: '-20% 0px -20% 0px' },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   const packages = [
     {
       name: 'Starter',
       price: '690 €',
+      value: 690,
       tagline: tr(lang, 'Ein professioneller Auftritt auf einer Seite. Ideal für den Einstieg.', 'A professional presence on one page. Ideal to get started.'),
       features: [
         tr(lang, 'Durchdachte Landingpage (One-Pager)', 'Well-crafted landing page (one-pager)'),
@@ -22,6 +50,7 @@ const PricingSection = () => {
     {
       name: 'Professional',
       price: '1.290 €',
+      value: 1290,
       tagline: tr(lang, 'Mehrere Seiten für alle, die ihre Arbeit richtig zeigen wollen.', 'Multiple pages for everyone who wants to properly show their work.'),
       features: [
         tr(lang, 'Alles aus Starter', 'Everything in Starter'),
@@ -36,6 +65,7 @@ const PricingSection = () => {
     {
       name: 'Premium',
       price: tr(lang, 'ab 1.890 €', 'from €1,890'),
+      value: 1890,
       tagline: tr(lang, 'Die komplette Lösung mit Funktionen, die dir aktiv Arbeit abnehmen.', 'The complete solution with features that actively save you work.'),
       features: [
         tr(lang, 'Alles aus Professional', 'Everything in Professional'),
@@ -54,10 +84,15 @@ const PricingSection = () => {
     { name: 'Premium', price: '129 €', desc: tr(lang, 'laufende Pflege plus ein Blogartikel pro Monat', 'ongoing care plus one blog article per month') },
   ];
 
-  const scrollToContact = () => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  /* Klick auf ein Paket: verrät, welches Paket zieht — und ist das Signal
+     "will kaufen" kurz vor der Anfrage. */
+  const choosePackage = (pkg: { name: string; value: number }) => {
+    trackCustom('PaketKlick', { content_name: pkg.name, value: pkg.value, currency: 'EUR' });
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
-    <section id="pricing" className="bg-paper text-ink py-20 sm:py-28 px-6">
+    <section ref={sectionRef} id="pricing" className="bg-paper text-ink py-20 sm:py-28 px-6">
       <div className="max-w-[1080px] mx-auto">
         <Reveal>
           <p className="font-mono-label text-electric mb-4">{tr(lang, 'Preise', 'Pricing')}</p>
@@ -99,7 +134,7 @@ const PricingSection = () => {
                   ))}
                 </ul>
                 <button
-                  onClick={scrollToContact}
+                  onClick={() => choosePackage(p)}
                   className={`mt-7 w-full py-3.5 rounded-full font-display font-bold text-[15px] transition-all inline-flex items-center justify-center gap-2 ${
                     p.highlight
                       ? 'bg-electric text-white hover:bg-electric-dark'

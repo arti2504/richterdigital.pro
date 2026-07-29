@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Mail, MapPin, Clock, Send, Loader2 } from 'lucide-react';
 import { useLang, tr } from '../i18n';
+import { track, setUserData, estimateLeadValue } from '../lib/pixel';
 
 const ACCESS_KEY = 'f29d119e-7534-481b-9109-e7b82dc2e8a6';
 const CONTACT_EMAIL = 'richterdigitals@gmail.com';
@@ -64,7 +66,18 @@ const ContactSection = () => {
     try {
       const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd });
       const data = await res.json();
-      if (data.success) { setSent(true); } else { setStatus('error'); }
+      if (data.success) {
+        setSent(true);
+        /* Conversion an Meta melden (nur bei erteilter Einwilligung):
+           Advanced Matching aus den Formulardaten, Wert aus dem Budgetrahmen. */
+        const [fn, ...rest] = name.trim().split(/\s+/);
+        setUserData({ em: email, fn, ln: rest.join(' ') });
+        track('Lead', {
+          content_category: projectType || 'unspecified',
+          value: estimateLeadValue(budget),
+          currency: 'EUR',
+        });
+      } else { setStatus('error'); }
     } catch { setStatus('error'); }
   };
 
@@ -157,6 +170,15 @@ const ContactSection = () => {
                   <p className="text-center text-xs text-cream-muted/50">
                     {tr(lang, 'Oder direkt per E-Mail:', 'Or email directly:')}{' '}
                     <a href={`mailto:${CONTACT_EMAIL}`} className="text-electric/70 hover:text-electric transition-colors">{CONTACT_EMAIL}</a>
+                  </p>
+
+                  <p className="text-center text-xs text-cream-muted/40" style={{ lineHeight: 1.5 }}>
+                    {tr(lang,
+                      'Deine Angaben nutzen wir ausschließlich zur Beantwortung deiner Anfrage. Näheres in der ',
+                      'We use your details solely to answer your inquiry. More in our ')}
+                    <Link to="/privacy" className="underline underline-offset-2 hover:text-cream-muted">
+                      {tr(lang, 'Datenschutzerklärung', 'privacy policy')}
+                    </Link>.
                   </p>
 
                 </form>
