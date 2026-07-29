@@ -61,6 +61,14 @@ const DeviceShowcase = ({ p }: { p: Project }) => {
   );
 };
 
+type CareProject = {
+  name: string;
+  branch: string;
+  desc: string;
+  link: string;
+  accent: string;
+};
+
 const PortfolioSection = () => {
   const { lang } = useLang();
 
@@ -103,6 +111,36 @@ const PortfolioSection = () => {
     },
   ];
 
+  const careProjects: CareProject[] = [
+    {
+      name: 'Powercleany',
+      branch: tr(lang, 'Online-Shop · Haushalts- & Reinigungsgeräte', 'Online shop · household & cleaning devices'),
+      desc: tr(lang,
+        'Laufender E-Commerce-Shop. Wir haben die Ladezeiten optimiert und betreuen die Seite technisch.',
+        'Live e-commerce shop. We optimised the load times and handle the ongoing technical care.'),
+      link: 'https://powercleany.de/',
+      accent: '#0E7490',
+    },
+    {
+      name: 'Fitorb',
+      branch: tr(lang, 'Online-Shop · Smart Ring & Health-Tech', 'Online shop · smart ring & health tech'),
+      desc: tr(lang,
+        'Shop für einen Gesundheits-Smart-Ring. Ladezeit-Optimierung und laufende technische Betreuung.',
+        'Shop for a health smart ring. Load time optimisation and ongoing technical care.'),
+      link: 'https://www.fitorb.de/',
+      accent: '#B45309',
+    },
+    {
+      name: 'SwiftPod',
+      branch: tr(lang, 'Online-Shop · Tech-Gadgets', 'Online shop · tech gadgets'),
+      desc: tr(lang,
+        'Produkt-Shop für eine Smart-Maus. Ladezeit-Optimierung und laufende technische Betreuung.',
+        'Product shop for a smart mouse. Load time optimisation and ongoing technical care.'),
+      link: 'https://swiftpod.de/',
+      accent: '#1D4ED8',
+    },
+  ];
+
   return (
     <section id="portfolio" className="bg-paper text-ink py-20 sm:py-28 px-6">
       <div className="max-w-[1080px] mx-auto">
@@ -136,6 +174,44 @@ const PortfolioSection = () => {
               </Reveal>
             </div>
           ))}
+        </div>
+
+        <div className="mt-20 lg:mt-28">
+          <Reveal>
+            <p className="font-mono-label text-electric mb-3">{tr(lang, 'Optimierung & Betreuung', 'Optimisation & care')}</p>
+            <h3 className="font-display font-bold" style={{ fontSize: 'clamp(24px, 3vw, 38px)', lineHeight: 1.15, letterSpacing: '-0.01em' }}>
+              {lang === 'de'
+                ? <>Drei Shops, die wir <span className="mark-hl">schnell halten</span>.</>
+                : <>Three shops we <span className="mark-hl">keep fast</span>.</>}
+            </h3>
+            <p className="mt-3 text-ink/70 font-sans max-w-[640px]" style={{ fontSize: '16px', lineHeight: 1.6 }}>
+              {tr(lang,
+                'Nicht jedes Projekt beginnt bei null. Diese laufenden Online-Shops haben wir performance-optimiert und betreuen sie laufend technisch.',
+                'Not every project starts from zero. We performance-optimised these live online shops and handle their ongoing technical care.')}
+            </p>
+          </Reveal>
+          <div className="mt-8 grid md:grid-cols-3 gap-5">
+            {careProjects.map((c, i) => (
+              <Reveal key={c.name} delay={i * 80}>
+                <a
+                  href={c.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block h-full bg-paper rounded-2xl border border-ink/10 p-6 hover:border-ink/25 hover:shadow-lg transition-all"
+                >
+                  <span className="inline-flex w-11 h-11 rounded-xl items-center justify-center font-display font-bold text-lg" style={{ background: `${c.accent}14`, color: c.accent }}>
+                    {c.name.charAt(0)}
+                  </span>
+                  <p className="mt-4 font-display font-bold text-ink" style={{ fontSize: '20px' }}>{c.name}</p>
+                  <p className="mt-1 font-mono-label text-ink/50" style={{ fontSize: '11px' }}>{c.branch}</p>
+                  <p className="mt-3 text-ink/70 text-sm" style={{ lineHeight: 1.55 }}>{c.desc}</p>
+                  <span className="mt-4 inline-flex items-center gap-2 font-display font-bold text-electric text-sm group-hover:gap-3 transition-all">
+                    {tr(lang, 'Shop ansehen', 'View shop')} <ArrowUpRight className="w-4 h-4" />
+                  </span>
+                </a>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </div>
     </section>

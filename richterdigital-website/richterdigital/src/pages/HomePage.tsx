@@ -4,6 +4,8 @@ import IntroSection      from '../sections/IntroSection';
 import ServicesSection   from '../sections/ServicesSection';
 import DesignSlideshowSection from '../sections/DesignSlideshowSection';
 import PortfolioSection  from '../sections/PortfolioSection';
+import TestimonialsSection from '../sections/TestimonialsSection';
+import PricingSection    from '../sections/PricingSection';
 import ProcessSection    from '../sections/ProcessSection';
 import FAQSection        from '../sections/FAQSection';
 import AboutSection      from '../sections/AboutSection';
@@ -19,6 +21,8 @@ const HomePage = () => (
       <ServicesSection />
       <DesignSlideshowSection />
       <PortfolioSection />
+      <TestimonialsSection />
+      <PricingSection />
       <ProcessSection />
       <FAQSection />
       <AboutSection />

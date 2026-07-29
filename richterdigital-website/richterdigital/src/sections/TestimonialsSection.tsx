@@ -1,32 +1,25 @@
 import { useLang, tr } from '../i18n';
 import Reveal from '../components/Reveal';
 
-// HINWEIS: Beispiel-Rezensionen als Platzhalter, damit das Layout sichtbar ist.
-// Vor Veröffentlichung durch ECHTE Kundenstimmen ersetzen.
+// WICHTIG: Diese Zitate sind Entwürfe. Vor dem Deploy müssen Oleg und Becky
+// den Wortlaut ausdrücklich freigeben — erst dann veröffentlichen.
 const TestimonialsSection = () => {
   const { lang } = useLang();
 
   const testimonials = [
     {
       quote: tr(lang,
-        'Wir hatten eine grobe Idee und am Ende eine fertige App im Store. Die Updates kamen regelmäßig und ich wusste immer, woran gerade gearbeitet wird.',
-        'We had a rough idea and ended up with a finished app in the store. The updates came regularly and I always knew what was being worked on.'),
-      name: 'Lena Brandt',
-      role: tr(lang, 'Gründerin, Nordlicht', 'Founder, Nordlicht'),
+        'Arthur hat die Ladezeiten meiner drei Shops deutlich verbessert und kümmert sich seitdem zuverlässig um die Technik. Ich muss mich um nichts kümmern und kann mich voll auf den Verkauf konzentrieren.',
+        'Arthur significantly improved the load times of my three shops and has been reliably taking care of the tech ever since. I don’t have to worry about anything and can focus fully on selling.'),
+      name: 'Oleg',
+      role: tr(lang, 'Inhaber, Powercleany · Fitorb · SwiftPod', 'Owner, Powercleany · Fitorb · SwiftPod'),
     },
     {
       quote: tr(lang,
-        'Schnell, ehrlich und ohne das übliche Agentur-Geschwurbel. Probleme wurden direkt angesprochen statt schöngeredet.',
-        'Fast, honest and without the usual agency fluff. Problems were named directly instead of glossed over.'),
-      name: 'Marco Feldmann',
-      role: tr(lang, 'Geschäftsführer, Pixelwerk', 'Managing Director, Pixelwerk'),
-    },
-    {
-      quote: tr(lang,
-        'Unsere Landingpage lädt schnell und die Anfragen sind seit dem Relaunch spürbar mehr geworden.',
-        'Our landing page loads fast and we have noticeably more inquiries since the relaunch.'),
-      name: 'Sophie Adler',
-      role: tr(lang, 'Marketing, Lunara', 'Marketing, Lunara'),
+        'Arthur hat meine Marke sofort verstanden. Die Design-Entwürfe für meine Website haben meine Erwartungen übertroffen, und die Zusammenarbeit ist unkompliziert und auf Augenhöhe.',
+        'Arthur understood my brand right away. The design drafts for my website exceeded my expectations, and working together is easy and on equal footing.'),
+      name: 'Rebecca',
+      role: tr(lang, 'Gründerin, Soul of Frequency by ØLVIA Healing', 'Founder, Soul of Frequency by ØLVIA Healing'),
     },
   ];
 
@@ -44,7 +37,7 @@ const TestimonialsSection = () => {
           </h2>
         </Reveal>
 
-        <div className="mt-12 grid md:grid-cols-3 gap-5">
+        <div className="mt-12 grid md:grid-cols-2 gap-5 max-w-[880px]">
           {testimonials.map((t, i) => (
             <Reveal key={i} delay={i * 80}>
               <div className="h-full bg-paper rounded-2xl border border-ink/10 p-6 flex flex-col">
