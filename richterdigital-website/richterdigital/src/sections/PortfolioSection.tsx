@@ -68,10 +68,10 @@ type CareProject = {
   link: string;
   accent: string;
   logo: string;
-  /* Hintergrund je Marke: Fitorb und SwiftPod haben weisse Wortmarken, die auf
-     hellem Grund verschwinden. Umfaerben kommt nicht infrage - fremde Logos
-     werden unveraendert verwendet. Also bekommt jedes den Grund, fuer den es
-     gestaltet wurde. */
+  /* Hintergrund je Marke: SwiftPod veroeffentlicht nur eine weisse Wortmarke,
+     die auf hellem Grund verschwindet, und bekommt deshalb einen dunklen Grund
+     (so sieht auch der eigene Shop aus). Umfaerben kommt nicht infrage - fremde
+     Logos werden unveraendert verwendet. */
   logoBg: string;
 };
 
@@ -138,7 +138,7 @@ const PortfolioSection = () => {
       link: 'https://www.fitorb.de/',
       accent: '#B45309',
       logo: '/images/refs/fitorb.png',
-      logoBg: '#0B1022',
+      logoBg: '#F1F1F2',
     },
     {
       name: 'SwiftPod',
