@@ -143,8 +143,15 @@ export function trackCustom(event: string, params?: Record<string, unknown>): bo
  * Lead gleich zu behandeln. Konservativ an den Paketpreisen orientiert.
  */
 export function estimateLeadValue(budgetLabel: string): number {
-  if (/8\.000|8,000/.test(budgetLabel)) return 5000;
-  if (/3\.000|3,000/.test(budgetLabel)) return 1890;
-  if (/1\.000|1,000/.test(budgetLabel)) return 1290;
+  // Die Auswahl sind Spannen ("3.000 bis 8.000 EUR"), also steht in jedem
+  // Label mehr als eine Zahl. Deshalb die UNTERGRENZE auswerten, nicht
+  // irgendeine Zahl: sonst zaehlt "1.000 bis 3.000" wie "3.000 bis 8.000".
+  if (/unter|under/i.test(budgetLabel)) return 690;
+  const ohneTausenderpunkt = budgetLabel.replace(/[.,](?=\d{3})/g, '');
+  const untergrenze = parseInt(ohneTausenderpunkt.match(/\d+/)?.[0] ?? '', 10);
+  if (Number.isNaN(untergrenze)) return 690; // "Keine Angabe"
+  if (untergrenze >= 8000) return 5000;
+  if (untergrenze >= 3000) return 1890;
+  if (untergrenze >= 1000) return 1290;
   return 690; // Starter-Paket als Untergrenze
 }
