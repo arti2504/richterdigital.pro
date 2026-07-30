@@ -67,6 +67,12 @@ type CareProject = {
   desc: string;
   link: string;
   accent: string;
+  logo: string;
+  /* Hintergrund je Marke: Fitorb und SwiftPod haben weisse Wortmarken, die auf
+     hellem Grund verschwinden. Umfaerben kommt nicht infrage - fremde Logos
+     werden unveraendert verwendet. Also bekommt jedes den Grund, fuer den es
+     gestaltet wurde. */
+  logoBg: string;
 };
 
 const PortfolioSection = () => {
@@ -120,6 +126,8 @@ const PortfolioSection = () => {
         'Live e-commerce shop. We optimised the load times and handle the ongoing technical care.'),
       link: 'https://powercleany.de/',
       accent: '#0E7490',
+      logo: '/images/refs/powercleany.png',
+      logoBg: '#F1F1F2',
     },
     {
       name: 'Fitorb',
@@ -129,6 +137,8 @@ const PortfolioSection = () => {
         'Shop for a health smart ring. Load time optimisation and ongoing technical care.'),
       link: 'https://www.fitorb.de/',
       accent: '#B45309',
+      logo: '/images/refs/fitorb.png',
+      logoBg: '#0B1022',
     },
     {
       name: 'SwiftPod',
@@ -138,6 +148,8 @@ const PortfolioSection = () => {
         'Product shop for a smart mouse. Load time optimisation and ongoing technical care.'),
       link: 'https://swiftpod.de/',
       accent: '#1D4ED8',
+      logo: '/images/refs/swiftpod.png',
+      logoBg: '#0B1022',
     },
   ];
 
@@ -199,9 +211,19 @@ const PortfolioSection = () => {
                   rel="noopener noreferrer"
                   className="group block h-full bg-paper rounded-2xl border border-ink/10 p-6 hover:border-ink/25 hover:shadow-lg transition-all"
                 >
-                  <span className="inline-flex w-11 h-11 rounded-xl items-center justify-center font-display font-bold text-lg" style={{ background: `${c.accent}14`, color: c.accent }}>
-                    {c.name.charAt(0)}
-                  </span>
+                  <div
+                    className="flex items-center justify-center rounded-xl h-[74px] px-6 border border-ink/5"
+                    style={{ background: c.logoBg }}
+                  >
+                    <img
+                      src={c.logo}
+                      alt={`${c.name} Logo`}
+                      loading="lazy"
+                      width={600}
+                      height={100}
+                      className="max-h-[30px] w-auto object-contain"
+                    />
+                  </div>
                   <p className="mt-4 font-display font-bold text-ink" style={{ fontSize: '20px' }}>{c.name}</p>
                   <p className="mt-1 font-mono-label text-ink/50" style={{ fontSize: '11px' }}>{c.branch}</p>
                   <p className="mt-3 text-ink/70 text-sm" style={{ lineHeight: 1.55 }}>{c.desc}</p>
