@@ -14,7 +14,7 @@ const TestimonialsSection = () => {
         'Arthur significantly improved the load times of my three shops and has been reliably taking care of the tech ever since. I don’t have to worry about anything and can focus fully on selling.'),
       name: 'Oleg',
       role: tr(lang, 'Inhaber, Powercleany · Fitorb · SwiftPod', 'Owner, Powercleany · Fitorb · SwiftPod'),
-      photo: undefined,
+      photo: '/images/refs/oleg.jpg',
     },
     {
       quote: tr(lang,
@@ -46,13 +46,14 @@ const TestimonialsSection = () => {
               <div className="h-full bg-paper rounded-2xl border border-ink/10 p-6 flex flex-col">
                 {/* Bewertung des Kunden selbst - bewusst ohne Plattform-Logo,
                     damit es nicht faelschlich nach Google oder Trustpilot aussieht. */}
-                <div className="flex items-center gap-2 mb-4">
-                  <span className="flex gap-0.5" aria-hidden="true">
-                    {[0, 1, 2, 3, 4].map((i) => (
-                      <Star key={i} className="w-4 h-4 text-amber-400" fill="currentColor" strokeWidth={0} />
-                    ))}
-                  </span>
-                  <span className="font-display font-bold text-ink text-sm">5/5</span>
+                <div
+                  className="flex gap-0.5 mb-4"
+                  role="img"
+                  aria-label={tr(lang, '5 von 5 Sternen', '5 out of 5 stars')}
+                >
+                  {[0, 1, 2, 3, 4].map((i) => (
+                    <Star key={i} className="w-4 h-4 text-amber-400" fill="currentColor" strokeWidth={0} />
+                  ))}
                 </div>
                 <p className="text-ink/80 font-sans" style={{ fontSize: '16px', lineHeight: 1.6 }}>&ldquo;{t.quote}&rdquo;</p>
                 <div className="mt-5 flex items-center gap-3 pt-2">
