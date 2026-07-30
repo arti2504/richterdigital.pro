@@ -21,7 +21,8 @@ const TestimonialsSection = () => {
         'Arthur hat meine Marke sofort verstanden. Die Design-Entwürfe für meine Website haben meine Erwartungen übertroffen, und die Zusammenarbeit ist unkompliziert und auf Augenhöhe.',
         'Arthur understood my brand right away. The design drafts for my website exceeded my expectations, and working together is easy and on equal footing.'),
       name: 'Rebecca',
-      role: tr(lang, 'Gründerin, Soul of Frequency by ØLVIA Healing', 'Founder, Soul of Frequency by ØLVIA Healing'),
+      /* Markenname auf Wunsch der Kundin noch nicht oeffentlich - nur "SOF". */
+      role: tr(lang, 'Gründerin, SOF', 'Founder, SOF'),
       photo: '/images/refs/becky.jpg',
     },
   ];

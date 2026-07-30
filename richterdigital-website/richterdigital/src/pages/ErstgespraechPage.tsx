@@ -137,7 +137,8 @@ const ErstgespraechPage = () => {
         'Arthur hat meine Marke sofort verstanden. Die Design-Entwürfe für meine Website haben meine Erwartungen übertroffen, und die Zusammenarbeit ist unkompliziert und auf Augenhöhe.',
         'Arthur understood my brand right away. The design drafts for my website exceeded my expectations, and working together is easy and on equal footing.'),
       name: 'Rebecca',
-      rolle: tr(lang, 'Gründerin, Soul of Frequency', 'Founder, Soul of Frequency'),
+      /* Markenname auf Wunsch der Kundin noch nicht oeffentlich - nur "SOF". */
+      rolle: tr(lang, 'Gründerin, SOF', 'Founder, SOF'),
       foto: '/images/refs/becky.jpg',
     },
   ];
