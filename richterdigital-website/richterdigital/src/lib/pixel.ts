@@ -9,7 +9,7 @@
  */
 // Typ bewusst als string (nicht als Literal), damit die Pruefung unten
 // unabhaengig vom eingetragenen Wert kompiliert.
-export const META_PIXEL_ID: string = '';
+export const META_PIXEL_ID: string = '4331807687032584';
 
 export const TRACKING_ENABLED = META_PIXEL_ID !== '';
 
