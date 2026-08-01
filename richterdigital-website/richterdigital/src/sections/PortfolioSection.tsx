@@ -78,11 +78,28 @@ type CareProject = {
 const PortfolioSection = () => {
   const { lang } = useLang();
   const spur = useRef<HTMLDivElement>(null);
+  const [aktiv, setAktiv] = useState(0);
 
-  const schieben = (richtung: 1 | -1) => {
+  /* Pfeile und Punkte setzen den Index selbst. Wuerde die Anzeige nur am
+     Scroll-Ereignis haengen, waere sie kaputt, sobald das Ereignis ausbleibt. */
+  const zuKarte = (i: number) => {
     const el = spur.current;
-    if (!el) return;
-    el.scrollBy({ left: richtung * Math.min(el.clientWidth * 0.85, 420), behavior: 'smooth' });
+    if (!el || !el.firstElementChild) return;
+    const ziel = Math.max(0, Math.min(i, el.children.length - 1));
+    const breite = (el.firstElementChild as HTMLElement).offsetWidth + 20;
+    setAktiv(ziel);
+    el.scrollTo({ left: ziel * breite, behavior: 'smooth' });
+  };
+
+  const schieben = (richtung: 1 | -1) => zuKarte(aktiv + richtung);
+
+  /* Beim Wischen von Hand nachziehen. */
+  const beimScrollen = () => {
+    const el = spur.current;
+    if (!el || !el.firstElementChild) return;
+    const breite = (el.firstElementChild as HTMLElement).offsetWidth + 20;
+    const i = Math.round(el.scrollLeft / breite);
+    setAktiv((vorher) => (i !== vorher ? i : vorher));
   };
 
   const projects: Project[] = [
@@ -172,9 +189,10 @@ const PortfolioSection = () => {
           </h2>
         </Reveal>
 
-        {/* Waagerechter Schieber statt untereinander: spart viel Scrollen. */}
+        {/* Waagerechter Schieber statt untereinander: spart viel Scrollen.
+            Pfeile auch auf dem Handy, sonst sieht niemand, dass es weitergeht. */}
         <div className="mt-6 flex justify-end">
-          <div className="hidden sm:flex gap-2">
+          <div className="flex gap-2">
             <button onClick={() => schieben(-1)} aria-label={tr(lang, 'Zurück', 'Previous')}
               className="w-11 h-11 rounded-full border border-ink/15 bg-paper flex items-center justify-center hover:border-electric hover:text-electric transition-colors">
               <ChevronLeft className="w-5 h-5" />
@@ -189,6 +207,7 @@ const PortfolioSection = () => {
 
       <div
         ref={spur}
+        onScroll={beimScrollen}
         className="mt-4 flex gap-5 overflow-x-auto snap-x snap-mandatory scroll-px-6 px-6 pb-2"
         style={{ scrollbarWidth: 'none' }}
       >
@@ -209,6 +228,27 @@ const PortfolioSection = () => {
               {tr(lang, 'Live ansehen', 'View live')} <ArrowUpRight className="w-4 h-4" />
             </a>
           </article>
+        ))}
+      </div>
+
+      {/* Punkte zeigen, wie viele Projekte es gibt und wo man gerade ist. */}
+      <div className="mt-4 flex justify-center gap-2">
+        {projects.map((p, i) => (
+          <button
+            key={p.name}
+            onClick={() => zuKarte(i)}
+            aria-label={`${tr(lang, 'Projekt', 'Project')} ${i + 1}: ${p.name}`}
+            className="p-2"
+          >
+            <span
+              className="block rounded-full transition-all"
+              style={{
+                width: i === aktiv ? 22 : 8,
+                height: 8,
+                background: i === aktiv ? '#0711ff' : '#CFCFD6',
+              }}
+            />
+          </button>
         ))}
       </div>
 

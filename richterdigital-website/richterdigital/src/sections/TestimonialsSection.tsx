@@ -70,8 +70,8 @@ const TestimonialsSection = () => {
                   : <>What clients <span className="mark-hl">say about the work</span>.</>}
               </h2>
             </div>
-            {/* Pfeile nur am Rechner, auf dem Handy wird gewischt */}
-            <div className="hidden sm:flex gap-2 flex-shrink-0 mt-6 sm:mt-0">
+            {/* Pfeile auch auf dem Handy: das Wischen erkennt sonst niemand. */}
+            <div className="flex gap-2 flex-shrink-0 mt-6 sm:mt-0">
               <button onClick={() => schieben(-1)} aria-label={tr(lang, 'Zurück', 'Previous')}
                 className="w-11 h-11 rounded-full border border-ink/15 bg-paper flex items-center justify-center hover:border-electric hover:text-electric transition-colors">
                 <ChevronLeft className="w-5 h-5" />
