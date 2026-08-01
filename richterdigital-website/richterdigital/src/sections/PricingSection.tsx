@@ -35,7 +35,9 @@ const PricingSection = () => {
   const packages = [
     {
       name: 'Starter',
-      price: '690 €',
+      /* Preise stehen bewusst nicht auf der Seite: ohne Bewertungen wirkt eine
+         konkrete Summe abschreckend. Der Wert bleibt fuer das Pixel-Event. */
+      headline: tr(lang, 'Eine starke Seite', 'One strong page'),
       value: 690,
       tagline: tr(lang, 'Ein professioneller Auftritt auf einer Seite. Ideal für den Einstieg.', 'A professional presence on one page. Ideal to get started.'),
       features: [
@@ -49,7 +51,7 @@ const PricingSection = () => {
     },
     {
       name: 'Professional',
-      price: '1.290 €',
+      headline: tr(lang, 'Bis zu fünf Seiten', 'Up to five pages'),
       value: 1290,
       tagline: tr(lang, 'Mehrere Seiten für alle, die ihre Arbeit richtig zeigen wollen.', 'Multiple pages for everyone who wants to properly show their work.'),
       features: [
@@ -64,7 +66,7 @@ const PricingSection = () => {
     },
     {
       name: 'Premium',
-      price: tr(lang, 'ab 1.890 €', 'from €1,890'),
+      headline: tr(lang, 'Mit Buchung & Anbindung', 'With booking & integrations'),
       value: 1890,
       tagline: tr(lang, 'Die komplette Lösung mit Funktionen, die dir aktiv Arbeit abnehmen.', 'The complete solution with features that actively save you work.'),
       features: [
@@ -95,16 +97,16 @@ const PricingSection = () => {
     <section ref={sectionRef} id="pricing" className="bg-paper text-ink py-20 sm:py-28 px-6">
       <div className="max-w-[1080px] mx-auto">
         <Reveal>
-          <p className="font-mono-label text-electric mb-4">{tr(lang, 'Preise', 'Pricing')}</p>
+          <p className="font-mono-label text-electric mb-4">{tr(lang, 'Pakete', 'Packages')}</p>
           <h2 className="font-display font-bold" style={{ fontSize: 'clamp(30px, 4.4vw, 56px)', lineHeight: 1.12, letterSpacing: '-0.02em' }}>
             {lang === 'de'
-              ? <>Klare Pakete, <span className="mark-hl">keine Überraschungen</span>.</>
-              : <>Clear packages, <span className="mark-hl">no surprises</span>.</>}
+              ? <>Drei Wege, <span className="mark-hl">online sichtbar zu werden</span>.</>
+              : <>Three ways to <span className="mark-hl">become visible online</span>.</>}
           </h2>
           <p className="mt-4 text-ink/70 font-sans max-w-[640px]" style={{ fontSize: '17px', lineHeight: 1.6 }}>
             {tr(lang,
-              'Websites und Landingpages zum Festpreis. Apps und Web-Apps kalkulieren wir individuell nach Umfang — dafür reden wir am besten kurz.',
-              'Websites and landing pages at a fixed price. Apps and web apps are quoted individually by scope — best to talk briefly for those.')}
+              'Jedes Projekt bekommt einen Festpreis, bevor die Arbeit beginnt — kein Stundenzettel, keine Nachforderung. Was deins kostet, klären wir im kostenlosen Erstgespräch, wenn ich weiß, was du wirklich brauchst.',
+              'Every project gets a fixed price before the work starts — no timesheets, no add-on invoices. What yours costs we clarify in the free first call, once I know what you actually need.')}
           </p>
         </Reveal>
 
@@ -122,8 +124,7 @@ const PricingSection = () => {
                   </span>
                 )}
                 <p className={`font-mono-label ${p.highlight ? 'text-electric-light' : 'text-electric'}`}>{p.name}</p>
-                <p className="mt-3 font-display font-bold" style={{ fontSize: 'clamp(30px, 3vw, 40px)' }}>{p.price}</p>
-                <p className={`mt-1 text-xs ${p.highlight ? 'text-white/50' : 'text-ink/50'}`}>{tr(lang, 'zzgl. 19 % USt.', 'plus 19% VAT')}</p>
+                <p className="mt-3 font-display font-bold" style={{ fontSize: 'clamp(24px, 2.4vw, 32px)' }}>{p.headline}</p>
                 <p className={`mt-3 text-sm ${p.highlight ? 'text-white/75' : 'text-ink/70'}`} style={{ lineHeight: 1.55 }}>{p.tagline}</p>
                 <ul className="mt-5 space-y-2.5 flex-1">
                   {p.features.map((f) => (

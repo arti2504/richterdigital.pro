@@ -53,7 +53,7 @@ echo [5/5] Git commit und push...
 cd /d "%REPO%"
 git add -A
 git commit -m "Redesign: new hero, fixed animations, clean layout"
-git push -f origin master:main
+git push -f origin HEAD:main
 echo   OK
 
 echo.

@@ -17,8 +17,8 @@ const FAQSection = () => {
     {
       q: tr(lang, 'Was kostet das?', 'What does it cost?'),
       a: tr(lang,
-        'Websites und Landingpages gibt es als klare Pakete ab 690 € zzgl. USt — die Übersicht findest du weiter oben auf dieser Seite. Apps und Web-Apps kalkulieren wir individuell nach Umfang. Die Erstberatung ist immer kostenlos.',
-        'Websites and landing pages come as clear packages from €690 plus VAT — you can find the overview further up on this page. Apps and web apps are quoted individually by scope. The first consultation is always free.'),
+        'Jedes Projekt bekommt einen Festpreis, bevor die Arbeit beginnt — keine Stundenzettel, keine Nachforderungen. Was deins kostet, hängt vom Umfang ab. Sag uns dein ungefähres Budget, und wir sagen dir ehrlich, was sich damit umsetzen lässt. Die Erstberatung ist immer kostenlos.',
+        'Every project gets a fixed price before the work starts — no timesheets, no add-on invoices. What yours costs depends on the scope. Tell us your rough budget and we will honestly say what is possible with it. The first consultation is always free.'),
     },
     {
       q: tr(lang, 'Ich bin nicht technisch. Ist das ein Problem?', 'I am not technical. Is that a problem?'),
