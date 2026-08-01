@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { ArrowUpRight } from 'lucide-react';
+import { useRef, useState } from 'react';
+import { ArrowUpRight, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useLang, tr } from '../i18n';
 import Reveal from '../components/Reveal';
 
@@ -77,6 +77,13 @@ type CareProject = {
 
 const PortfolioSection = () => {
   const { lang } = useLang();
+  const spur = useRef<HTMLDivElement>(null);
+
+  const schieben = (richtung: 1 | -1) => {
+    const el = spur.current;
+    if (!el) return;
+    el.scrollBy({ left: richtung * Math.min(el.clientWidth * 0.85, 420), behavior: 'smooth' });
+  };
 
   const projects: Project[] = [
     {
@@ -154,8 +161,8 @@ const PortfolioSection = () => {
   ];
 
   return (
-    <section id="portfolio" className="bg-paper text-ink py-20 sm:py-28 px-6">
-      <div className="max-w-[1080px] mx-auto">
+    <section id="portfolio" className="bg-paper text-ink py-20 sm:py-28">
+      <div className="max-w-[1080px] mx-auto px-6">
         <Reveal>
           <p className="font-mono-label text-electric mb-4">{tr(lang, 'Ausgewählte Arbeiten', 'Selected work')}</p>
           <h2 className="font-display font-bold" style={{ fontSize: 'clamp(30px, 4.4vw, 56px)', lineHeight: 1.12, letterSpacing: '-0.02em' }}>
@@ -165,29 +172,47 @@ const PortfolioSection = () => {
           </h2>
         </Reveal>
 
-        <div className="mt-14 space-y-16 lg:space-y-24">
-          {projects.map((p, i) => (
-            <div key={p.name} className="grid md:grid-cols-2 gap-8 lg:gap-14 items-center">
-              <Reveal variant={i % 2 === 1 ? 'right' : 'left'} className={i % 2 === 1 ? 'md:order-2' : 'md:order-1'}>
-                <DeviceShowcase p={p} />
-              </Reveal>
-              <Reveal variant={i % 2 === 1 ? 'left' : 'right'} className={i % 2 === 1 ? 'md:order-1' : 'md:order-2'}>
-                <div>
-                  <p className="font-mono-label text-ink/50">{p.type}</p>
-                  <h3 className="mt-2 font-display font-bold text-ink" style={{ fontSize: 'clamp(26px, 3vw, 38px)' }}>{p.name}</h3>
-                  <p className="mt-4 text-ink/70 font-sans" style={{ fontSize: '17px', lineHeight: 1.6 }}>{p.desc}</p>
-                  <div className="flex flex-wrap gap-2 mt-5">
-                    {p.tags.map((t) => (<span key={t} className="text-xs bg-mist text-ink/70 rounded-full px-3 py-1">{t}</span>))}
-                  </div>
-                  <a href={p.link} target="_blank" rel="noopener noreferrer" className="mt-6 inline-flex items-center gap-2 font-display font-bold text-electric hover:gap-3 transition-all">
-                    {tr(lang, 'Live ansehen', 'View live')} <ArrowUpRight className="w-5 h-5" />
-                  </a>
-                </div>
-              </Reveal>
-            </div>
-          ))}
+        {/* Waagerechter Schieber statt untereinander: spart viel Scrollen. */}
+        <div className="mt-6 flex justify-end">
+          <div className="hidden sm:flex gap-2">
+            <button onClick={() => schieben(-1)} aria-label={tr(lang, 'Zurück', 'Previous')}
+              className="w-11 h-11 rounded-full border border-ink/15 bg-paper flex items-center justify-center hover:border-electric hover:text-electric transition-colors">
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            <button onClick={() => schieben(1)} aria-label={tr(lang, 'Weiter', 'Next')}
+              className="w-11 h-11 rounded-full border border-ink/15 bg-paper flex items-center justify-center hover:border-electric hover:text-electric transition-colors">
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
         </div>
+      </div>
 
+      <div
+        ref={spur}
+        className="mt-4 flex gap-5 overflow-x-auto snap-x snap-mandatory scroll-px-6 px-6 pb-2"
+        style={{ scrollbarWidth: 'none' }}
+      >
+        {projects.map((p) => (
+          <article
+            key={p.name}
+            className="snap-start flex-shrink-0 bg-paper rounded-2xl border border-ink/10 p-5 flex flex-col"
+            style={{ width: 'min(85vw, 420px)' }}
+          >
+            <DeviceShowcase p={p} />
+            <p className="mt-4 font-mono-label text-ink/50">{p.type}</p>
+            <h3 className="mt-1.5 font-display font-bold text-ink" style={{ fontSize: '24px' }}>{p.name}</h3>
+            <p className="mt-2.5 text-ink/70 flex-1" style={{ fontSize: '15px', lineHeight: 1.6 }}>{p.desc}</p>
+            <div className="flex flex-wrap gap-2 mt-4">
+              {p.tags.map((t) => (<span key={t} className="text-xs bg-mist text-ink/70 rounded-full px-3 py-1">{t}</span>))}
+            </div>
+            <a href={p.link} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center gap-2 font-display font-bold text-electric hover:gap-3 transition-all text-sm">
+              {tr(lang, 'Live ansehen', 'View live')} <ArrowUpRight className="w-4 h-4" />
+            </a>
+          </article>
+        ))}
+      </div>
+
+      <div className="max-w-[1080px] mx-auto px-6">
         <div className="mt-20 lg:mt-28">
           <Reveal>
             <p className="font-mono-label text-electric mb-3">{tr(lang, 'Optimierung & Betreuung', 'Optimisation & care')}</p>

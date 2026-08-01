@@ -32,11 +32,6 @@ const PricingSection = () => {
     return () => io.disconnect();
   }, []);
 
-  const care = [
-    { name: 'Basis',   price: '29 €',  desc: tr(lang, 'Hosting, Updates, Sicherheit, Erreichbarkeit', 'Hosting, updates, security, uptime') },
-    { name: 'Plus',    price: '59 €',  desc: tr(lang, 'zusätzlich kleine Änderungen inklusive (Bilder, Texte)', 'plus small changes included (images, copy)') },
-    { name: 'Premium', price: '129 €', desc: tr(lang, 'laufende Pflege plus ein Blogartikel pro Monat', 'ongoing care plus one blog article per month') },
-  ];
 
   return (
     <section ref={sectionRef} id="pricing" className="bg-paper text-ink py-20 sm:py-28 px-6">
@@ -71,7 +66,7 @@ const PricingSection = () => {
             <div className="relative md:flex md:items-center md:justify-between gap-10">
               <div className="max-w-[560px]">
                 <span className="inline-block font-mono-label text-electric-light bg-electric/20 rounded-full px-3 py-1.5">
-                  {tr(lang, 'Zu jedem Paket inklusive', 'Included with every package')}
+                  {tr(lang, 'Zu jeder Landingpage inklusive', 'Included with every landing page')}
                 </span>
                 <p className="mt-4 font-display font-bold" style={{ fontSize: 'clamp(26px, 3.2vw, 38px)', lineHeight: 1.15 }}>
                   {tr(lang, 'Konkurrenzanalyse', 'Competitor analysis')}
@@ -103,32 +98,6 @@ const PricingSection = () => {
           </div>
         </Reveal>
 
-        <Reveal delay={120}>
-          <div className="mt-6 bg-mist rounded-2xl p-7 md:p-8">
-            <div className="md:flex items-end justify-between gap-6">
-              <div>
-                <p className="font-mono-label text-electric">{tr(lang, 'Laufende Betreuung', 'Ongoing care')}</p>
-                <p className="mt-2 font-display font-bold text-ink" style={{ fontSize: 'clamp(20px, 2.4vw, 28px)' }}>
-                  {tr(lang, 'Deine Seite bleibt schnell, sicher und aktuell.', 'Your site stays fast, secure and up to date.')}
-                </p>
-              </div>
-              <p className="text-ink/55 text-xs mt-2 md:mt-0 md:text-right whitespace-nowrap">
-                {tr(lang, 'optional · monatlich kündbar · zzgl. USt.', 'optional · cancel monthly · plus VAT')}
-              </p>
-            </div>
-            <div className="mt-5 grid sm:grid-cols-3 gap-4">
-              {care.map((c) => (
-                <div key={c.name} className="bg-paper rounded-xl border border-ink/10 p-5">
-                  <div className="flex items-baseline justify-between">
-                    <p className="font-display font-semibold text-ink text-sm">{c.name}</p>
-                    <p className="font-display font-bold text-electric">{c.price}<span className="text-ink/45 text-xs font-sans font-normal"> / {tr(lang, 'Monat', 'month')}</span></p>
-                  </div>
-                  <p className="mt-2 text-ink/65 text-sm" style={{ lineHeight: 1.5 }}>{c.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </Reveal>
       </div>
     </section>
   );

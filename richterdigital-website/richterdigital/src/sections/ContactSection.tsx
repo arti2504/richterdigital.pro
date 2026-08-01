@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, MapPin, Clock, Send, Loader2 } from 'lucide-react';
+import { Mail, MapPin, Clock, Send, Loader2, ArrowUp } from 'lucide-react';
 import { useLang, tr } from '../i18n';
 import { track, setUserData, estimateLeadValue } from '../lib/pixel';
 
@@ -98,10 +98,27 @@ const ContactSection = () => {
               {tr(lang, 'Eine Idee?', 'Have an idea?')}{' '}
               <span className="text-gradient-blue">{tr(lang, 'Lass uns reden.', "Let's talk.")}</span>
             </h2>
-            <p className="text-cream-muted text-lg max-w-lg mx-auto">
+            <p className="text-cream font-display font-bold mx-auto" style={{ fontSize: 'clamp(19px, 2.2vw, 26px)', lineHeight: 1.3, maxWidth: '22ch' }}>
+              {tr(lang,
+                'Verliere keine Kunden mehr an eine veraltete Seite.',
+                'Stop losing customers to an outdated site.')}
+            </p>
+            <p className="mt-4 text-cream-muted text-lg max-w-lg mx-auto">
               {tr(lang,
                 'Beschreib dein Projekt unten. Wir melden uns innerhalb von 24 Stunden mit einer ehrlichen Einschätzung. Unverbindlich und kostenlos.',
                 "Describe your project below. We get back to you within 24 hours with an honest assessment. No commitment, no cost.")}
+            </p>
+
+            {/* Kurzer Weg zurueck zum Rechner: vier Klicks statt Formular tippen. */}
+            <button
+              onClick={() => document.getElementById('pricing')?.scrollIntoView({ behavior: 'smooth' })}
+              className="mt-7 inline-flex items-center gap-2 px-7 py-3.5 bg-electric text-white font-display font-bold rounded-full hover:bg-electric-dark transition-colors"
+            >
+              <ArrowUp className="w-4 h-4" />
+              {tr(lang, 'In vier Fragen zum Angebot', 'Get a quote in four questions')}
+            </button>
+            <p className="mt-3 text-cream-muted/70 text-sm">
+              {tr(lang, 'Schneller als das Formular', 'Faster than the form')}
             </p>
           </div>
 

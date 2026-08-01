@@ -17,8 +17,8 @@ const FAQSection = () => {
     {
       q: tr(lang, 'Was kostet das?', 'What does it cost?'),
       a: tr(lang,
-        'Jedes Projekt bekommt einen Festpreis, bevor die Arbeit beginnt — keine Stundenzettel, keine Nachforderungen. Was deins kostet, hängt vom Umfang ab. Sag uns dein ungefähres Budget, und wir sagen dir ehrlich, was sich damit umsetzen lässt. Die Erstberatung ist immer kostenlos.',
-        'Every project gets a fixed price before the work starts — no timesheets, no add-on invoices. What yours costs depends on the scope. Tell us your rough budget and we will honestly say what is possible with it. The first consultation is always free.'),
+        'Du bekommst einen Festpreis, bevor die Arbeit beginnt. Was deins kostet, hängt vom Umfang ab. Beantworte oben die vier Fragen, dann schicke ich dir einen Vorschlag. Das kostet nichts und verpflichtet zu nichts.',
+        'You get a fixed price before the work starts. What yours costs depends on the scope. Answer the four questions above and I will send you a proposal. That costs nothing and commits you to nothing.'),
     },
     {
       q: tr(lang, 'Ich bin nicht technisch. Ist das ein Problem?', 'I am not technical. Is that a problem?'),
