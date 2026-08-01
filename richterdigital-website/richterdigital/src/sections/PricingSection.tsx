@@ -149,8 +149,51 @@ const PricingSection = () => {
           ))}
         </div>
 
+        {/* Zusatzleistung, die zu jedem Paket dazugehoert. Der durchgestrichene
+            Preis ist echt: Die Analyse ist einzeln fuer 190 € buchbar. Ein
+            erfundener Referenzpreis waere nach § 5 UWG abmahnfaehig. */}
+        <Reveal delay={100}>
+          <div className="mt-6 rounded-2xl border-2 border-electric/25 bg-electric/[0.03] p-7 md:p-8">
+            <div className="md:flex items-start justify-between gap-8">
+              <div className="max-w-[620px]">
+                <p className="font-mono-label text-electric">{tr(lang, 'Zu jedem Paket inklusive', 'Included with every package')}</p>
+                <p className="mt-2 font-display font-bold text-ink" style={{ fontSize: 'clamp(22px, 2.6vw, 30px)', lineHeight: 1.2 }}>
+                  {tr(lang, 'Konkurrenzanalyse', 'Competitor analysis')}
+                </p>
+                <p className="mt-3 text-ink/75" style={{ fontSize: '16px', lineHeight: 1.6 }}>
+                  {tr(lang,
+                    'Ich schaue mir deine drei stärksten Mitbewerber an: was sie besser machen, wo sie schwach sind und wo du sie überholen kannst. Du bekommst das Ergebnis schriftlich — kein Gerede, ein Bericht zum Nachlesen.',
+                    'I look at your three strongest competitors: what they do better, where they are weak and where you can overtake them. You get the result in writing — no talk, a report you can read.')}
+                </p>
+                <p className="mt-3 text-ink/55 text-sm">
+                  {tr(lang, 'Zwei bis drei Stunden Arbeit. Du bekommst sie nach dem Erstgespräch.',
+                         'Two to three hours of work. You receive it after the first call.')}
+                </p>
+              </div>
+
+              <div className="mt-5 md:mt-1 flex md:flex-col items-center md:items-end gap-3 md:gap-1 flex-shrink-0">
+                <span
+                  className="font-display font-bold line-through decoration-2"
+                  style={{ fontSize: '24px', color: '#DC2626' }}
+                >
+                  190 €
+                </span>
+                <span
+                  className="font-display font-bold"
+                  style={{ fontSize: 'clamp(26px, 3vw, 34px)', color: '#15803D' }}
+                >
+                  {tr(lang, 'kostenlos', 'free')}
+                </span>
+                <span className="text-ink/45 text-xs md:text-right">
+                  {tr(lang, 'einzeln buchbar für 190 €', 'bookable separately for €190')}
+                </span>
+              </div>
+            </div>
+          </div>
+        </Reveal>
+
         <Reveal delay={120}>
-          <div className="mt-10 bg-mist rounded-2xl p-7 md:p-8">
+          <div className="mt-6 bg-mist rounded-2xl p-7 md:p-8">
             <div className="md:flex items-end justify-between gap-6">
               <div>
                 <p className="font-mono-label text-electric">{tr(lang, 'Laufende Betreuung', 'Ongoing care')}</p>
