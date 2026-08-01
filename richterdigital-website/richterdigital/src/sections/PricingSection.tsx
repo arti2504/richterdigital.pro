@@ -162,12 +162,8 @@ const PricingSection = () => {
                 </p>
                 <p className="mt-3 text-ink/75" style={{ fontSize: '16px', lineHeight: 1.6 }}>
                   {tr(lang,
-                    'Ich schaue mir deine drei stärksten Mitbewerber an: was sie besser machen, wo sie schwach sind und wo du sie überholen kannst. Du bekommst das Ergebnis schriftlich — kein Gerede, ein Bericht zum Nachlesen.',
-                    'I look at your three strongest competitors: what they do better, where they are weak and where you can overtake them. You get the result in writing — no talk, a report you can read.')}
-                </p>
-                <p className="mt-3 text-ink/55 text-sm">
-                  {tr(lang, 'Zwei bis drei Stunden Arbeit. Du bekommst sie nach dem Erstgespräch.',
-                         'Two to three hours of work. You receive it after the first call.')}
+                    'Bevor ich anfange, schaue ich mir deine Mitbewerber an. Was sie online besser machen als du, und wo sie Lücken haben, die du nutzen kannst. Du bekommst das als PDF.',
+                    'Before I start, I look at your competitors. What they do better online than you, and where they have gaps you can use. You get it as a PDF.')}
                 </p>
               </div>
 
