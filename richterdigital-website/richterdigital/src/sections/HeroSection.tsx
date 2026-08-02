@@ -64,7 +64,9 @@ const HeroSection = () => {
 
       <div className="relative z-10 w-full max-w-[620px] mx-auto px-6 pb-10 sm:pb-12 text-center">
         <div className="flex flex-col sm:flex-row gap-3 justify-center items-center hero-phones-in">
-          <button onClick={() => scrollTo('contact')} className="w-full sm:w-auto px-7 py-3.5 bg-electric text-white font-display font-bold rounded-full text-[16px] hover:bg-electric-dark transition-all">
+          {/* Ziel ist der Rechner, nicht das Seitenende. Vorher landete hier
+              jeder ganz unten und musste von dort wieder hochspringen. */}
+          <button onClick={() => scrollTo('pricing')} className="w-full sm:w-auto px-7 py-3.5 bg-electric text-white font-display font-bold rounded-full text-[16px] hover:bg-electric-dark transition-all">
             {tr(lang, 'Kostenloses Angebot', 'Get a free quote')}
           </button>
           <button onClick={() => scrollTo('portfolio')} className="w-full sm:w-auto px-6 py-3.5 bg-transparent text-white border border-white/40 font-display font-semibold rounded-full text-[16px] hover:border-white hover:bg-white/5 transition-all flex items-center justify-center gap-2 group">

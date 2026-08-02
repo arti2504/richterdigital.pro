@@ -17,11 +17,24 @@
     --radius: 0.875rem;
   }
   * { @apply border-border; }
-  html { scroll-behavior: smooth; }
+  /* overflow-x gehoert auf html, nicht auf body.
+     Steht es nur auf body, waehrend html sichtbar bleibt, wird der body zum
+     eigenen Scrollbereich. Das Fenster hat dann nichts mehr zu scrollen, und
+     jeder Sprung per scrollIntoView oder window.scrollTo bleibt wirkungslos.
+     Mit der Maus liess sich die Seite weiter bewegen, aber kein einziger
+     Knopf, der zu einem Abschnitt springt, hat funktioniert. */
+  html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+  }
   body {
     @apply bg-background text-foreground antialiased;
     font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
+  }
+  /* Die Kopfzeile steht fest und ist 88 Pixel hoch. Ohne diesen Abstand
+     landet die Ueberschrift des Abschnitts beim Sprung darunter. */
+  section[id] {
+    scroll-margin-top: 100px;
   }
   h1, h2, h3, h4, h5, h6 {
     font-family: 'Raleway', sans-serif;

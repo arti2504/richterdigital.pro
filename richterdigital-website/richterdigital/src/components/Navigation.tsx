@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Menu, X, ChevronDown } from 'lucide-react';
 import { useLang, tr } from '../i18n';
 
@@ -8,6 +8,7 @@ const Navigation = () => {
   const [mobileOpen,  setMobileOpen]  = useState(false);
   const [servicesOpen,setServicesOpen]= useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const isHome = location.pathname === '/';
   const { lang, toggle } = useLang();
 
@@ -32,6 +33,21 @@ const Navigation = () => {
   const scrollTo = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     setMobileOpen(false);
+  };
+
+  /* Von Impressum oder Datenschutz aus gibt es den Abschnitt nicht. Vorher tat
+     der Knopf dort gar nichts. Jetzt geht es erst zur Startseite und danach
+     zum Ziel, sobald der Abschnitt im Dokument steht. */
+  const zumAbschnitt = (id: string) => {
+    setMobileOpen(false);
+    if (isHome) {
+      document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+    navigate('/');
+    requestAnimationFrame(() =>
+      requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })),
+    );
   };
 
   const LangToggle = ({ className = '' }: { className?: string }) => (
@@ -85,9 +101,9 @@ const Navigation = () => {
               {isHome && (
                 <>
                   <button onClick={() => scrollTo('portfolio')} className="text-[15px] font-display font-light tracking-wide uppercase text-white/90 hover:text-white transition-colors">Portfolio</button>
-                  <button onClick={() => scrollTo('pricing')}   className="text-[15px] font-display font-light tracking-wide uppercase text-white/90 hover:text-white transition-colors">{tr(lang, 'Pakete', 'Packages')}</button>
+                  <button onClick={() => zumAbschnitt('pricing')}   className="text-[15px] font-display font-light tracking-wide uppercase text-white/90 hover:text-white transition-colors">{tr(lang, 'Angebot', 'Get a quote')}</button>
                   <button onClick={() => scrollTo('about')}     className="text-[15px] font-display font-light tracking-wide uppercase text-white/90 hover:text-white transition-colors">{tr(lang, 'Über uns', 'About us')}</button>
-                  <button onClick={() => scrollTo('contact')}   className="text-[15px] font-display font-light tracking-wide uppercase text-white/90 hover:text-white transition-colors">{tr(lang, 'Kontakt', 'Contact')}</button>
+                  <button onClick={() => zumAbschnitt('contact')}   className="text-[15px] font-display font-light tracking-wide uppercase text-white/90 hover:text-white transition-colors">{tr(lang, 'Kontakt', 'Contact')}</button>
                 </>
               )}
               {!isHome && (
@@ -97,7 +113,7 @@ const Navigation = () => {
 
             <div className="hidden lg:flex items-center gap-6">
               <LangToggle />
-              <button onClick={() => isHome ? scrollTo('contact') : undefined} className="px-7 py-3 bg-electric text-white text-[15px] font-display font-bold rounded-full hover:bg-electric-dark transition-all">
+              <button onClick={() => zumAbschnitt('pricing')} className="px-7 py-3 bg-electric text-white text-[15px] font-display font-bold rounded-full hover:bg-electric-dark transition-all">
                 {tr(lang, 'Projekt anfragen', 'Start a project')}
               </button>
             </div>
@@ -120,12 +136,12 @@ const Navigation = () => {
             <>
               <button onClick={() => scrollTo('services')}  className="text-2xl font-display font-semibold uppercase tracking-wide text-white hover:text-electric-light transition-colors">{tr(lang, 'Leistungen', 'Services')}</button>
               <button onClick={() => scrollTo('portfolio')} className="text-2xl font-display font-semibold uppercase tracking-wide text-white hover:text-electric-light transition-colors">Portfolio</button>
-              <button onClick={() => scrollTo('pricing')}   className="text-2xl font-display font-semibold uppercase tracking-wide text-white hover:text-electric-light transition-colors">{tr(lang, 'Pakete', 'Packages')}</button>
+              <button onClick={() => zumAbschnitt('pricing')}   className="text-2xl font-display font-semibold uppercase tracking-wide text-white hover:text-electric-light transition-colors">{tr(lang, 'Angebot', 'Get a quote')}</button>
               <button onClick={() => scrollTo('about')}     className="text-2xl font-display font-semibold uppercase tracking-wide text-white hover:text-electric-light transition-colors">{tr(lang, 'Über uns', 'About us')}</button>
-              <button onClick={() => scrollTo('contact')}   className="text-2xl font-display font-semibold uppercase tracking-wide text-white hover:text-electric-light transition-colors">{tr(lang, 'Kontakt', 'Contact')}</button>
+              <button onClick={() => zumAbschnitt('contact')}   className="text-2xl font-display font-semibold uppercase tracking-wide text-white hover:text-electric-light transition-colors">{tr(lang, 'Kontakt', 'Contact')}</button>
             </>
           )}
-          <button onClick={() => { scrollTo('contact'); setMobileOpen(false); }} className="mt-2 px-10 py-4 bg-electric text-white font-display font-bold rounded-full text-lg">
+          <button onClick={() => zumAbschnitt('pricing')} className="mt-2 px-10 py-4 bg-electric text-white font-display font-bold rounded-full text-lg">
             {tr(lang, 'Projekt anfragen', 'Start a project')}
           </button>
           <LangToggle className="mt-2 text-base" />
