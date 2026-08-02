@@ -8,7 +8,7 @@ const AboutSection = () => {
       <div className="max-w-[1080px] mx-auto grid md:grid-cols-2 gap-10 lg:gap-14 items-center">
         <Reveal variant="left">
           <div className="relative max-w-[420px] mx-auto">
-            <img src="/images/arthur.jpg" alt="Arthur Richter, Gründer von Richter Digital" className="w-full rounded-3xl object-cover" />
+            <img loading="lazy" decoding="async" src="/images/arthur.webp" alt="Arthur Richter, Gründer von Richter Digital" className="w-full rounded-3xl object-cover" />
             <div className="absolute bottom-4 left-4 bg-ink/85 backdrop-blur-sm px-4 py-2 rounded-full">
               <span className="text-white font-display font-semibold text-sm">Arthur Richter, {tr(lang, 'Gründer', 'Founder')}</span>
             </div>

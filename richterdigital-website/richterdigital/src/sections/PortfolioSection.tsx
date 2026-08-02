@@ -36,11 +36,11 @@ const DeviceShowcase = ({ p }: { p: Project }) => {
       <div className="relative w-full aspect-[4/3]">
         <div className="absolute left-0 top-3 right-[16%] bottom-3 rounded-xl overflow-hidden border border-ink/10 bg-white shadow-xl">
           <div className="h-7 bg-mist flex items-center gap-1.5 px-3 border-b border-ink/10"><Dot /><Dot /><Dot /></div>
-          <img src={p.desktop} alt={`${p.name} Desktop`} onError={() => setDeskErr(true)} className="w-full h-[calc(100%-1.75rem)] object-cover object-top" />
+          <img loading="lazy" decoding="async" src={p.desktop} alt={`${p.name} Desktop`} onError={() => setDeskErr(true)} className="w-full h-[calc(100%-1.75rem)] object-cover object-top" />
         </div>
         {p.mobile && !mobErr && (
           <div className="absolute right-0 bottom-2 w-[30%] aspect-[9/19] rounded-[18px] border-[3px] border-ink bg-white overflow-hidden shadow-2xl">
-            <img src={p.mobile} alt={`${p.name} Mobile`} onError={() => setMobErr(true)} className="w-full h-full object-cover object-top" />
+            <img loading="lazy" decoding="async" src={p.mobile} alt={`${p.name} Mobile`} onError={() => setMobErr(true)} className="w-full h-full object-cover object-top" />
           </div>
         )}
       </div>
@@ -50,11 +50,11 @@ const DeviceShowcase = ({ p }: { p: Project }) => {
   return (
     <div className="w-full aspect-[4/3] flex items-end justify-center gap-4 pb-2">
       <div className="w-[34%] aspect-[9/19] rounded-[18px] border-[3px] border-ink bg-white overflow-hidden shadow-2xl">
-        <img src={p.mobile} alt={`${p.name} 1`} onError={() => setMobErr(true)} className="w-full h-full object-cover object-top" />
+        <img loading="lazy" decoding="async" src={p.mobile} alt={`${p.name} 1`} onError={() => setMobErr(true)} className="w-full h-full object-cover object-top" />
       </div>
       {p.mobile2 && (
         <div className="w-[34%] aspect-[9/19] rounded-[18px] border-[3px] border-ink bg-white overflow-hidden shadow-2xl mb-6">
-          <img src={p.mobile2} alt={`${p.name} 2`} className="w-full h-full object-cover object-top" />
+          <img loading="lazy" decoding="async" src={p.mobile2} alt={`${p.name} 2`} className="w-full h-full object-cover object-top" />
         </div>
       )}
     </div>
@@ -112,8 +112,8 @@ const PortfolioSection = () => {
       tags: ['Kotlin', 'Firebase', 'AdMob', 'Google Play'],
       link: 'https://play.google.com/store/apps/developer?id=Richter+Digital',
       accent: '#3DDC84',
-      mobile: '/images/smile4me-screenshot1.png',
-      mobile2: '/images/smile4me-screenshot2.png',
+      mobile: '/images/smile4me-screenshot1.webp',
+      mobile2: '/images/smile4me-screenshot2.webp',
     },
     {
       name: 'Clio AI',
@@ -124,8 +124,8 @@ const PortfolioSection = () => {
       tags: ['React', 'TypeScript', 'AI / LLM'],
       link: 'https://getclio.ai',
       accent: '#0711ff',
-      desktop: '/images/clio-desktop.png',
-      mobile: '/images/clio-mobile.png',
+      desktop: '/images/clio-desktop.webp',
+      mobile: '/images/clio-mobile.webp',
     },
     {
       name: 'ThePackt',
@@ -136,8 +136,8 @@ const PortfolioSection = () => {
       tags: ['React', 'Firebase', 'Community'],
       link: 'https://thepackt.io',
       accent: '#F59E0B',
-      desktop: '/images/packt-desktop.png',
-      mobile: '/images/packt-mobile.png',
+      desktop: '/images/packt-desktop.webp',
+      mobile: '/images/packt-mobile.webp',
     },
   ];
 

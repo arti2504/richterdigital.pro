@@ -4,7 +4,13 @@ import { useLang, tr } from '../i18n';
 
 const HeroSection = () => {
   const { lang } = useLang();
-  const [isMobile, setIsMobile] = useState(false);
+
+  /* Startwert direkt aus matchMedia lesen. Mit einem festen false zeigt der
+     erste Render die Desktop-Datei, und das Handy beginnt sie zu laden, bevor
+     der Effekt sie gegen die kleinere austauscht. */
+  const [isMobile, setIsMobile] = useState(
+    () => typeof window !== 'undefined' && window.matchMedia('(max-width: 640px)').matches,
+  );
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 640px)');
@@ -15,6 +21,26 @@ const HeroSection = () => {
   }, []);
 
   const videoSrc = isMobile ? '/images/hero-video-mobile.mp4' : '/images/hero-video.mp4';
+  const posterSrc = isMobile ? '/images/hero-poster-mobile.jpg' : '/images/hero-poster.jpg';
+
+  /* Das Video darf nicht um die Leitung konkurrieren, solange die Seite noch
+     aufbaut. preload="none" reicht dafuer nicht, autoPlay setzt sich darueber
+     hinweg. Deshalb steht zuerst nur das Standbild, und die Quelle kommt erst
+     dazu, wenn der Browser sonst nichts mehr zu tun hat. */
+  const [videoLaden, setVideoLaden] = useState(false);
+
+  useEffect(() => {
+    let abbrechen: () => void;
+    const starten = () => setVideoLaden(true);
+    if (typeof window.requestIdleCallback === 'function') {
+      const id = window.requestIdleCallback(starten, { timeout: 3000 });
+      abbrechen = () => window.cancelIdleCallback(id);
+    } else {
+      const id = window.setTimeout(starten, 1200);
+      abbrechen = () => window.clearTimeout(id);
+    }
+    return () => abbrechen();
+  }, []);
 
   const scrollTo = (id: string) =>
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
@@ -22,9 +48,17 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-screen bg-ink flex items-end justify-center overflow-hidden">
       <div className="absolute inset-0 z-[1]">
-        <video key={videoSrc} className="w-full h-full object-cover" autoPlay muted loop playsInline>
-          <source src={videoSrc} type="video/mp4" />
-        </video>
+        <video
+          key={videoSrc}
+          className="w-full h-full object-cover"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster={posterSrc}
+          src={videoLaden ? videoSrc : undefined}
+        />
         <div className="absolute inset-0" style={{ background: 'linear-gradient(to bottom, rgba(20,20,20,0.0) 0%, rgba(20,20,20,0.0) 60%, rgba(20,20,20,0.8) 100%)' }} />
       </div>
 

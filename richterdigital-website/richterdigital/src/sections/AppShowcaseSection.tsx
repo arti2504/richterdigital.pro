@@ -58,7 +58,7 @@ const AppShowcaseSection = () => {
 
             {/* App header */}
             <div className="flex flex-col sm:flex-row sm:items-center gap-5 mb-10 pb-10 border-b border-white/5">
-              <img
+              <img loading="lazy" decoding="async"
                 src="/images/smile4me-logo.png"
                 alt="Smile4Me"
                 className="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl object-cover breathing flex-shrink-0"
@@ -114,15 +114,15 @@ const AppShowcaseSection = () => {
               {/* Right — Screenshots */}
               <div className="flex gap-5 justify-center lg:justify-end items-end">
                 <div className="lens-frame-inner w-40 md:w-52 aspect-[9/16] overflow-hidden hover:scale-[1.03] transition-transform duration-500 flex-shrink-0">
-                  <img
-                    src="/images/smile4me-screenshot1.png"
+                  <img loading="lazy" decoding="async"
+                    src="/images/smile4me-screenshot1.webp"
                     alt="Smile4Me Screenshot 1"
                     className="w-full h-full object-cover"
                   />
                 </div>
                 <div className="lens-frame-inner w-40 md:w-52 aspect-[9/16] overflow-hidden hover:scale-[1.03] transition-transform duration-500 flex-shrink-0 mb-10">
-                  <img
-                    src="/images/smile4me-screenshot2.png"
+                  <img loading="lazy" decoding="async"
+                    src="/images/smile4me-screenshot2.webp"
                     alt="Smile4Me Screenshot 2"
                     className="w-full h-full object-cover"
                   />

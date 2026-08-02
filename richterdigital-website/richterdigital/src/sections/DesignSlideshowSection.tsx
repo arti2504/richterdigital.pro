@@ -3,8 +3,8 @@ import { useLang, tr } from '../i18n';
 import Reveal from '../components/Reveal';
 
 const IMAGES = [
-  '/images/designs/design-1.jpg', '/images/designs/design-2.jpg', '/images/designs/design-3.jpg', '/images/designs/design-4.jpg',
-  '/images/designs/design-5.jpg', '/images/designs/design-6.jpg', '/images/designs/design-7.jpg', '/images/designs/design-8.jpg',
+  '/images/designs/design-1.webp', '/images/designs/design-2.webp', '/images/designs/design-3.webp', '/images/designs/design-4.webp',
+  '/images/designs/design-5.webp', '/images/designs/design-6.webp', '/images/designs/design-7.webp', '/images/designs/design-8.webp',
 ];
 
 const Dot = () => <span className="w-2.5 h-2.5 rounded-full bg-ink/20" />;
