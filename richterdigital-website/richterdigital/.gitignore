@@ -3,3 +3,6 @@ dist
 .DS_Store
 *.local
 _originale
+
+# Build-Zwischenstand, gehoert nicht ins Repo
+*.tsbuildinfo

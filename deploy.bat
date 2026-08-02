@@ -13,16 +13,26 @@ echo ============================================
 echo.
 
 echo [1/5] Cache loeschen (erzwingt frischen Build)...
-if exist "%PROJECT%\dist" rmdir /s /q "%PROJECT%\dist"
-if exist "%PROJECT%\node_modules\.vite" rmdir /s /q "%PROJECT%\node_modules\.vite"
-if exist "%PROJECT%\tsconfig.app.tsbuildinfo" del /q "%PROJECT%\tsconfig.app.tsbuildinfo"
-if exist "%PROJECT%\tsconfig.node.tsbuildinfo" del /q "%PROJECT%\tsconfig.node.tsbuildinfo"
+if exist "%PROJECT%\dist" rmdir /s /q "%PROJECT%\dist" 2>nul
+if exist "%PROJECT%\node_modules\.vite" rmdir /s /q "%PROJECT%\node_modules\.vite" 2>nul
+if exist "%PROJECT%\tsconfig.app.tsbuildinfo" del /q "%PROJECT%\tsconfig.app.tsbuildinfo" 2>nul
+if exist "%PROJECT%\tsconfig.node.tsbuildinfo" del /q "%PROJECT%\tsconfig.node.tsbuildinfo" 2>nul
+if exist "%PROJECT%\dist" (
+    echo.
+    echo   FEHLER: dist laesst sich nicht loeschen.
+    echo   Meist haelt ein laufender Vorschau-Server den Ordner offen.
+    echo   Schliesse ihn und starte deploy.bat erneut.
+    pause
+    exit /b 1
+)
 echo   OK
 
 echo.
 echo [2/5] Stand vom Server holen...
 cd /d "%REPO%"
-git pull --rebase origin main
+rem --autostash: Schritt 1 raeumt Build-Dateien weg, und ein Pull mit
+rem offenen Aenderungen im Arbeitsverzeichnis bricht sonst ab.
+git pull --rebase --autostash origin main
 if errorlevel 1 (
     echo.
     echo   FEHLER: git pull fehlgeschlagen. Erst aufloesen, dann neu starten.
