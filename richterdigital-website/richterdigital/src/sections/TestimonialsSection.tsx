@@ -58,7 +58,7 @@ const TestimonialsSection = () => {
   if (stimmen.length === 0) return null;
 
   return (
-    <section className="bg-mist text-ink py-20 sm:py-28">
+    <section id="stimmen" className="bg-mist text-ink py-20 sm:py-28">
       <div className="max-w-[1080px] mx-auto px-6">
         <Reveal>
           <div className="sm:flex sm:items-end sm:justify-between gap-6">

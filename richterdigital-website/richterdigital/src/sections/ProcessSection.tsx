@@ -13,7 +13,7 @@ const ProcessSection = () => {
   ];
 
   return (
-    <section className="bg-mist text-ink py-20 sm:py-28 px-6">
+    <section id="ablauf" className="bg-mist text-ink py-20 sm:py-28 px-6">
       <div className="max-w-[1080px] mx-auto">
         <Reveal>
           <p className="font-mono-label text-electric mb-4">{tr(lang, 'So arbeiten wir', 'How we work')}</p>

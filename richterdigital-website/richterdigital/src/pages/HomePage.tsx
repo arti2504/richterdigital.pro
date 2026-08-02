@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import Navigation        from '../components/Navigation';
 import HeroSection       from '../sections/HeroSection';
 import IntroSection      from '../sections/IntroSection';
@@ -11,25 +12,30 @@ import FAQSection        from '../sections/FAQSection';
 import AboutSection      from '../sections/AboutSection';
 import ContactSection    from '../sections/ContactSection';
 import Footer            from '../sections/Footer';
+import { scrollTiefeMessen } from '../lib/scrollTiefe';
 
-const HomePage = () => (
-  <>
-    <Navigation />
-    <main>
-      <HeroSection />
-      <IntroSection />
-      <ServicesSection />
-      <DesignSlideshowSection />
-      <PortfolioSection />
-      <TestimonialsSection />
-      <PricingSection />
-      <ProcessSection />
-      <FAQSection />
-      <AboutSection />
-      <ContactSection />
-    </main>
-    <Footer />
-  </>
-);
+const HomePage = () => {
+  useEffect(() => scrollTiefeMessen(), []);
+
+  return (
+    <>
+      <Navigation />
+      <main>
+        <HeroSection />
+        <IntroSection />
+        <ServicesSection />
+        <DesignSlideshowSection />
+        <PortfolioSection />
+        <TestimonialsSection />
+        <PricingSection />
+        <ProcessSection />
+        <FAQSection />
+        <AboutSection />
+        <ContactSection />
+      </main>
+      <Footer />
+    </>
+  );
+};
 
 export default HomePage;

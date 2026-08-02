@@ -3,7 +3,7 @@ import { useLang, tr } from '../i18n';
 const IntroSection = () => {
   const { lang } = useLang();
   return (
-    <section className="bg-paper text-ink py-16 sm:py-24 lg:py-28 px-6">
+    <section id="intro" className="bg-paper text-ink py-16 sm:py-24 lg:py-28 px-6">
       <div className="max-w-[860px] mx-auto text-center">
         {/* Einzige h1 der Seite: die Hauptaussage. Ohne h1 fehlt Google das
             staerkste Signal, worum es hier geht. */}
