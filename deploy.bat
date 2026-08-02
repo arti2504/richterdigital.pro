@@ -1,6 +1,10 @@
 @echo off
+setlocal
 set REPO=C:\Users\PC\Desktop\Richter Digitals\Richter Digital
 set PROJECT=%REPO%\richterdigital-website\richterdigital
+
+set MELDUNG=%~1
+if "%MELDUNG%"=="" set MELDUNG=Website aktualisiert
 
 echo.
 echo ============================================
@@ -16,14 +20,14 @@ if exist "%PROJECT%\tsconfig.node.tsbuildinfo" del /q "%PROJECT%\tsconfig.node.t
 echo   OK
 
 echo.
-echo [2/5] Bilder nach public\images kopieren...
-if not exist "%PROJECT%\public\images" mkdir "%PROJECT%\public\images"
-xcopy /Y /I "%REPO%\images\*" "%PROJECT%\public\images\" > nul
-if exist "%REPO%\images\arthur.jpg" (
-  xcopy /Y /I "%REPO%\images\arthur.jpg" "%PROJECT%\public\images\" > nul
-  echo   OK - inkl. arthur.jpg
-) else (
-  echo   OK - HINWEIS: arthur.jpg fehlt noch in images\
+echo [2/5] Stand vom Server holen...
+cd /d "%REPO%"
+git pull --rebase origin main
+if errorlevel 1 (
+    echo.
+    echo   FEHLER: git pull fehlgeschlagen. Erst aufloesen, dann neu starten.
+    pause
+    exit /b 1
 )
 echo   OK
 
@@ -41,8 +45,19 @@ if not exist "%PROJECT%\dist\index.html" (
 echo   OK - Build erfolgreich
 
 echo.
-echo [4/5] dist nach Repo-Root kopieren...
-robocopy "%PROJECT%\dist" "%REPO%" /E /NFL /NDL /NJH /NJS
+echo [4/5] dist in die Repo-Wurzel spiegeln...
+rem Die Quelle der Wahrheit fuer Bilder ist public\images im Projekt.
+rem Frueher wurden hier die veroeffentlichten Bilder zurueckkopiert, dadurch
+rem kamen geloeschte und unkomprimierte Dateien immer wieder zurueck.
+rem /MIR raeumt alte Dateien mit weg, aber nur in diesen drei Ordnern,
+rem niemals in der Wurzel selbst (dort liegen .git, Quellcode und Skripte).
+robocopy "%PROJECT%\dist\assets" "%REPO%\assets" /MIR /NFL /NDL /NJH /NJS
+robocopy "%PROJECT%\dist\fonts"  "%REPO%\fonts"  /MIR /NFL /NDL /NJH /NJS
+robocopy "%PROJECT%\dist\images" "%REPO%\images" /MIR /NFL /NDL /NJH /NJS
+copy /Y "%PROJECT%\dist\index.html"  "%REPO%\index.html"  > nul
+copy /Y "%PROJECT%\dist\robots.txt"  "%REPO%\robots.txt"  > nul
+copy /Y "%PROJECT%\dist\sitemap.xml" "%REPO%\sitemap.xml" > nul
+copy /Y "%PROJECT%\dist\CNAME"       "%REPO%\CNAME"       > nul
 if not exist "%REPO%\app-ads.txt" (
     echo google.com, pub-3806787756785352, DIRECT, f08c47fec0942fa0 > "%REPO%\app-ads.txt"
 )
@@ -52,8 +67,15 @@ echo.
 echo [5/5] Git commit und push...
 cd /d "%REPO%"
 git add -A
-git commit -m "Redesign: new hero, fixed animations, clean layout"
-git push -f origin HEAD:main
+git commit -m "%MELDUNG%"
+git push origin HEAD:main
+if errorlevel 1 (
+    echo.
+    echo   FEHLER: push abgelehnt. Meist liegt ein neuerer Stand auf GitHub.
+    echo   Loesung: git pull --rebase origin main, dann deploy.bat erneut.
+    pause
+    exit /b 1
+)
 echo   OK
 
 echo.
