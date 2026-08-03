@@ -141,17 +141,20 @@ export function trackCustom(event: string, params?: Record<string, unknown>): bo
  * Geschaetzter Auftragswert je Budget-Angabe im Formular.
  * Damit kann Meta auf Anfragen mit hoeherem Wert hin optimieren, statt jeden
  * Lead gleich zu behandeln. Konservativ an den Paketpreisen orientiert.
+ *
+ * Derzeit ungenutzt: Der Rechner fragt kein Budget mehr ab, das Lead-Event
+ * geht ohne Wert raus. Bleibt fuer den Fall, dass die Frage zurueckkommt.
  */
 export function estimateLeadValue(budgetLabel: string): number {
   // Die Auswahl sind Spannen ("3.000 bis 8.000 EUR"), also steht in jedem
   // Label mehr als eine Zahl. Deshalb die UNTERGRENZE auswerten, nicht
   // irgendeine Zahl: sonst zaehlt "1.000 bis 3.000" wie "3.000 bis 8.000".
-  if (/unter|under/i.test(budgetLabel)) return 690;
+  if (/unter|under/i.test(budgetLabel)) return 399;
   const ohneTausenderpunkt = budgetLabel.replace(/[.,](?=\d{3})/g, '');
   const untergrenze = parseInt(ohneTausenderpunkt.match(/\d+/)?.[0] ?? '', 10);
-  if (Number.isNaN(untergrenze)) return 690; // "Keine Angabe"
+  if (Number.isNaN(untergrenze)) return 399; // "Keine Angabe"
   if (untergrenze >= 8000) return 5000;
   if (untergrenze >= 3000) return 1890;
   if (untergrenze >= 1000) return 1290;
-  return 690; // Starter-Paket als Untergrenze
+  return 399; // Starter-Paket als Untergrenze
 }

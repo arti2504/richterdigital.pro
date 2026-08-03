@@ -37,24 +37,46 @@ const PricingSection = () => {
     <section ref={sectionRef} id="pricing" className="bg-paper text-ink py-20 sm:py-28 px-6">
       <div className="max-w-[1080px] mx-auto">
         <Reveal>
-          <p className="font-mono-label text-electric mb-4">{tr(lang, 'Angebot', 'Get a quote')}</p>
-          <h2 className="font-display font-bold" style={{ fontSize: 'clamp(30px, 4.4vw, 56px)', lineHeight: 1.12, letterSpacing: '-0.02em' }}>
-            {lang === 'de'
-              ? <>Vier Fragen, <span className="mark-hl">dann weißt du woran du bist</span>.</>
-              : <>Four questions, <span className="mark-hl">then you know where you stand</span>.</>}
-          </h2>
-          <p className="mt-4 text-ink/70 font-sans max-w-[640px]" style={{ fontSize: '17px', lineHeight: 1.6 }}>
-            {tr(lang,
-              'Sag mir kurz, was du vorhast. Ich schicke dir einen Vorschlag mit Festpreis, damit du vorher weißt, was es kostet. Kostenlos und unverbindlich.',
-              'Tell me briefly what you have in mind. I send you a proposal with a fixed price, so you know what it costs beforehand. Free and without obligation.')}
-          </p>
+          <div className="sm:flex sm:items-start sm:justify-between sm:gap-10">
+            <div className="max-w-[640px]">
+              <p className="font-mono-label text-electric mb-4">{tr(lang, 'Angebot', 'Get a quote')}</p>
+              <h2 className="font-display font-bold" style={{ fontSize: 'clamp(30px, 4.4vw, 56px)', lineHeight: 1.12, letterSpacing: '-0.02em' }}>
+                {lang === 'de'
+                  ? <>Vier Fragen, <span className="mark-hl">dann weißt du woran du bist</span>.</>
+                  : <>Four questions, <span className="mark-hl">then you know where you stand</span>.</>}
+              </h2>
+              <p className="mt-4 text-ink/70 font-sans" style={{ fontSize: '17px', lineHeight: 1.6 }}>
+                {tr(lang,
+                  'Sag mir kurz, was du vorhast. Ich schicke dir einen Vorschlag mit Festpreis, damit du vorher weißt, was es kostet. Kostenlos und unverbindlich.',
+                  'Tell me briefly what you have in mind. I send you a proposal with a fixed price, so you know what it costs beforehand. Free and without obligation.')}
+              </p>
+            </div>
+
+            {/* Preisschild. Beantwortet die Frage, die den Besucher vom Rechner
+                abhaelt: rede ich hier ueber Hunderte oder ueber Zehntausende. */}
+            <div className="mt-8 sm:mt-2 flex-shrink-0 flex justify-center sm:block">
+              <div
+                className="rounded-full bg-electric text-white flex flex-col items-center justify-center shadow-xl"
+                style={{ width: '148px', height: '148px', transform: 'rotate(-8deg)' }}
+              >
+                <span className="font-display font-semibold opacity-90" style={{ fontSize: '15px', lineHeight: 1 }}>
+                  {tr(lang, 'ab', 'from')}
+                </span>
+                <span className="font-display font-bold whitespace-nowrap" style={{ fontSize: '38px', lineHeight: 1.15, letterSpacing: '-0.02em' }}>
+                  399&nbsp;€
+                </span>
+              </div>
+            </div>
+          </div>
         </Reveal>
 
         <AngebotRechner />
 
-        {/* Zusatzleistung, die zu jedem Paket dazugehoert. Der durchgestrichene
-            Preis ist echt: Die Analyse ist einzeln fuer 190 € buchbar. Ein
-            erfundener Referenzpreis waere nach § 5 UWG abmahnfaehig. */}
+        {/* Zusatzleistung der beiden groesseren Pakete. Beim Starter zu 399 €
+            waere eine Zugabe im Wert von 190 € fast die Haelfte des Auftrags.
+            Der durchgestrichene Preis ist echt: Die Analyse ist einzeln fuer
+            190 € buchbar. Ein erfundener Referenzpreis waere nach § 5 UWG
+            abmahnfaehig. */}
         <Reveal delay={100}>
           <div className="mt-6 relative overflow-hidden rounded-2xl bg-navy-800 text-cream p-7 md:p-10">
             {/* Blauer Schein, damit der Block sich vom Rest der Seite abhebt */}
@@ -66,7 +88,7 @@ const PricingSection = () => {
             <div className="relative md:flex md:items-center md:justify-between gap-10">
               <div className="max-w-[560px]">
                 <span className="inline-block font-mono-label text-electric-light bg-electric/20 rounded-full px-3 py-1.5">
-                  {tr(lang, 'Zu jeder Landingpage inklusive', 'Included with every landing page')}
+                  {tr(lang, 'In Professional und Premium enthalten', 'Included in Professional and Premium')}
                 </span>
                 <p className="mt-4 font-display font-bold" style={{ fontSize: 'clamp(26px, 3.2vw, 38px)', lineHeight: 1.15 }}>
                   {tr(lang, 'Konkurrenzanalyse', 'Competitor analysis')}
