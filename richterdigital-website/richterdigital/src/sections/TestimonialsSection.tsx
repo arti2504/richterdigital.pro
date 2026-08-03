@@ -3,7 +3,7 @@ import { Star, ChevronLeft, ChevronRight, BadgeCheck } from 'lucide-react';
 import { useLang, tr } from '../i18n';
 import Reveal from '../components/Reveal';
 
-/* Zitate sind von Oleg und Rebecca freigegeben.
+/* Die beiden Texte sind die Google-Rezensionen von Oleg und Rebecca.
 
    Die Zahlen im linken Block stammen vom echten Google-Profil, nachgesehen am
    02.08.2026: 5,0 aus 2 Rezensionen. Die Anzahl steht bewusst dabei. Ein
@@ -67,13 +67,20 @@ const TestimonialsSection = () => {
   if (stimmen.length === 0) return null;
 
   return (
-    <section id="stimmen" className="bg-mist text-ink py-20 sm:py-28 overflow-hidden">
+    /* Verlauf aus dem Markenblau nach unten ins Papierweiss. Der Endwert ist
+       exakt bg-paper (#FDFDFD), damit die Kante zur Angebotssektion darunter
+       nicht sichtbar wird. */
+    <section
+      id="stimmen"
+      className="text-white py-20 sm:py-28 overflow-hidden"
+      style={{ background: 'linear-gradient(180deg, #0711FF 0%, #2733F5 38%, #8F97FF 70%, #FDFDFD 100%)' }}
+    >
       <div className="max-w-[1080px] mx-auto px-6">
         <Reveal>
-          <h2 className="font-display font-bold text-center" style={{ fontSize: 'clamp(30px, 4.4vw, 56px)', lineHeight: 1.12, letterSpacing: '-0.02em' }}>
+          <h2 className="font-display font-bold text-center text-white" style={{ fontSize: 'clamp(30px, 4.4vw, 56px)', lineHeight: 1.12, letterSpacing: '-0.02em' }}>
             {lang === 'de'
-              ? <>Das sagen <span className="mark-hl">unsere Kunden</span></>
-              : <>What <span className="mark-hl">our clients say</span></>}
+              ? <>Das sagen <span className="hl-invers">unsere Kunden</span></>
+              : <>What <span className="hl-invers">our clients say</span></>}
           </h2>
         </Reveal>
       </div>
@@ -89,18 +96,20 @@ const TestimonialsSection = () => {
             rel="noopener noreferrer"
             className="flex flex-col items-center text-center flex-shrink-0 lg:w-[230px] group"
           >
-            <p className="font-display font-bold tracking-wide" style={{ fontSize: 'clamp(20px, 2.4vw, 26px)' }}>
+            <p className="font-display font-bold tracking-wide text-white" style={{ fontSize: 'clamp(20px, 2.4vw, 26px)' }}>
               {tr(lang, 'AUSGEZEICHNET', 'EXCELLENT')}
             </p>
             <div className="mt-3">
               <Sterne groesse="w-7 h-7" />
             </div>
-            <p className="mt-3 text-ink/70" style={{ fontSize: '14px' }}>
+            <p className="mt-3 text-white/75" style={{ fontSize: '14px' }}>
               {lang === 'de'
-                ? <>Basierend auf <strong className="text-ink font-semibold">{GOOGLE_ANZAHL} Bewertungen</strong></>
-                : <>Based on <strong className="text-ink font-semibold">{GOOGLE_ANZAHL} reviews</strong></>}
+                ? <>Basierend auf <strong className="text-white font-semibold">{GOOGLE_ANZAHL} Bewertungen</strong></>
+                : <>Based on <strong className="text-white font-semibold">{GOOGLE_ANZAHL} reviews</strong></>}
             </p>
-            <span className="mt-3 inline-flex items-center gap-2 group-hover:opacity-75 transition-opacity">
+            {/* Weisser Sockel unter dem Zeichen, sonst geht das Vier-Farben-G
+                auf dem blauen Grund unter. */}
+            <span className="mt-4 inline-flex items-center gap-2 bg-white rounded-full pl-3 pr-4 py-2 shadow-lg group-hover:opacity-90 transition-opacity">
               <GoogleG className="w-6 h-6" />
               <span className="font-display font-semibold text-[19px] text-ink">Google</span>
             </span>
@@ -120,15 +129,20 @@ const TestimonialsSection = () => {
               return (
                 <div
                   key={s.name}
-                  className="snap-start flex-shrink-0 bg-paper rounded-2xl border border-ink/10 p-6 flex flex-col"
+                  className="snap-start flex-shrink-0 bg-white rounded-2xl p-6 flex flex-col shadow-xl"
                   style={{ width: 'min(78vw, 330px)' }}
                 >
                   <div className="flex items-center gap-3">
                     <img src={s.photo} alt={s.name} loading="lazy" width={256} height={256} className="w-11 h-11 rounded-full object-cover flex-shrink-0" />
-                    <div className="min-w-0">
+                    <div className="min-w-0 flex-1">
                       <p className="font-display font-semibold text-ink text-[15px] truncate">{s.name}</p>
                       <p className="text-ink/55 text-xs truncate">{s.role}</p>
                     </div>
+                    {/* Die Kartentexte sind die Rezensionen, die Oleg und Rebecca
+                        bei Google hinterlassen haben. Deshalb darf das Zeichen hier
+                        stehen. Falls hier je ein Zitat auftaucht, das nicht von
+                        Google stammt, muss es fuer diese Karte wieder weg. */}
+                    <GoogleG className="w-5 h-5 flex-shrink-0" />
                   </div>
 
                   <div className="mt-4 flex items-center gap-2">
@@ -157,14 +171,14 @@ const TestimonialsSection = () => {
           <button
             onClick={() => schieben(-1)}
             aria-label={tr(lang, 'Zurück', 'Previous')}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/3 w-10 h-10 rounded-full bg-paper border border-ink/15 shadow-lg flex items-center justify-center hover:border-electric hover:text-electric transition-colors"
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/3 w-10 h-10 rounded-full bg-white text-ink shadow-xl flex items-center justify-center hover:text-electric transition-colors"
           >
             <ChevronLeft className="w-5 h-5" />
           </button>
           <button
             onClick={() => schieben(1)}
             aria-label={tr(lang, 'Weiter', 'Next')}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/3 w-10 h-10 rounded-full bg-paper border border-ink/15 shadow-lg flex items-center justify-center hover:border-electric hover:text-electric transition-colors"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/3 w-10 h-10 rounded-full bg-white text-ink shadow-xl flex items-center justify-center hover:text-electric transition-colors"
           >
             <ChevronRight className="w-5 h-5" />
           </button>

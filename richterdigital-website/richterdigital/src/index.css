@@ -190,6 +190,17 @@
 }
 
 /* ── Marker highlight (Droids-style), uses accent #0711ff ── */
+/* Umgekehrte Hervorhebung fuer Abschnitte auf blauem Grund: weisser Kasten,
+   blaue Schrift. Das normale .mark-hl waere dort blau auf blau. */
+.hl-invers {
+  background-color: #fff;
+  color: #0711ff;
+  padding: 0.02em 0.22em;
+  border-radius: 0.1em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
 .mark-hl {
   background-color: #0711ff;
   color: #fff;
