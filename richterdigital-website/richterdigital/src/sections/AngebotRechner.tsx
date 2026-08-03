@@ -63,7 +63,6 @@ const AngebotRechner = () => {
   const [antworten, setAntworten] = useState<string[]>([]);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  const [telefon, setTelefon] = useState('');
   const [status, setStatus] = useState<'idle' | 'sending' | 'error'>('idle');
   const [fertig, setFertig] = useState(false);
 
@@ -89,7 +88,6 @@ const AngebotRechner = () => {
     fd.append('subject', `${tr(lang, 'Neue Anfrage', 'New request')}: ${antworten[0] ?? ''}`);
     fd.append('name', name);
     fd.append('email', email);
-    if (telefon) fd.append(tr(lang, 'Telefon', 'Phone'), telefon);
     schritte.forEach((s, i) => fd.append(s.feld, antworten[i] ?? tr(lang, 'keine Angabe', 'not provided')));
     fd.append('botcheck', '');
     try {
@@ -121,8 +119,8 @@ const AngebotRechner = () => {
         </p>
         <p className="mt-3 text-ink/65 max-w-[420px] mx-auto" style={{ lineHeight: 1.6 }}>
           {tr(lang,
-            'Ich schaue mir deine Angaben an und melde mich innerhalb von 24 Stunden mit einem Vorschlag.',
-            'I will look at your answers and get back to you within 24 hours with a proposal.')}
+            'Deinen Festpreis schicke ich dir innerhalb von 24 Stunden per E-Mail. Danach liegt der Ball bei dir.',
+            'I will email you your fixed price within 24 hours. After that the ball is in your court.')}
         </p>
       </div>
     );
@@ -169,11 +167,14 @@ const AngebotRechner = () => {
       ) : (
         <form onSubmit={absenden} className="mt-5">
           <p className="font-display font-bold" style={{ fontSize: 'clamp(22px, 2.8vw, 32px)', lineHeight: 1.2 }}>
-            {tr(lang, 'Wohin soll der Vorschlag?', 'Where should the proposal go?')}
+            {tr(lang, 'Wohin schicke ich deinen Preis?', 'Where should I send your price?')}
           </p>
-          <p className="mt-2 text-ink/60 text-sm">
-            {tr(lang, 'Ich melde mich innerhalb von 24 Stunden. Kostenlos und unverbindlich.',
-                   'I get back to you within 24 hours. Free and without obligation.')}
+          {/* Die Zusage steht bewusst vor den Feldern. An genau dieser Stelle
+              sind am 03.08.2026 sechs von sechs Interessenten abgesprungen. */}
+          <p className="mt-2 text-ink/65 text-sm" style={{ lineHeight: 1.6 }}>
+            {tr(lang,
+              'Du bekommst eine E-Mail mit deinem Festpreis. Das war es. Wenn er für dich passt, meldest du dich. Ich hake nicht nach und rufe nicht an.',
+              'You get one email with your fixed price. That is it. If it works for you, you get in touch. I will not follow up and I will not call.')}
           </p>
 
           <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
@@ -187,12 +188,6 @@ const AngebotRechner = () => {
               <label htmlFor="ar-mail" className="font-mono-label text-ink/55 block mb-1.5">{tr(lang, 'E-Mail', 'Email')} *</label>
               <input id="ar-mail" type="email" required value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" className={feld} placeholder="name@firma.de" />
             </div>
-            <div>
-              <label htmlFor="ar-tel" className="font-mono-label text-ink/55 block mb-1.5">
-                {tr(lang, 'Telefon', 'Phone')} <span className="text-ink/35">{tr(lang, '(optional)', '(optional)')}</span>
-              </label>
-              <input id="ar-tel" type="tel" value={telefon} onChange={(e) => setTelefon(e.target.value)} autoComplete="tel" className={feld} placeholder={tr(lang, 'falls du lieber telefonierst', 'if you prefer a call')} />
-            </div>
           </div>
 
           {status === 'error' && (
@@ -204,7 +199,7 @@ const AngebotRechner = () => {
 
           <button type="submit" disabled={status === 'sending'} className="mt-6 w-full py-4 bg-electric text-white font-display font-bold rounded-xl flex items-center justify-center gap-2 disabled:opacity-70 hover:bg-electric-dark transition-colors">
             {status === 'sending' ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
-            {status === 'sending' ? tr(lang, 'Wird gesendet…', 'Sending…') : tr(lang, 'Vorschlag anfordern', 'Request proposal')}
+            {status === 'sending' ? tr(lang, 'Wird gesendet…', 'Sending…') : tr(lang, 'Preis anfordern', 'Request price')}
           </button>
 
           <div className="mt-4 flex items-center justify-between gap-4">
