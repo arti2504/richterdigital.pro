@@ -16,8 +16,8 @@ const ServicesSection = () => {
         'Seiten, die aus Besuchern Kunden machen. Schnell geladen, klar aufgebaut und für Google optimiert.',
         'Pages that turn visitors into customers. Fast to load, clearly built and optimised for Google.'),
       extra: tr(lang,
-        'Zu jeder Landingpage gehört die Konkurrenzanalyse dazu. Ich schaue mir an, was deine Mitbewerber online machen und wo du sie überholen kannst. Einzeln kostet die 190 €, bei einer Landingpage ist sie kostenlos.',
-        'A competitor analysis comes with every landing page. I look at what your competitors do online and where you can overtake them. On its own it costs €190, with a landing page it is free.'),
+        'Ab dem Professional-Paket gehört die Konkurrenzanalyse dazu. Ich schaue mir an, was deine Mitbewerber online machen und wo du sie überholen kannst. Einzeln kostet sie 190 €.',
+        'From the Professional package onwards, the competitor analysis is included. I look at what your competitors do online and where you can overtake them. On its own it costs €190.'),
     },
     {
       t: tr(lang, 'Web-Apps', 'Web apps'),
@@ -68,7 +68,7 @@ const ServicesSection = () => {
                     {it.extra && (
                       <div className="mt-4 mb-6 mr-4 rounded-xl bg-electric/[0.06] border border-electric/20 px-5 py-4">
                         <p className="font-display font-bold text-ink text-[15px]">
-                          {tr(lang, 'Konkurrenzanalyse inklusive', 'Competitor analysis included')}
+                          {tr(lang, 'Konkurrenzanalyse ab Professional', 'Competitor analysis from Professional')}
                           <span className="ml-2 font-sans font-normal" style={{ color: '#DC2626' }}>
                             <span className="line-through">190&nbsp;€</span>
                           </span>
