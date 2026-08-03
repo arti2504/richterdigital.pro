@@ -119,8 +119,8 @@ const AngebotRechner = () => {
         </p>
         <p className="mt-3 text-ink/65 max-w-[420px] mx-auto" style={{ lineHeight: 1.6 }}>
           {tr(lang,
-            'Deinen Festpreis schicke ich dir innerhalb von 24 Stunden per E-Mail. Danach liegt der Ball bei dir.',
-            'I will email you your fixed price within 24 hours. After that the ball is in your court.')}
+            'Deinen Festpreis schicke ich dir innerhalb von 24 Stunden per E-Mail.',
+            'I will email you your fixed price within 24 hours.')}
         </p>
       </div>
     );
@@ -169,12 +169,14 @@ const AngebotRechner = () => {
           <p className="font-display font-bold" style={{ fontSize: 'clamp(22px, 2.8vw, 32px)', lineHeight: 1.2 }}>
             {tr(lang, 'Wohin schicke ich deinen Preis?', 'Where should I send your price?')}
           </p>
-          {/* Die Zusage steht bewusst vor den Feldern. An genau dieser Stelle
-              sind am 03.08.2026 sechs von sechs Interessenten abgesprungen. */}
+          {/* Steht bewusst vor den Feldern. An genau dieser Stelle sind am
+              03.08.2026 sechs von sechs Interessenten abgesprungen. Kurz
+              halten: eine Aufzaehlung dessen, was man alles nicht tut, klingt
+              nach Rechtfertigung und weckt erst den Verdacht. */}
           <p className="mt-2 text-ink/65 text-sm" style={{ lineHeight: 1.6 }}>
             {tr(lang,
-              'Du bekommst eine E-Mail mit deinem Festpreis. Das war es. Wenn er für dich passt, meldest du dich. Ich hake nicht nach und rufe nicht an.',
-              'You get one email with your fixed price. That is it. If it works for you, you get in touch. I will not follow up and I will not call.')}
+              'Du bekommst deinen Festpreis per E-Mail. Ob du dich danach meldest, entscheidest du.',
+              'You get your fixed price by email. Whether you get in touch after that is up to you.')}
           </p>
 
           <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
