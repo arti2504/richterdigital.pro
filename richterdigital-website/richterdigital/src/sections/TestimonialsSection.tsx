@@ -1,13 +1,19 @@
-import { useRef } from 'react';
-import { Star, ChevronLeft, ChevronRight, ArrowUpRight } from 'lucide-react';
+import { useRef, useState } from 'react';
+import { Star, ChevronLeft, ChevronRight, BadgeCheck } from 'lucide-react';
 import { useLang, tr } from '../i18n';
 import Reveal from '../components/Reveal';
 
-/* Zitate sind von Oleg und Rebecca freigegeben. */
+/* Zitate sind von Oleg und Rebecca freigegeben.
 
+   Die Zahlen im linken Block stammen vom echten Google-Profil, nachgesehen am
+   02.08.2026: 5,0 aus 2 Rezensionen. Die Anzahl steht bewusst dabei. Ein
+   Sternedurchschnitt ohne Anzahl gilt als irrefuehrend, sobald nur wenige
+   Bewertungen dahinterstehen. Beim Aendern der Anzahl unbedingt vorher auf
+   dem Profil nachsehen. */
 const GOOGLE_PROFIL = 'https://share.google/HTVGc8UxX7cHVEr1t';
+const GOOGLE_ANZAHL = 2;
 
-/** Googles Vier-Farben-G, fuer den Verweis auf das echte Profil. */
+/** Googles Vier-Farben-G, als Verweis auf das echte Profil. */
 const GoogleG = ({ className = '' }: { className?: string }) => (
   <svg viewBox="0 0 48 48" className={className} aria-hidden="true">
     <path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z" />
@@ -17,17 +23,20 @@ const GoogleG = ({ className = '' }: { className?: string }) => (
   </svg>
 );
 
-const Sterne = () => (
+const Sterne = ({ groesse = 'w-4 h-4' }: { groesse?: string }) => (
   <div className="flex gap-0.5" role="img" aria-label="5 von 5 Sternen">
     {[0, 1, 2, 3, 4].map((i) => (
-      <Star key={i} className="w-4 h-4 text-amber-400" fill="currentColor" strokeWidth={0} />
+      <Star key={i} className={`${groesse} text-amber-400`} fill="currentColor" strokeWidth={0} />
     ))}
   </div>
 );
 
+const KURZ = 150;
+
 const TestimonialsSection = () => {
   const { lang } = useLang();
   const spur = useRef<HTMLDivElement>(null);
+  const [offen, setOffen] = useState<number | null>(null);
 
   const stimmen = [
     {
@@ -52,80 +61,114 @@ const TestimonialsSection = () => {
   const schieben = (richtung: 1 | -1) => {
     const el = spur.current;
     if (!el) return;
-    el.scrollBy({ left: richtung * Math.min(el.clientWidth * 0.85, 420), behavior: 'smooth' });
+    el.scrollBy({ left: richtung * Math.min(el.clientWidth * 0.8, 380), behavior: 'smooth' });
   };
 
   if (stimmen.length === 0) return null;
 
   return (
-    <section id="stimmen" className="bg-mist text-ink py-20 sm:py-28">
+    <section id="stimmen" className="bg-mist text-ink py-20 sm:py-28 overflow-hidden">
       <div className="max-w-[1080px] mx-auto px-6">
         <Reveal>
-          <div className="sm:flex sm:items-end sm:justify-between gap-6">
-            <div>
-              <p className="font-mono-label text-electric mb-4">{tr(lang, 'Stimmen', 'Voices')}</p>
-              <h2 className="font-display font-bold" style={{ fontSize: 'clamp(30px, 4.4vw, 56px)', lineHeight: 1.12, letterSpacing: '-0.02em' }}>
-                {lang === 'de'
-                  ? <>Was Kunden <span className="mark-hl">über die Arbeit sagen</span>.</>
-                  : <>What clients <span className="mark-hl">say about the work</span>.</>}
-              </h2>
-            </div>
-            {/* Pfeile auch auf dem Handy: das Wischen erkennt sonst niemand. */}
-            <div className="flex gap-2 flex-shrink-0 mt-6 sm:mt-0">
-              <button onClick={() => schieben(-1)} aria-label={tr(lang, 'Zurück', 'Previous')}
-                className="w-11 h-11 rounded-full border border-ink/15 bg-paper flex items-center justify-center hover:border-electric hover:text-electric transition-colors">
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <button onClick={() => schieben(1)} aria-label={tr(lang, 'Weiter', 'Next')}
-                className="w-11 h-11 rounded-full border border-ink/15 bg-paper flex items-center justify-center hover:border-electric hover:text-electric transition-colors">
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </div>
-          </div>
+          <h2 className="font-display font-bold text-center" style={{ fontSize: 'clamp(30px, 4.4vw, 56px)', lineHeight: 1.12, letterSpacing: '-0.02em' }}>
+            {lang === 'de'
+              ? <>Das sagen <span className="mark-hl">unsere Kunden</span></>
+              : <>What <span className="mark-hl">our clients say</span></>}
+          </h2>
         </Reveal>
       </div>
 
-      {/* Waagerechter Schieber. Auf dem Handy eine Karte, am Rechner zwei. */}
-      <div
-        ref={spur}
-        className="mt-10 flex gap-5 overflow-x-auto snap-x snap-mandatory scroll-px-6 px-6 pb-2"
-        style={{ scrollbarWidth: 'none' }}
-      >
-        {stimmen.map((s) => (
-          <div
-            key={s.name}
-            className="snap-start flex-shrink-0 bg-paper rounded-2xl border border-ink/10 p-6 flex flex-col"
-            style={{ width: 'min(85vw, 440px)' }}
-          >
-            <Sterne />
-            <p className="mt-4 text-ink/80 flex-1" style={{ fontSize: '16px', lineHeight: 1.6 }}>&ldquo;{s.quote}&rdquo;</p>
-            <div className="mt-5 flex items-center gap-3">
-              <img src={s.photo} alt={s.name} loading="lazy" width={256} height={256} className="w-11 h-11 rounded-full object-cover" />
-              <div>
-                <p className="font-display font-semibold text-ink text-sm">{s.name}</p>
-                <p className="text-ink/55 text-xs">{s.role}</p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+      <div className="max-w-[1080px] mx-auto mt-12 px-6 lg:flex lg:items-center lg:gap-12">
 
-      {/* Verweis auf das echte Profil. Ueberpruefbar, anders als Sterne auf der eigenen Seite. */}
-      <div className="max-w-[1080px] mx-auto px-6">
-        <Reveal delay={80}>
+        {/* Linker Block mit der Gesamtnote. Verweist auf das echte Profil,
+            damit die Angabe nachpruefbar ist. */}
+        <Reveal>
           <a
             href={GOOGLE_PROFIL}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-8 inline-flex items-center gap-2.5 bg-paper border border-ink/12 rounded-full pl-4 pr-5 py-2.5 hover:border-electric transition-colors group"
+            className="flex flex-col items-center text-center flex-shrink-0 lg:w-[230px] group"
           >
-            <GoogleG className="w-5 h-5" />
-            <span className="font-display font-semibold text-sm text-ink">
-              {tr(lang, 'Bewertungen auf Google ansehen', 'See our reviews on Google')}
+            <p className="font-display font-bold tracking-wide" style={{ fontSize: 'clamp(20px, 2.4vw, 26px)' }}>
+              {tr(lang, 'AUSGEZEICHNET', 'EXCELLENT')}
+            </p>
+            <div className="mt-3">
+              <Sterne groesse="w-7 h-7" />
+            </div>
+            <p className="mt-3 text-ink/70" style={{ fontSize: '14px' }}>
+              {lang === 'de'
+                ? <>Basierend auf <strong className="text-ink font-semibold">{GOOGLE_ANZAHL} Bewertungen</strong></>
+                : <>Based on <strong className="text-ink font-semibold">{GOOGLE_ANZAHL} reviews</strong></>}
+            </p>
+            <span className="mt-3 inline-flex items-center gap-2 group-hover:opacity-75 transition-opacity">
+              <GoogleG className="w-6 h-6" />
+              <span className="font-display font-semibold text-[19px] text-ink">Google</span>
             </span>
-            <ArrowUpRight className="w-4 h-4 text-ink/45 group-hover:text-electric transition-colors" />
           </a>
         </Reveal>
+
+        {/* Rechts der Schieber mit den einzelnen Stimmen */}
+        <div className="relative mt-12 lg:mt-0 flex-1 min-w-0">
+          <div
+            ref={spur}
+            className="flex gap-5 overflow-x-auto snap-x snap-mandatory pb-2"
+            style={{ scrollbarWidth: 'none' }}
+          >
+            {stimmen.map((s, i) => {
+              const langerText = s.quote.length > KURZ;
+              const ausgeklappt = offen === i || !langerText;
+              return (
+                <div
+                  key={s.name}
+                  className="snap-start flex-shrink-0 bg-paper rounded-2xl border border-ink/10 p-6 flex flex-col"
+                  style={{ width: 'min(78vw, 330px)' }}
+                >
+                  <div className="flex items-center gap-3">
+                    <img src={s.photo} alt={s.name} loading="lazy" width={256} height={256} className="w-11 h-11 rounded-full object-cover flex-shrink-0" />
+                    <div className="min-w-0">
+                      <p className="font-display font-semibold text-ink text-[15px] truncate">{s.name}</p>
+                      <p className="text-ink/55 text-xs truncate">{s.role}</p>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 flex items-center gap-2">
+                    <Sterne />
+                    <BadgeCheck className="w-[18px] h-[18px] text-electric" aria-label={tr(lang, 'Kunde bestätigt', 'Verified client')} />
+                  </div>
+
+                  <p className="mt-3 text-ink/80 flex-1" style={{ fontSize: '15px', lineHeight: 1.6 }}>
+                    &ldquo;{ausgeklappt ? s.quote : s.quote.slice(0, KURZ).trimEnd() + '…'}&rdquo;
+                  </p>
+
+                  {langerText && (
+                    <button
+                      onClick={() => setOffen(offen === i ? null : i)}
+                      className="mt-3 self-start text-ink/50 hover:text-electric transition-colors text-sm"
+                    >
+                      {offen === i ? tr(lang, 'Weniger', 'Show less') : tr(lang, 'Weiterlesen', 'Read more')}
+                    </button>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Pfeile. Auch auf dem Handy sichtbar, das Wischen erkennt sonst niemand. */}
+          <button
+            onClick={() => schieben(-1)}
+            aria-label={tr(lang, 'Zurück', 'Previous')}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/3 w-10 h-10 rounded-full bg-paper border border-ink/15 shadow-lg flex items-center justify-center hover:border-electric hover:text-electric transition-colors"
+          >
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <button
+            onClick={() => schieben(1)}
+            aria-label={tr(lang, 'Weiter', 'Next')}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/3 w-10 h-10 rounded-full bg-paper border border-ink/15 shadow-lg flex items-center justify-center hover:border-electric hover:text-electric transition-colors"
+          >
+            <ChevronRight className="w-5 h-5" />
+          </button>
+        </div>
       </div>
     </section>
   );
