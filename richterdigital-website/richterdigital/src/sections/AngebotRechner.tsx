@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Send, Loader2, Check } from 'lucide-react';
 import { useLang, tr } from '../i18n';
@@ -65,8 +65,21 @@ const AngebotRechner = () => {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'sending' | 'error'>('idle');
   const [fertig, setFertig] = useState(false);
+  const karte = useRef<HTMLDivElement>(null);
 
   const gesamt = schritte.length + 1; // Fragen plus Kontaktschritt
+
+  /* Beim Kontaktschritt die Karte an den oberen Rand holen.
+     Auf dem Handy stand der Absendeknopf sonst im unteren Drittel, wo das
+     Einwilligungsbanner liegt. Ein Tipp darauf traf das Banner statt den
+     Knopf, und die Anfrage ging nie raus. */
+  useEffect(() => {
+    if (schritt !== schritte.length || fertig) return;
+    const el = karte.current;
+    if (!el) return;
+    const oben = el.getBoundingClientRect().top + window.scrollY - 96;
+    window.scrollTo({ top: Math.max(0, oben), behavior: 'smooth' });
+  }, [schritt, schritte.length, fertig]);
 
   const waehlen = (wert: string) => {
     const neu = [...antworten];
@@ -127,7 +140,7 @@ const AngebotRechner = () => {
   }
 
   return (
-    <div className="mt-12 bg-paper border border-ink/10 rounded-2xl p-6 sm:p-9 shadow-sm">
+    <div ref={karte} className="mt-12 bg-paper border border-ink/10 rounded-2xl p-6 sm:p-9 shadow-sm">
       {/* Fortschritt */}
       <div className="flex items-center gap-2">
         {Array.from({ length: gesamt }).map((_, i) => (
