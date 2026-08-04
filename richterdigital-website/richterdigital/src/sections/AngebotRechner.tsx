@@ -119,8 +119,8 @@ const AngebotRechner = () => {
         </p>
         <p className="mt-3 text-ink/65 max-w-[420px] mx-auto" style={{ lineHeight: 1.6 }}>
           {tr(lang,
-            'Deinen Festpreis schicke ich dir innerhalb von 24 Stunden per E-Mail.',
-            'I will email you your fixed price within 24 hours.')}
+            'Deine Preisübersicht schicke ich dir innerhalb von 24 Stunden per E-Mail.',
+            'I will email you your price overview within 24 hours.')}
         </p>
       </div>
     );
@@ -167,7 +167,7 @@ const AngebotRechner = () => {
       ) : (
         <form onSubmit={absenden} className="mt-5">
           <p className="font-display font-bold" style={{ fontSize: 'clamp(22px, 2.8vw, 32px)', lineHeight: 1.2 }}>
-            {tr(lang, 'Wohin schicke ich deinen Preis?', 'Where should I send your price?')}
+            {tr(lang, 'Deine Preisübersicht', 'Your price overview')}
           </p>
           {/* Steht bewusst vor den Feldern. An genau dieser Stelle sind am
               03.08.2026 sechs von sechs Interessenten abgesprungen. Kurz
@@ -175,8 +175,8 @@ const AngebotRechner = () => {
               nach Rechtfertigung und weckt erst den Verdacht. */}
           <p className="mt-2 text-ink/65 text-sm" style={{ lineHeight: 1.6 }}>
             {tr(lang,
-              'Du bekommst deinen Festpreis per E-Mail. Ob du dich danach meldest, entscheidest du.',
-              'You get your fixed price by email. Whether you get in touch after that is up to you.')}
+              'Ich schicke sie dir per E-Mail, dann kannst du sie dir in Ruhe anschauen.',
+              'I will send it to you by email so you can look at it in your own time.')}
           </p>
 
           <input type="checkbox" name="botcheck" className="hidden" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
@@ -201,7 +201,7 @@ const AngebotRechner = () => {
 
           <button type="submit" disabled={status === 'sending'} className="mt-6 w-full py-4 bg-electric text-white font-display font-bold rounded-xl flex items-center justify-center gap-2 disabled:opacity-70 hover:bg-electric-dark transition-colors">
             {status === 'sending' ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
-            {status === 'sending' ? tr(lang, 'Wird gesendet…', 'Sending…') : tr(lang, 'Preis anfordern', 'Request price')}
+            {status === 'sending' ? tr(lang, 'Wird gesendet…', 'Sending…') : tr(lang, 'Preisübersicht anfordern', 'Request price overview')}
           </button>
 
           <div className="mt-4 flex items-center justify-between gap-4">
