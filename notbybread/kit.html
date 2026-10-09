@@ -250,19 +250,20 @@
       ctx.fillStyle = COLORS.soft;
       ctx.font = '600 40px Figtree, sans-serif';
       ctx.fillText(place.toUpperCase(), 280, 175);
+      // Left column flows top to bottom, so a long title never runs into the code.
       ctx.fillStyle = COLORS.text;
-      ctx.font = '500 92px Fraunces, Georgia, serif';
-      var y = wrap(ctx, program, 120, 400, 1100, 108);
+      ctx.font = '500 84px Fraunces, Georgia, serif';
+      var y = wrap(ctx, program, 120, 360, 1140, 98);
       if (startsLine) {
         ctx.fillStyle = COLORS.soft;
-        ctx.font = '400 50px Figtree, sans-serif';
-        ctx.fillText(startsLine, 120, y + 20);
-        y += 90;
+        ctx.font = '400 48px Figtree, sans-serif';
+        y = wrap(ctx, startsLine, 120, y + 10, 1140, 58);
       }
       ctx.fillStyle = COLORS.text;
-      ctx.font = '400 46px Figtree, sans-serif';
-      wrap(ctx, 'Get the free app Not By Bread, tap “I have a group code” and enter:', 120, Math.max(y + 60, 700), 1100, 60);
-      codeBox(ctx, 120, 810, 620, 150, 92);
+      ctx.font = '400 44px Figtree, sans-serif';
+      y = wrap(ctx, 'Get the free app Not By Bread, tap “I have a group code” and enter:', 120, y + 50, 1140, 56);
+      codeBox(ctx, 120, y - 10, 600, 136, 84);
+      var bottom = y + 126;
       drawQr(ctx, joinUrl, 1360, 300, 440);
       ctx.fillStyle = COLORS.soft;
       ctx.font = '400 32px Figtree, sans-serif';
@@ -270,7 +271,8 @@
       ctx.fillText('Scan to join', 1580, 790);
       ctx.textAlign = 'left';
       ctx.font = '400 28px Figtree, sans-serif';
-      wrap(ctx, SAFETY, 120, 1030, 1680, 36);
+      var safetyTop = Math.max(1036, bottom + 50);
+      layout.slide = wrap(ctx, SAFETY, 120, safetyTop, 1680, 36) - 36 + 8;
     }
 
     function drawCard() {
@@ -287,12 +289,13 @@
       var y = wrap(ctx, 'Fast and pray with ' + place + '.', 50, 170, 560, 36);
       ctx.fillStyle = COLORS.text;
       ctx.font = '400 26px Figtree, sans-serif';
-      wrap(ctx, 'Free app · tap “I have a group code”', 50, y + 14, 560, 34);
-      codeBox(ctx, 50, 330, 520, 110, 62);
+      y = wrap(ctx, 'Free app · tap “I have a group code”', 50, y + 14, 560, 34);
+      var boxTop = Math.max(330, y);
+      codeBox(ctx, 50, boxTop, 520, 104, 60);
       drawQr(ctx, joinUrl, 640, 120, 360);
       ctx.fillStyle = COLORS.soft;
       ctx.font = '400 19px Figtree, sans-serif';
-      wrap(ctx, SAFETY, 50, 520, 950, 26);
+      layout.card = wrap(ctx, SAFETY, 50, Math.max(520, boxTop + 140), 950, 26) - 26 + 6;
     }
 
     function drawInsert() {
@@ -305,43 +308,33 @@
       ctx.fillStyle = COLORS.soft;
       ctx.font = '600 38px Figtree, sans-serif';
       ctx.fillText(place.toUpperCase(), 637, 320);
+      // Centered, flowing top to bottom: title, date, QR, instruction, code, safety.
       ctx.fillStyle = COLORS.text;
-      ctx.font = '500 82px Fraunces, Georgia, serif';
-      ctx.textAlign = 'left';
-      var title = program;
-      ctx.textAlign = 'center';
-      var lines = [];
-      var words = title.split(' ');
-      var line = '';
-      for (var i = 0; i < words.length; i++) {
-        var test = line ? line + ' ' + words[i] : words[i];
-        if (ctx.measureText(test).width > 1080 && line) { lines.push(line); line = words[i]; } else { line = test; }
-      }
-      if (line) lines.push(line);
-      var y = 440;
-      lines.forEach(function (l) { ctx.fillText(l, 637, y); y += 96; });
+      ctx.font = '500 80px Fraunces, Georgia, serif';
+      var y = wrap(ctx, program, 637, 430, 1080, 92);
       if (startsLine) {
         ctx.fillStyle = COLORS.soft;
-        ctx.font = '400 44px Figtree, sans-serif';
-        ctx.fillText(startsLine, 637, y + 10);
-        y += 80;
+        ctx.font = '400 42px Figtree, sans-serif';
+        y = wrap(ctx, startsLine, 637, y + 6, 1080, 52);
       }
-      drawQr(ctx, joinUrl, 387, y + 30, 500);
+      drawQr(ctx, joinUrl, 417, y + 4, 440);
+      y += 444 + 56;
       ctx.fillStyle = COLORS.text;
-      ctx.font = '400 40px Figtree, sans-serif';
-      ctx.fillText('Get the free app Not By Bread,', 637, y + 610);
-      ctx.fillText('tap “I have a group code” and enter:', 637, y + 662);
+      ctx.font = '400 38px Figtree, sans-serif';
+      y = wrap(ctx, 'Get the free app Not By Bread, tap “I have a group code” and enter:', 637, y, 1000, 50);
       ctx.textAlign = 'left';
-      codeBox(ctx, 287, y + 700, 700, 140, 86);
+      codeBox(ctx, 302, y - 20, 670, 124, 78);
+      y += 104 + 52;
       ctx.fillStyle = COLORS.soft;
-      ctx.font = '400 30px Figtree, sans-serif';
+      ctx.font = '400 28px Figtree, sans-serif';
       ctx.textAlign = 'center';
-      var sy = y + 920;
-      var sw = SAFETY.split('. ');
-      ctx.fillText(sw[0] + '.', 637, sy);
-      ctx.fillText(sw.slice(1).join('. '), 637, sy + 42);
+      layout.insert = wrap(ctx, SAFETY, 637, y, 1060, 38) - 38 + 8;
       ctx.textAlign = 'left';
     }
+
+    // Lowest point drawn on each piece, so a check can see nothing runs off the edge.
+    var layout = {};
+    window.kitLayout = layout;
 
     function drawAll() {
       drawSlide();
