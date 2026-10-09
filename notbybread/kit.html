@@ -249,11 +249,11 @@
       flame(ctx, 170, 190, 150);
       ctx.fillStyle = COLORS.soft;
       ctx.font = '600 40px Figtree, sans-serif';
-      ctx.fillText(place.toUpperCase(), 280, 175);
+      var labelEnd = wrap(ctx, place.toUpperCase(), 280, 175, 1500, 50);
       // Left column flows top to bottom, so a long title never runs into the code.
       ctx.fillStyle = COLORS.text;
       ctx.font = '500 84px Fraunces, Georgia, serif';
-      var y = wrap(ctx, program, 120, 360, 1140, 98);
+      var y = wrap(ctx, program, 120, Math.max(360, labelEnd + 110), 1140, 98);
       if (startsLine) {
         ctx.fillStyle = COLORS.soft;
         ctx.font = '400 48px Figtree, sans-serif';
@@ -307,11 +307,11 @@
       ctx.textAlign = 'center';
       ctx.fillStyle = COLORS.soft;
       ctx.font = '600 38px Figtree, sans-serif';
-      ctx.fillText(place.toUpperCase(), 637, 320);
+      var labelEnd = wrap(ctx, place.toUpperCase(), 637, 320, 1100, 48);
       // Centered, flowing top to bottom: title, date, QR, instruction, code, safety.
       ctx.fillStyle = COLORS.text;
       ctx.font = '500 80px Fraunces, Georgia, serif';
-      var y = wrap(ctx, program, 637, 430, 1080, 92);
+      var y = wrap(ctx, program, 637, Math.max(430, labelEnd + 80), 1080, 92);
       if (startsLine) {
         ctx.fillStyle = COLORS.soft;
         ctx.font = '400 42px Figtree, sans-serif';
