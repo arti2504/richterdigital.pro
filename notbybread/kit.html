@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Church kit — Not By Bread</title>
+  <meta name="description" content="A slide, a pew card and an announcement to invite your church to fast and pray together." />
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600&family=Fraunces:opsz,wght@9..144,500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --background: #f6efe3;
+      --card: #fbf7ee;
+      --text: #2b211a;
+      --soft: #6b5b4e;
+      --line: #e6dccb;
+      --honey: #e9b45b;
+      --terracotta: #c9644a;
+      --on-terracotta: #fffdf8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--background);
+      color: var(--text);
+      font-family: Figtree, system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 18px;
+      line-height: 1.55;
+    }
+    main { max-width: 860px; margin: 0 auto; padding: 36px 16px 64px; }
+    .brand { font-family: Fraunces, Georgia, serif; font-size: 24px; }
+    .brand span { color: var(--terracotta); }
+    h1 { font-family: Fraunces, Georgia, serif; font-weight: 500; font-size: 34px; line-height: 1.2; margin: 24px 0 6px; }
+    h2 { font-family: Fraunces, Georgia, serif; font-weight: 500; font-size: 24px; margin-bottom: 6px; }
+    .lead { color: var(--soft); max-width: 640px; }
+    section { margin-top: 36px; }
+    .hint { color: var(--soft); font-size: 16px; margin-bottom: 12px; }
+    canvas { display: block; width: 100%; height: auto; border-radius: 12px; border: 1px solid var(--line); background: var(--card); }
+    .small canvas { max-width: 420px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+    button {
+      min-height: 52px;
+      padding: 0 22px;
+      border-radius: 999px;
+      border: 1.5px solid var(--text);
+      background: transparent;
+      color: var(--text);
+      font: 600 17px Figtree, system-ui, sans-serif;
+      cursor: pointer;
+    }
+    textarea {
+      width: 100%;
+      min-height: 170px;
+      padding: 16px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      color: var(--text);
+      font: 17px/1.55 Figtree, system-ui, sans-serif;
+      resize: vertical;
+    }
+    .missing {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 18px;
+      margin-top: 24px;
+    }
+    footer { color: var(--soft); font-size: 15px; margin-top: 40px; }
+    footer a { color: var(--soft); }
+  </style>
+</head>
+<body>
+  <main>
+    <div class="brand">Not By <span>Bread</span></div>
+    <h1 id="title">Your church kit</h1>
+    <p class="lead">Everything you need to invite your church: a slide for Sunday, a pew card, a bulletin insert and a short announcement. Every piece carries your group code, a QR code and a line about fasting safely. Change the wording to fit your church.</p>
+
+    <div class="missing" id="missing" hidden>Open this page from the Group tab in the app, so it knows your group code.</div>
+
+    <div id="kit">
+      <section>
+        <h2>Slide for Sunday</h2>
+        <p class="hint">16:9, for the screen before or after the service.</p>
+        <canvas id="slide" width="1920" height="1080" role="img" aria-label="Slide with the group code and QR code"></canvas>
+        <div class="actions"><button data-download="slide">Download slide (PNG)</button></div>
+      </section>
+
+      <section class="small">
+        <h2>Pew card</h2>
+        <p class="hint">3.5 × 2 inches, like a business card. Print on card stock.</p>
+        <canvas id="card" width="1050" height="600" role="img" aria-label="Pew card with the group code and QR code"></canvas>
+        <div class="actions"><button data-download="card">Download pew card (PNG)</button></div>
+      </section>
+
+      <section class="small">
+        <h2>Bulletin insert</h2>
+        <p class="hint">4.25 × 5.5 inches, four to a letter sheet.</p>
+        <canvas id="insert" width="1275" height="1650" role="img" aria-label="Bulletin insert with the group code and QR code"></canvas>
+        <div class="actions"><button data-download="insert">Download insert (PNG)</button></div>
+      </section>
+
+      <section>
+        <h2>Announcement</h2>
+        <p class="hint">About thirty seconds from the pulpit.</p>
+        <textarea id="announcement" aria-label="Announcement text"></textarea>
+        <div class="actions"><button data-copy="announcement">Copy announcement</button></div>
+      </section>
+
+      <section>
+        <h2>Bulletin or email text</h2>
+        <textarea id="bulletin" aria-label="Bulletin text"></textarea>
+        <div class="actions"><button data-copy="bulletin">Copy text</button></div>
+      </section>
+    </div>
+
+    <footer><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a></footer>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+  <script>
+    var COLORS = { bg: '#F6EFE3', card: '#FBF7EE', text: '#2B211A', soft: '#6B5B4E', line: '#E6DCCB', honey: '#E9B45B', terracotta: '#C9644A' };
+    var SAFETY = 'Talk to your doctor before fasting, especially if you take medication. Ending a fast early is never failure.';
+    var PROGRAMS = {
+      'twenty-one-days': '21 Days of Prayer and Fasting',
+      'daniel-fast-21': '21-Day Daniel Fast',
+      'seven-day-reset': '7-Day Reset',
+      'weekly-fast-day': 'Weekly Fast Day'
+    };
+
+    var params = new URLSearchParams(location.search);
+    var code = (params.get('code') || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 6);
+    var group = (params.get('g') || '').slice(0, 60);
+    var church = (params.get('c') || '').slice(0, 80);
+    var program = PROGRAMS[params.get('p')] || 'Fasting and prayer';
+    var start = params.get('d') || '';
+    var place = church || group || 'our church';
+    var joinUrl = 'https://richterdigital.pro/notbybread/join?' + new URLSearchParams(Array.from(params.entries()).filter(function (e) { return ['code', 'g', 'c', 'd', 'p'].indexOf(e[0]) >= 0; })).toString();
+
+    function formatDate(key) {
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(key)) return '';
+      var p = key.split('-').map(Number);
+      return new Date(p[0], p[1] - 1, p[2]).toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+    }
+    var startsLine = formatDate(start) ? 'Starts ' + formatDate(start) : '';
+
+    if (code.length !== 6) {
+      document.getElementById('missing').hidden = false;
+      document.getElementById('kit').hidden = true;
+    } else {
+      document.getElementById('title').textContent = 'Church kit for ' + place;
+      document.getElementById('announcement').value =
+        (startsLine ? startsLine.replace('Starts', 'Starting') + ', w' : 'W') +
+        'e are fasting and praying together: ' + program + '. You can join our group in a free app called Not By Bread. ' +
+        'It gives you each day’s Scripture and a prayer for the moment hunger comes. ' +
+        'Download it from the App Store, tap “I have a group code” and enter ' + code.split('').join(' ') + '. ' +
+        'If you take medication or have a health condition, talk to your doctor first. And remember: ending a fast early is never failure.';
+      document.getElementById('bulletin').value =
+        program + (startsLine ? ' — ' + startsLine : '') + '.\n' +
+        'Fast and pray with ' + place + ' in the free Not By Bread app. Download it from the App Store, tap “I have a group code” and enter ' + code + '.\n' +
+        'Or open: ' + joinUrl + '\n' + SAFETY;
+      document.fonts.load('500 40px Fraunces').then(function () { return document.fonts.load('600 40px Figtree'); }).then(drawAll, drawAll);
+    }
+
+    function drawQr(ctx, text, x, y, size) {
+      var qr = qrcode(0, 'M');
+      qr.addData(text);
+      qr.make();
+      var n = qr.getModuleCount();
+      var quiet = 2;
+      var cell = size / (n + quiet * 2);
+      ctx.fillStyle = '#FFFFFF';
+      ctx.fillRect(x, y, size, size);
+      ctx.fillStyle = COLORS.text;
+      for (var r = 0; r < n; r++) {
+        for (var c = 0; c < n; c++) {
+          if (qr.isDark(r, c)) ctx.fillRect(Math.floor(x + (c + quiet) * cell), Math.floor(y + (r + quiet) * cell), Math.ceil(cell), Math.ceil(cell));
+        }
+      }
+    }
+
+    // Wraps text into lines that fit maxWidth; returns the y after the last line.
+    function wrap(ctx, text, x, y, maxWidth, lineHeight) {
+      var words = text.split(' ');
+      var line = '';
+      for (var i = 0; i < words.length; i++) {
+        var test = line ? line + ' ' + words[i] : words[i];
+        if (ctx.measureText(test).width > maxWidth && line) {
+          ctx.fillText(line, x, y);
+          line = words[i];
+          y += lineHeight;
+        } else {
+          line = test;
+        }
+      }
+      if (line) { ctx.fillText(line, x, y); y += lineHeight; }
+      return y;
+    }
+
+    function codeBox(ctx, x, y, w, h, fontSize) {
+      ctx.fillStyle = COLORS.card;
+      ctx.strokeStyle = COLORS.line;
+      ctx.lineWidth = Math.max(2, fontSize / 20);
+      roundRect(ctx, x, y, w, h, h / 4);
+      ctx.fill();
+      ctx.stroke();
+      ctx.fillStyle = COLORS.text;
+      ctx.font = '600 ' + fontSize + 'px Figtree, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(code.split('').join(' '), x + w / 2, y + h / 2 + fontSize * 0.04);
+      ctx.textAlign = 'left';
+      ctx.textBaseline = 'alphabetic';
+    }
+
+    function roundRect(ctx, x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.arcTo(x + w, y, x + w, y + h, r);
+      ctx.arcTo(x + w, y + h, x, y + h, r);
+      ctx.arcTo(x, y + h, x, y, r);
+      ctx.arcTo(x, y, x + w, y, r);
+      ctx.closePath();
+    }
+
+    function flame(ctx, cx, cy, h) {
+      // The app's flame, simplified: a honey drop with a terracotta core.
+      var w = h * 0.62;
+      ctx.fillStyle = COLORS.honey;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy - h / 2);
+      ctx.bezierCurveTo(cx + w * 0.55, cy - h * 0.1, cx + w / 2, cy + h * 0.32, cx, cy + h / 2);
+      ctx.bezierCurveTo(cx - w / 2, cy + h * 0.32, cx - w * 0.55, cy - h * 0.1, cx, cy - h / 2);
+      ctx.fill();
+      ctx.fillStyle = COLORS.terracotta;
+      ctx.beginPath();
+      ctx.moveTo(cx, cy - h * 0.05);
+      ctx.bezierCurveTo(cx + w * 0.28, cy + h * 0.15, cx + w * 0.24, cy + h * 0.38, cx, cy + h * 0.45);
+      ctx.bezierCurveTo(cx - w * 0.24, cy + h * 0.38, cx - w * 0.28, cy + h * 0.15, cx, cy - h * 0.05);
+      ctx.fill();
+    }
+
+    function drawSlide() {
+      var cv = document.getElementById('slide');
+      var ctx = cv.getContext('2d');
+      ctx.fillStyle = COLORS.bg;
+      ctx.fillRect(0, 0, cv.width, cv.height);
+      flame(ctx, 170, 190, 150);
+      ctx.fillStyle = COLORS.soft;
+      ctx.font = '600 40px Figtree, sans-serif';
+      ctx.fillText(place.toUpperCase(), 280, 175);
+      ctx.fillStyle = COLORS.text;
+      ctx.font = '500 92px Fraunces, Georgia, serif';
+      var y = wrap(ctx, program, 120, 400, 1100, 108);
+      if (startsLine) {
+        ctx.fillStyle = COLORS.soft;
+        ctx.font = '400 50px Figtree, sans-serif';
+        ctx.fillText(startsLine, 120, y + 20);
+        y += 90;
+      }
+      ctx.fillStyle = COLORS.text;
+      ctx.font = '400 46px Figtree, sans-serif';
+      wrap(ctx, 'Get the free app Not By Bread, tap “I have a group code” and enter:', 120, Math.max(y + 60, 700), 1100, 60);
+      codeBox(ctx, 120, 810, 620, 150, 92);
+      drawQr(ctx, joinUrl, 1360, 300, 440);
+      ctx.fillStyle = COLORS.soft;
+      ctx.font = '400 32px Figtree, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('Scan to join', 1580, 790);
+      ctx.textAlign = 'left';
+      ctx.font = '400 28px Figtree, sans-serif';
+      wrap(ctx, SAFETY, 120, 1030, 1680, 36);
+    }
+
+    function drawCard() {
+      var cv = document.getElementById('card');
+      var ctx = cv.getContext('2d');
+      ctx.fillStyle = COLORS.bg;
+      ctx.fillRect(0, 0, cv.width, cv.height);
+      flame(ctx, 70, 80, 70);
+      ctx.fillStyle = COLORS.text;
+      ctx.font = '500 46px Fraunces, Georgia, serif';
+      ctx.fillText('Not By Bread', 120, 96);
+      ctx.fillStyle = COLORS.soft;
+      ctx.font = '400 28px Figtree, sans-serif';
+      var y = wrap(ctx, 'Fast and pray with ' + place + '.', 50, 170, 560, 36);
+      ctx.fillStyle = COLORS.text;
+      ctx.font = '400 26px Figtree, sans-serif';
+      wrap(ctx, 'Free app · tap “I have a group code”', 50, y + 14, 560, 34);
+      codeBox(ctx, 50, 330, 520, 110, 62);
+      drawQr(ctx, joinUrl, 640, 120, 360);
+      ctx.fillStyle = COLORS.soft;
+      ctx.font = '400 19px Figtree, sans-serif';
+      wrap(ctx, SAFETY, 50, 520, 950, 26);
+    }
+
+    function drawInsert() {
+      var cv = document.getElementById('insert');
+      var ctx = cv.getContext('2d');
+      ctx.fillStyle = COLORS.bg;
+      ctx.fillRect(0, 0, cv.width, cv.height);
+      flame(ctx, 637, 170, 150);
+      ctx.textAlign = 'center';
+      ctx.fillStyle = COLORS.soft;
+      ctx.font = '600 38px Figtree, sans-serif';
+      ctx.fillText(place.toUpperCase(), 637, 320);
+      ctx.fillStyle = COLORS.text;
+      ctx.font = '500 82px Fraunces, Georgia, serif';
+      ctx.textAlign = 'left';
+      var title = program;
+      ctx.textAlign = 'center';
+      var lines = [];
+      var words = title.split(' ');
+      var line = '';
+      for (var i = 0; i < words.length; i++) {
+        var test = line ? line + ' ' + words[i] : words[i];
+        if (ctx.measureText(test).width > 1080 && line) { lines.push(line); line = words[i]; } else { line = test; }
+      }
+      if (line) lines.push(line);
+      var y = 440;
+      lines.forEach(function (l) { ctx.fillText(l, 637, y); y += 96; });
+      if (startsLine) {
+        ctx.fillStyle = COLORS.soft;
+        ctx.font = '400 44px Figtree, sans-serif';
+        ctx.fillText(startsLine, 637, y + 10);
+        y += 80;
+      }
+      drawQr(ctx, joinUrl, 387, y + 30, 500);
+      ctx.fillStyle = COLORS.text;
+      ctx.font = '400 40px Figtree, sans-serif';
+      ctx.fillText('Get the free app Not By Bread,', 637, y + 610);
+      ctx.fillText('tap “I have a group code” and enter:', 637, y + 662);
+      ctx.textAlign = 'left';
+      codeBox(ctx, 287, y + 700, 700, 140, 86);
+      ctx.fillStyle = COLORS.soft;
+      ctx.font = '400 30px Figtree, sans-serif';
+      ctx.textAlign = 'center';
+      var sy = y + 920;
+      var sw = SAFETY.split('. ');
+      ctx.fillText(sw[0] + '.', 637, sy);
+      ctx.fillText(sw.slice(1).join('. '), 637, sy + 42);
+      ctx.textAlign = 'left';
+    }
+
+    function drawAll() {
+      drawSlide();
+      drawCard();
+      drawInsert();
+    }
+
+    document.querySelectorAll('[data-download]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var id = b.getAttribute('data-download');
+        var a = document.createElement('a');
+        a.download = 'not-by-bread-' + id + '-' + code + '.png';
+        a.href = document.getElementById(id).toDataURL('image/png');
+        a.click();
+      });
+    });
+    document.querySelectorAll('[data-copy]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var field = document.getElementById(b.getAttribute('data-copy'));
+        var label = b.textContent;
+        var done = function () { b.textContent = 'Copied'; setTimeout(function () { b.textContent = label; }, 1500); };
+        if (navigator.clipboard) navigator.clipboard.writeText(field.value).then(done, function () { field.select(); });
+        else { field.select(); document.execCommand('copy'); done(); }
+      });
+    });
+  </script>
+</body>
+</html>
