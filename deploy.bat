@@ -59,11 +59,12 @@ echo [4/5] dist in die Repo-Wurzel spiegeln...
 rem Die Quelle der Wahrheit fuer Bilder ist public\images im Projekt.
 rem Frueher wurden hier die veroeffentlichten Bilder zurueckkopiert, dadurch
 rem kamen geloeschte und unkomprimierte Dateien immer wieder zurueck.
-rem /MIR raeumt alte Dateien mit weg, aber nur in diesen drei Ordnern,
+rem /MIR raeumt alte Dateien mit weg, aber nur in diesen vier Ordnern,
 rem niemals in der Wurzel selbst (dort liegen .git, Quellcode und Skripte).
 robocopy "%PROJECT%\dist\assets" "%REPO%\assets" /MIR /NFL /NDL /NJH /NJS
 robocopy "%PROJECT%\dist\fonts"  "%REPO%\fonts"  /MIR /NFL /NDL /NJH /NJS
 robocopy "%PROJECT%\dist\images" "%REPO%\images" /MIR /NFL /NDL /NJH /NJS
+robocopy "%PROJECT%\dist\plague" "%REPO%\plague" /MIR /NFL /NDL /NJH /NJS
 copy /Y "%PROJECT%\dist\index.html"  "%REPO%\index.html"  > nul
 copy /Y "%PROJECT%\dist\robots.txt"  "%REPO%\robots.txt"  > nul
 copy /Y "%PROJECT%\dist\sitemap.xml" "%REPO%\sitemap.xml" > nul
