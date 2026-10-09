@@ -87,7 +87,7 @@
       <h2>3. What leaves your phone, and why</h2>
 
       <h3>a) Your account</h3>
-      <p>Once you have finished setting up the app, it creates an anonymous account with a random ID at our backend provider, Supabase. If you sign in with Apple, we receive an Apple user ID and, if you choose to share them, your name and email address (or Apple’s private relay address). If you sign in by email, we receive your email address. The account keeps your group, your journal backup and your purchase with you on a new phone.</p>
+      <p>Once you have finished setting up the app, it creates an anonymous account with a random ID at our backend provider, Supabase. If you sign in with Apple, we receive an Apple user ID and, if you choose to share them, your name and email address (or Apple’s private relay address). If you sign in by email, we receive your email address. The account keeps your group, your journal backup and your purchase with you on a new phone. If you sign in with Apple, we also keep a token from Apple for one purpose only: to revoke your Apple sign-in when you delete your account.</p>
 
       <h3>b) Reminders from your group</h3>
       <p>We store your time zone and your morning and evening times and, if you allow notifications, your device’s push token, so that notes such as “3 people prayed for you today” arrive at a good local time and never at night.</p>
@@ -102,6 +102,8 @@
       <h3>e) Groups</h3>
       <p>When you join or create a group we store the first name you give, your membership and role, how many fasts you completed, and whether you are fasting right now and until when. Other members see how many are fasting; your name appears only for a fast where you chose “Let my group see my name”. We also store the prayer requests you post to the group wall, who tapped “praying”, and reports and blocks.</p>
       <p>Before a post appears, its text is checked for safety by Anthropic or OpenAI. A post that looks like a possible crisis is not published and is stored without its text; the group leader only learns that someone may need care.</p>
+      <p>When you join or create a group, we store that you accepted the group rules and when. To stop people from guessing codes, we count join attempts for an hour. If a leader removes someone, that person is kept on a list so the code does not let them back in. If a leader deletes her account, the longest-standing member leads the group from then on.</p>
+      <p>If you report a post, we store the report, hide the post for you at once, and tell the group leader that a post was reported. The post, its author’s first name and your reason are emailed to our support address so we can review it within 24 hours. That email is sent through Resend, Inc. (USA). It carries your account ID, not your name.</p>
 
       <h3>f) Journal backup</h3>
       <p>If you sign in, your journal entries are backed up so you can restore them on a new phone. The text is stored encrypted. An entry you delete is deleted from the backup too.</p>
@@ -145,6 +147,7 @@
         <li>Account, group data, posts and journal backup: until you delete them or your account.</li>
         <li>Spoken prayer audio: up to 24 hours.</li>
         <li>Push token: until you delete your account or turn notifications off.</li>
+        <li>Join attempts: one day. Reports: until the post or your account is deleted.</li>
         <li>Safety counts: kept, as they contain nothing about you.</li>
       </ul>
     </section>
