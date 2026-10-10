@@ -56,7 +56,7 @@
       <h2>In short</h2>
       <ul class="short">
         <li>Your health answers, weight, check-ins and fasting history stay on your phone.</li>
-        <li>Personal prayers are written by an AI service only after you agree. You can use written prayers instead, which never leave your phone.</li>
+        <li>Prayers are written ahead of time and chosen on your phone. What you type for a prayer never leaves your phone. The app uses no AI.</li>
         <li>Your group sees the first name you give it. While you fast you are counted; your name shows only if you choose that for the fast.</li>
         <li>No ads. We do not sell your data and do not track you across other apps or websites.</li>
         <li>You can export your data and delete your account in the app at any time.</li>
@@ -77,7 +77,8 @@
       <ul>
         <li>Your answers to the health questions before a fast, your weight and your evening check-ins.</li>
         <li>Your fasts, streak, program progress and settings.</li>
-        <li>Your journal, unless you back it up (see 3f).</li>
+        <li>Your journal, unless you back it up (see 3d).</li>
+        <li>The note you type before a prayer and the prayers you were shown. Prayers come from a library inside the app.</li>
         <li>Your location, if you allow it for a sunrise-to-sunset fast. The app uses it once on the phone to work out today’s sunset and does not send it anywhere.</li>
       </ul>
       <p>Morning words, the evening check-in, notes during a fast, the Sunday question and the reminder before a free trial ends are scheduled on your phone. If you delete the app, this data is gone.</p>
@@ -92,32 +93,25 @@
       <h3>b) Reminders from your group</h3>
       <p>We store your time zone and your morning and evening times and, if you allow notifications, your device’s push token, so that notes such as “3 people prayed for you today” arrive at a good local time and never at night.</p>
 
-      <h3>c) Personal prayers (only with your consent)</h3>
-      <p>Before the first personal prayer the app asks for your permission. If you agree, each time you ask for a prayer the app sends to our server, and from there to Anthropic or OpenAI: your first name, the kind of fast and the hour you are in, the topics you pray about, the time of day, your Bible translation, your church background and the note you typed, if any. Your last five journal entries are included only if you turn that switch on.</p>
-      <p>Before anything is sent, the app checks your note on the phone for signs of crisis or of a body warning sign. We do not store the text of prayers or notes on our server. We keep a short record that a prayer was made (time, prompt version, provider) to prevent misuse. The AI providers work on our behalf; under their API terms they do not use this data to train their models and may keep it for a limited time to detect abuse. You can turn personal prayers off in Profile at any time.</p>
-
-      <h3>d) Spoken prayers (paid feature)</h3>
-      <p>To read a prayer aloud, its text, which includes your first name, is sent to OpenAI or ElevenLabs to create the audio. The audio file is kept on our server for up to 24 hours so it can be played again, then deleted.</p>
-
-      <h3>e) Groups</h3>
+      <h3>c) Groups</h3>
       <p>When you join or create a group we store the first name you give, your membership and role, how many fasts you completed, and whether you are fasting right now and until when. Other members see how many are fasting; your name appears only for a fast where you chose “Let my group see my name”. We also store the prayer requests you post to the group wall, who tapped “praying”, and reports and blocks.</p>
-      <p>Before a post appears, its text is checked for safety by Anthropic or OpenAI. A post that looks like a possible crisis is not published and is stored without its text; the group leader only learns that someone may need care.</p>
+      <p>Before a post appears, our server checks its text with fixed rules, not with AI: posts with links, phone numbers, email addresses, selling or crude language are not published and not stored. A post that looks like a possible crisis is not published and is stored without its text; the group leader only learns that someone may need care.</p>
       <p>When you join or create a group, we store that you accepted the group rules and when. To stop people from guessing codes, we count join attempts for an hour. If a leader removes someone, that person is kept on a list so the code does not let them back in. If a leader deletes her account, the longest-standing member leads the group from then on.</p>
       <p>If you report a post, we store the report, hide the post for you at once, and tell the group leader that a post was reported. The post, its author’s first name and your reason are emailed to our support address so we can review it within 24 hours. That email is sent through Resend, Inc. (USA). It carries your account ID, not your name.</p>
 
-      <h3>f) Journal backup</h3>
+      <h3>d) Journal backup</h3>
       <p>If you sign in, your journal entries are backed up so you can restore them on a new phone. The text is stored encrypted. An entry you delete is deleted from the backup too.</p>
 
-      <h3>g) Purchases</h3>
+      <h3>e) Purchases</h3>
       <p>Apple handles payment; we never see your payment details. RevenueCat, Inc. (USA) receives your app user ID and Apple’s purchase receipts to confirm your subscription.</p>
 
-      <h3>h) Delivering notifications</h3>
+      <h3>f) Delivering notifications</h3>
       <p>Group notifications are delivered through the Expo push service (650 Industries, Inc., USA) and Apple’s push service. They receive your push token and the text of the notification.</p>
 
-      <h3>i) Safety counts</h3>
+      <h3>g) Safety counts</h3>
       <p>When the crisis screen or the warning-sign card appears, our server counts it without any user ID, device ID or text, so we can see whether our safety checks misfire.</p>
 
-      <h3>j) Product analytics</h3>
+      <h3>h) Product analytics</h3>
       <p>We use PostHog (PostHog, Inc., USA) to see which parts of the app are used, with events such as “fast started” or “paywall viewed” and a random device ID. Events never contain your name, notes, prayers, journal, health answers, weight, warning signs, crisis signals or how long you fasted. PostHog is set to discard IP addresses.</p>
     </section>
 
@@ -131,21 +125,20 @@
       <p>Because we are based in Germany, the EU General Data Protection Regulation applies.</p>
       <ul>
         <li>Providing the app, your account and your subscription: performance of a contract (Art. 6(1)(b) GDPR).</li>
-        <li>Personal prayers, the journal switch, groups and notifications: your consent (Art. 6(1)(a) and Art. 9(2)(a) GDPR). You can withdraw it at any time in the app; this does not affect what happened before.</li>
+        <li>Groups, the journal backup and notifications: your consent (Art. 6(1)(a) and Art. 9(2)(a) GDPR). You can withdraw it at any time in the app; this does not affect what happened before.</li>
         <li>Safety counts, abuse prevention and product analytics without sensitive data: our legitimate interest in a safe, working app (Art. 6(1)(f) GDPR).</li>
       </ul>
     </section>
 
     <section>
       <h2>6. Where data is processed</h2>
-      <p>Our backend runs on Supabase servers in the United States. The AI, voice, purchase, push and analytics providers named above are based in the United States. Transfers from the EU rely on the EU-U.S. Data Privacy Framework or on the European Commission’s Standard Contractual Clauses.</p>
+      <p>Our backend runs on Supabase servers in the United States. The email, purchase, push and analytics providers named above are based in the United States. Transfers from the EU rely on the EU-U.S. Data Privacy Framework or on the European Commission’s Standard Contractual Clauses.</p>
     </section>
 
     <section>
       <h2>7. How long we keep data</h2>
       <ul>
         <li>Account, group data, posts and journal backup: until you delete them or your account.</li>
-        <li>Spoken prayer audio: up to 24 hours.</li>
         <li>Push token: until you delete your account or turn notifications off.</li>
         <li>Join attempts: one day. Reports: until the post or your account is deleted.</li>
         <li>Safety counts: kept, as they contain nothing about you.</li>
@@ -156,8 +149,7 @@
       <h2>8. Your choices and rights</h2>
       <ul>
         <li><strong>Export:</strong> Profile → Export my data.</li>
-        <li><strong>Delete:</strong> Profile → Delete account removes your account and everything on our server that is linked to you. Records that a prayer was made remain only without any link to you.</li>
-        <li><strong>Personal prayers and journal in prayers:</strong> on and off in Profile.</li>
+        <li><strong>Delete:</strong> Profile → Delete account removes your account and everything on our server that is linked to you.</li>
         <li><strong>Groups:</strong> leave at any time; choose per fast whether your name shows.</li>
         <li><strong>Notifications:</strong> in the iPhone Settings.</li>
       </ul>
@@ -170,10 +162,10 @@
       <p>Consumer health data in this app means: answers to the health questions, weight, mood check-ins, your fasting activity, warning signs or health matters you write in a note, and prayer requests about health.</p>
       <ul>
         <li>Health answers, weight and check-ins never leave your phone.</li>
-        <li>A note and your prayer topics are sent to the AI provider only for a personal prayer you asked for, after your consent.</li>
+        <li>A note you type before a prayer and your prayer topics stay on your phone.</li>
         <li>Your group sees that you are fasting as a count, your name only if you choose. What you post to your group, your group sees.</li>
       </ul>
-      <p>We collect and share this data only to provide the features you use. We do not sell consumer health data. You can see, export and delete it in the app, withdraw consent in Profile, or write to us.</p>
+      <p>We collect and share this data only to provide the features you use. We do not sell consumer health data. You can see, export and delete it in the app, leave your group, or write to us.</p>
     </section>
 
     <section>
