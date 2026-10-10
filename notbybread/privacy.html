@@ -113,6 +113,9 @@
 
       <h3>h) Product analytics</h3>
       <p>We use PostHog (PostHog, Inc., USA) to see which parts of the app are used, with events such as “fast started” or “paywall viewed” and a random device ID. Events never contain your name, notes, prayers, journal, health answers, weight, warning signs, crisis signals or how long you fasted. PostHog is set to discard IP addresses.</p>
+
+      <h3>i) Crash reports</h3>
+      <p>If the app crashes, it sends an anonymous crash report to Sentry (Functional Software, Inc., USA): the error, the app version, the iPhone model and system version, and the screen where it happened. Reports never contain your name, user ID, notes, prayers, journal, health answers or screenshots. You can turn crash reports off in Profile → Send crash reports.</p>
     </section>
 
     <section>
@@ -126,13 +129,13 @@
       <ul>
         <li>Providing the app, your account and your subscription: performance of a contract (Art. 6(1)(b) GDPR).</li>
         <li>Groups, the journal backup and notifications: your consent (Art. 6(1)(a) and Art. 9(2)(a) GDPR). You can withdraw it at any time in the app; this does not affect what happened before.</li>
-        <li>Safety counts, abuse prevention and product analytics without sensitive data: our legitimate interest in a safe, working app (Art. 6(1)(f) GDPR).</li>
+        <li>Safety counts, abuse prevention, product analytics and crash reports without sensitive data: our legitimate interest in a safe, working app (Art. 6(1)(f) GDPR).</li>
       </ul>
     </section>
 
     <section>
       <h2>6. Where data is processed</h2>
-      <p>Our backend runs on Supabase servers in the United States. The email, purchase, push and analytics providers named above are based in the United States. Transfers from the EU rely on the EU-U.S. Data Privacy Framework or on the European Commission’s Standard Contractual Clauses.</p>
+      <p>Our backend runs on Supabase servers in the United States. The email, purchase, push, analytics and crash report providers named above are based in the United States. Transfers from the EU rely on the EU-U.S. Data Privacy Framework or on the European Commission’s Standard Contractual Clauses.</p>
     </section>
 
     <section>
@@ -142,6 +145,7 @@
         <li>Push token: until you delete your account or turn notifications off.</li>
         <li>Join attempts: one day. Reports: until the post or your account is deleted.</li>
         <li>Safety counts: kept, as they contain nothing about you.</li>
+        <li>Crash reports: deleted by Sentry after 90 days at the latest.</li>
       </ul>
     </section>
 
@@ -152,6 +156,7 @@
         <li><strong>Delete:</strong> Profile → Delete account removes your account and everything on our server that is linked to you.</li>
         <li><strong>Groups:</strong> leave at any time; choose per fast whether your name shows.</li>
         <li><strong>Notifications:</strong> in the iPhone Settings.</li>
+        <li><strong>Crash reports:</strong> Profile → Send crash reports.</li>
       </ul>
       <p>You have the right to access, correct, delete, restrict, receive a copy of, and object to the processing of your data, and to withdraw consent. Write to us at <a href="mailto:richterdigitals@gmail.com">richterdigitals@gmail.com</a>. You may also complain to a data protection authority; ours is the Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen.</p>
       <p>Residents of U.S. states with privacy laws, such as California, have the same rights. We do not sell personal data, do not share it for targeted advertising, and do not use it for profiling with legal or similar effects.</p>
