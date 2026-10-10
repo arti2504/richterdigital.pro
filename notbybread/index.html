@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Not By Bread — Daniel Fast, prayer and fasting</title>
+  <meta name="description" content="A Christian app for fasting and prayer: a flame timer, a prayer for the moment hunger comes, and fasting together with your church." />
+  <meta property="og:title" content="Not By Bread" />
+  <meta property="og:description" content="When you're hungry, pray. Fast and pray together with your church." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600&family=Fraunces:opsz,wght@9..144,500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --background: #f6efe3;
+      --card: #fbf7ee;
+      --text: #2b211a;
+      --soft: #6b5b4e;
+      --line: #e6dccb;
+      --honey: #e9b45b;
+      --terracotta: #c9644a;
+      --on-terracotta: #fffdf8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--background);
+      color: var(--text);
+      font-family: Figtree, system-ui, -apple-system, "Segoe UI", sans-serif;
+      font-size: 18px;
+      line-height: 1.55;
+    }
+    main { max-width: 600px; margin: 0 auto; padding: 40px 16px 56px; }
+    .flame { width: 72px; height: 104px; margin-bottom: 18px; }
+    h1 { font-family: Fraunces, Georgia, serif; font-weight: 500; font-size: 40px; line-height: 1.1; }
+    h1 span { color: var(--terracotta); }
+    .verse { font-family: Fraunces, Georgia, serif; font-style: italic; color: var(--soft); margin-top: 10px; }
+    .lead { margin-top: 22px; font-size: 20px; }
+    ul { list-style: none; margin-top: 22px; }
+    li { padding: 14px 0; border-top: 1px solid var(--line); }
+    li strong { display: block; }
+    .button {
+      display: block;
+      min-height: 60px;
+      border-radius: 999px;
+      background: var(--terracotta);
+      color: var(--on-terracotta);
+      font-weight: 600;
+      font-size: 18px;
+      text-align: center;
+      text-decoration: none;
+      padding: 18px 20px;
+      margin-top: 28px;
+    }
+    .button[aria-disabled="true"] { background: var(--line); color: var(--soft); pointer-events: none; }
+    .note { color: var(--soft); font-size: 16px; margin-top: 14px; }
+    .safety {
+      margin-top: 28px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: 14px;
+      font-size: 16px;
+    }
+    footer { color: var(--soft); font-size: 15px; margin-top: 32px; }
+    footer a { color: var(--soft); }
+  </style>
+</head>
+<body>
+  <main>
+    <svg class="flame" viewBox="0 0 72 104" aria-hidden="true">
+      <path d="M36 2 C58 34 70 52 66 72 C62 92 48 102 36 102 C24 102 10 92 6 72 C2 52 14 34 36 2 Z" fill="#E9B45B" />
+      <path d="M36 50 C47 64 52 74 50 84 C48 94 42 99 36 99 C30 99 24 94 22 84 C20 74 25 64 36 50 Z" fill="#C9644A" />
+    </svg>
+    <h1>Not By <span>Bread</span></h1>
+    <p class="verse">Man shall not live by bread alone, but by every word that proceedeth out of the mouth of God. Matthew 4:4</p>
+    <p class="lead">A quiet companion for fasting and prayer. When you’re hungry, pray.</p>
+    <ul>
+      <li><strong>A prayer for the moment hunger comes</strong>Tap “I’m struggling” and hear a prayer for this hour of your fast.</li>
+      <li><strong>Fast together with your church</strong>Join your group with a code, see who is fasting with you and pray for each other’s requests.</li>
+      <li><strong>The Daniel Fast and 21 Days of Prayer</strong>A daily Scripture, a short devotional and one question to carry into the evening.</li>
+      <li><strong>A journal of answered prayer</strong>Write down what you ask, and look back at what God did.</li>
+    </ul>
+    <a class="button" id="store" href="#" aria-disabled="true">Coming to the App Store in December</a>
+    <p class="note">Did your church give you a code? Open the link they shared, or enter the code in the app under “I have a group code”.</p>
+    <p class="safety">Talk to your doctor before fasting, especially if you take medication or have a health condition. Ending a fast early is never failure.</p>
+    <footer><a href="privacy.html">Privacy</a> · <a href="terms.html">Terms</a> · Richter digital</footer>
+  </main>
+  <script>
+    // Set once the app is live in the App Store.
+    var APP_STORE_URL = '';
+    if (APP_STORE_URL) {
+      var store = document.getElementById('store');
+      store.href = APP_STORE_URL;
+      store.removeAttribute('aria-disabled');
+      store.textContent = 'Get Not By Bread on the App Store';
+    }
+  </script>
+</body>
+</html>
